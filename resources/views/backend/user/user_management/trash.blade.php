@@ -1,0 +1,65 @@
+@extends('backend.layouts.master')
+@section('title', $page_title)
+@section('css')
+    <link rel="stylesheet" href="{{asset('assets/backend/css/jquery.dataTables.min.css')}}">
+    <link rel="stylesheet" href="{{asset('assets/backend/custom_css/datatable_style.css')}}">
+@endsection
+@section('content')
+    <div class="page-content">
+        <div class="container-fluid">
+            @include($module.'includes.breadcrumb')
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row g-4">
+                                <div class="col-sm-auto">
+                                    <h4 class="card-title mb-0">{{ $page_title }}</h4>
+                                </div>
+                                <div class="col-sm">
+                                    <div class="d-flex justify-content-sm-end">
+                                        <a class="btn btn-success" href="{{route($base_route.'index')}}">
+                                            <i class="ri-menu-2-line align-bottom me-1"></i> {{ $panel . ' List'}} </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive  mt-3 mb-1">
+                                <table id="dataTable" class="table align-middle table-nowrap table-striped">
+                                    <thead class="table-light">
+                                    <tr>
+                                        <th>S.N</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Contact</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($data['users'] as $data)
+                                       <tr>
+                                           <td>{{ $loop->iteration }}</td>
+                                           <td>{{ $data->name ?? ''}} </td>
+                                           <td>{{ $data->email ?? ''}}</td>
+                                           <td>{{ $data->contact ?? ''}}</td>
+                                           <td>
+                                               @include($module.'includes.trash_action')
+                                           </td>
+                                       </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- container-fluid -->
+    </div>
+@endsection
+
+@section('js')
+
+@endsection
