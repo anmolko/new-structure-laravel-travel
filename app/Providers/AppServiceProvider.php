@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Setting;
-use Illuminate\Support\Facades\View;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -21,8 +22,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        View::composer('view', function () {
-//            $theme_data = Setting::first();
+        Schema::defaultStringLength(191);
+        Blueprint::macro('additionalColumns', function (){
+            $this->boolean('status')->default(0);
+            $this->foreignId('created_by')->references('id')->on('users')->cascadeOnUpdate();
+            $this->foreignId('updated_by')->nullable()->references('id')->on('users')->cascadeOnUpdate();
+            $this->softDeletes();
+            $this->timestamps();
         });
+
+        Builder::macro('withWhereHas', fn($relation, $constraint)=> $this->whereHas($relation, $constraint)->with([$relation=>$constraint]));
     }
 }

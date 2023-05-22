@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Backend\User;
+namespace App\Http\Controllers\Backend\Tour;
 
 use App\Http\Controllers\Backend\BackendBaseController;
 use App\Http\Requests\Backend\UserRequest;
 use App\Models\Backend\User;
-use App\Services\UserService;
+use App\Services\PackageService;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -16,39 +16,39 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 
-class UserController extends BackendBaseController
+class PackageController extends BackendBaseController
 {
 
     protected string $module        = 'backend.';
-    protected string $base_route    = 'backend.user.user-management.';
-    protected string $view_path     = 'backend.user.user_management.';
-    protected string $panel         = 'User';
-    protected string $folder_name   = 'user';
+    protected string $base_route    = 'backend.tour.package.';
+    protected string $view_path     = 'backend.tour.package.';
+    protected string $panel         = 'Package';
+    protected string $folder_name   = 'package';
     protected string $page_title, $page_method, $image_path, $file_path;
     protected object $model;
-    private UserService $userService;
+    private PackageService $packageService;
 
 
-    public function __construct(UserService $userService)
+    public function __construct(PackageService $packageService)
     {
-        $this->model        = new User();
-        $this->userService  = $userService;
-        $this->image_path   = public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$this->folder_name);
+        $this->model            = new User();
+        $this->packageService   = $packageService;
+        $this->image_path       = public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$this->folder_name);
     }
 
     public function index()
     {
         $this->page_method = 'index';
         $this->page_title  = 'List '.$this->panel;
-        $data              = [];
-        $data['row']       = $this->model->orderBy('id','desc')->get();
+        $data               = [];
+        $data['users']      = $this->model->orderBy('id','desc')->get();
 
         return view($this->loadView($this->view_path.'index'), compact('data'));
     }
 
     public function getDataForDataTable(Request $request)
     {
-        return $this->userService->getDataForDatatable($request);
+        return $this->packageService->getDataForDatatable($request);
     }
 
     /**
@@ -75,9 +75,7 @@ class UserController extends BackendBaseController
     {
         DB::beginTransaction();
         try {
-            $request->request->add(['password' => bcrypt($request['password_input']) ]);
-
-            $request->request->add(['password',]);
+            $request->request->add(['password',bcrypt($request['password'])]);
             if($request->hasFile('image')){
                 $image_name = $this->uploadImage($request->file('image'),'200','200');
                 $request->request->add(['image',$image_name]);
@@ -86,8 +84,7 @@ class UserController extends BackendBaseController
                 $image_name = $this->uploadImage($request->file('cover'),'2000','850');
                 $request->request->add(['cover',$image_name]);
             }
-
-            $this->model->create($request->all());
+            User::create($request->all());
             Session::flash('success',$this->panel.' was created successfully');
             DB::commit();
         } catch (\Exception $e) {

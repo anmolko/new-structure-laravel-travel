@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\View;
 use Intervention\Image\Facades\Image;
 
@@ -81,5 +83,19 @@ class BackendBaseController extends Controller
         if (!empty($image_name) && file_exists($this->image_path.DIRECTORY_SEPARATOR.$image_name)){
             @unlink($this->image_path.DIRECTORY_SEPARATOR.$image_name);
         }
+    }
+
+    public function statusUpdate(){
+
+        $data['row']       = $this->model->find(request()->id);
+        DB::beginTransaction();
+        try {
+            $data['row']->update(request()->all());
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Session::flash('error',$this->panel.' was not updated. Something went wrong.');
+        }
+        return response()->json(['id'=>$data['row']->id,'status'=>$data['row']->status]);
     }
 }

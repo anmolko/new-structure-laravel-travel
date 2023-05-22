@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\Tour\Basic_setup\CountryController;
+use App\Http\Controllers\Backend\Tour\PackageController;
 use App\Http\Controllers\Backend\User\UserController;
 use App\Http\Controllers\Backend\User\UserProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +32,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 //Route::post('/dashboard/theme-mode', 'App\Http\Controllers\SettingController@themeMode')->name('settings.theme');
 
 
-Route::name('user.')->prefix('user/')->middleware(['auth'])->group(function () {
+Route::prefix('user/')->name('user.')->middleware(['auth'])->group(function () {
     //signed-in user routes
     Route::get('profile', [UserProfileController::class, 'index'])->name('profile');
     Route::get('profile/{slug?}', [UserProfileController::class, 'profile'])->name('profile');
@@ -51,5 +53,26 @@ Route::name('user.')->prefix('user/')->middleware(['auth'])->group(function () {
     Route::post('/user-management/trash/{id}/restore', [UserController::class,'restore'])->name('user-management.restore');
     Route::delete('/user-management/trash/{id}/remove', [UserController::class,'removeTrash'])->name('user-management.remove-trash');
     Route::resource('user-management', UserController::class);
+
+});
+
+Route::prefix('tour/')->name('tour.')->middleware(['auth'])->group(function () {
+
+    Route::prefix('basic-setup/')->name('basic_setup.')->middleware(['auth'])->group(function () {
+       //country
+        Route::post('/user-management/status-update', [UserController::class,'statusUpdate'])->name('country.status-update');
+        Route::get('/country/trash', [CountryController::class,'trash'])->name('country.trash');
+        Route::post('/country/trash/{id}/restore', [CountryController::class,'restore'])->name('country.restore');
+        Route::delete('/country/trash/{id}/remove', [CountryController::class,'removeTrash'])->name('country.remove-trash');
+        Route::resource('country', CountryController::class);
+
+    });
+
+    //package
+    Route::post('/package/data', [PackageController::class,'getDataForDataTable'])->name('package.data');
+    Route::get('/package/trash', [PackageController::class,'trash'])->name('package.trash');
+    Route::post('/package/trash/{id}/restore', [PackageController::class,'restore'])->name('package.restore');
+    Route::delete('/package/trash/{id}/remove', [PackageController::class,'removeTrash'])->name('package.remove-trash');
+    Route::resource('package', PackageController::class);
 
 });

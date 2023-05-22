@@ -18,6 +18,7 @@
     content: '*';
     --vz-text-opacity: 1;
     color: rgba(var(--vz-danger-rgb),var(--vz-text-opacity))!important;
+    margin-left: 5px;
 }
 
 .select2-container--default .select2-selection--single{

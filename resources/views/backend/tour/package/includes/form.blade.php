@@ -77,7 +77,7 @@
     </div>
     <div class="col-lg-12 border-top mt-3">
         <div class="hstack gap-2">
-            {!! Form::submit($button,['class'=>'btn btn-success mt-3','id'=>'user-add-button']) !!}
+            {!! Form::submit('CREATE',['class'=>'btn btn-success mt-3','id'=>'user-add-button']) !!}
         </div>
     </div>
 </div>
