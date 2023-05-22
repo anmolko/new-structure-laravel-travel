@@ -3,6 +3,7 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/backend/css/jquery.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/custom_css/datatable_style.css')}}">
+    <link href="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')
     <div class="page-content">
@@ -18,7 +19,7 @@
                                 </div>
                                 <div class="col-sm">
                                     <div class="d-flex justify-content-sm-end">
-                                        <a class="btn btn-success" href="{{route($base_route.'index')}}">
+                                        <a class="btn btn-outline-success waves-effect waves-light" href="{{route($base_route.'index')}}">
                                             <i class="ri-menu-2-line align-bottom me-1"></i> {{ $panel . ' List'}} </a>
                                     </div>
                                 </div>
@@ -26,7 +27,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive  mt-3 mb-1">
-                                <table id="dataTable" class="table align-middle table-nowrap table-striped">
+                                <table id="trashDataTable" class="table align-middle table-nowrap table-striped">
                                     <thead class="table-light">
                                     <tr>
                                         <th>S.N</th>
@@ -61,5 +62,8 @@
 @endsection
 
 @section('js')
-
+    <script src="{{asset('assets/backend/js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('assets/common/trash.js')}}"></script>
+    @include($module.'includes.toast_message')
 @endsection

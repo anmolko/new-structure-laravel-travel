@@ -48,8 +48,8 @@ Route::name('user.')->prefix('user/')->middleware(['auth'])->group(function () {
     Route::post('/user-management/status-update', [UserController::class,'statusUpdate'])->name('user-management.status-update');
     Route::post('/user-management/data', [UserController::class,'getDataForDataTable'])->name('user-management.data');
     Route::get('/user-management/trash', [UserController::class,'trash'])->name('user-management.trash');
-    Route::post('/user-management/trash/restore', [UserController::class,'restore'])->name('user-management.restore');
-    Route::delete('/user-management/trash/remove', [UserController::class,'removeTrash'])->name('user-management.remove-trash');
+    Route::post('/user-management/trash/{id}/restore', [UserController::class,'restore'])->name('user-management.restore');
+    Route::delete('/user-management/trash/{id}/remove', [UserController::class,'removeTrash'])->name('user-management.remove-trash');
     Route::resource('user-management', UserController::class);
 
 });

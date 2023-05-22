@@ -29,7 +29,7 @@ class UserRequest extends FormRequest
         return [
             'name'      => 'required',
             'email'     => 'required|email|unique:users,email,'.$this->user_management,
-            'password_input'  => 'required_if:email,==,null|confirmed',
+            'password_input'  => 'required_if:email,==,null|min:6',
             'contact'   => 'required',
         ];
     }

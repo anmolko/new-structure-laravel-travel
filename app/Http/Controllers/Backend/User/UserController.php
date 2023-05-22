@@ -170,9 +170,8 @@ class UserController extends BackendBaseController
         $data['row']       = $this->model->find($id);
         DB::beginTransaction();
         try {
-            $this->deleteImage($data['row']->image);
-            $this->deleteImage($data['row']->cover);
             $data['row']->delete();
+
             Session::flash('success',$this->panel.' was removed successfully');
             DB::commit();
         } catch (\Exception $e) {
@@ -191,6 +190,42 @@ class UserController extends BackendBaseController
         $data['users']     = $this->model->onlyTrashed()->get();
 
         return view($this->loadView($this->view_path.'trash'), compact('data'));
+    }
+
+    public function restore(Request $request, $id)
+    {
+
+        DB::beginTransaction();
+        try {
+            $this->model->withTrashed()->find($id)->restore();
+
+            Session::flash('success',$this->panel.' restored successfully');
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Session::flash('error',$this->panel.' restored failed. Something went wrong.');
+        }
+
+        return redirect()->route($this->base_route.'index');
+    }
+
+    public function removeTrash(Request $request, $id)
+    {
+        $data['row']       = $this->model->withTrashed()->find($id);
+        DB::beginTransaction();
+        try {
+            $this->deleteImage($data['row']->image);
+            $this->deleteImage($data['row']->cover);
+            $data['row']->forceDelete();
+
+            Session::flash('success',$this->panel.' was removed successfully');
+            DB::commit();
+        } catch (\Exception $e) {
+            DB::rollback();
+            Session::flash('error',$this->panel.' was not removed. Something went wrong.');
+        }
+
+        return redirect()->route($this->base_route.'trash');
     }
 
     public function statusUpdate(){

@@ -1,7 +1,5 @@
-$(document).on('click','.cs-remove-trash', function (e) {
+$( ".remove_trash" ).on("submit", function(e) {
     e.preventDefault();
-    var url = $(this).attr('cs-delete-route');
-    var id = $(this).attr('data-value');
     Swal.fire({
         html: '<div class="mt-2">' +
             '<lord-icon src="https://cdn.lordicon.com/tdrtiskw.json"' +
@@ -10,7 +8,7 @@ $(document).on('click','.cs-remove-trash', function (e) {
             '<div class="mt-4 pt-2 fs-15">' +
             '<h4>Are your sure? </h4>' +
             '<p class="text-muted mx-4 mb-0">' +
-            'Removing this data might affect other relared data</p>' +
+            'This data will be removed permanently and cannot be recovered</p>' +
             '</div>' +
             '</div>',
         showCancelButton: !0,
@@ -23,26 +21,12 @@ $(document).on('click','.cs-remove-trash', function (e) {
     {
         t.value
             ?
-            $.ajax({
-                url: url,
-                type: "DELETE",
-                cache: false,
-                data: {
-                    "_token": $('meta[name="csrf-token"]').attr('content'),
-                    "id": id,
-                },
-                success: function (url){
-                    window.location.href = url;
-                },
-                error: function (e){
-                    console.log(e);
-                }
-            })
+            $(".remove_trash")[0].submit()
             :
             t.dismiss === Swal.DismissReason.cancel &&
             Swal.fire({
                 title: "Cancelled",
-                text: "Data was not removed.",
+                text: "User status was not changed.",
                 icon: "error",
                 confirmButtonClass: "btn btn-primary mt-2",
                 buttonsStyling: !1
@@ -50,10 +34,11 @@ $(document).on('click','.cs-remove-trash', function (e) {
     });
 
 
+});
 
-
-
-
-
-})
-
+dataTable = $('#trashDataTable').DataTable({
+    paging: true,
+    searching: true,
+    ordering:  true,
+    lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+});

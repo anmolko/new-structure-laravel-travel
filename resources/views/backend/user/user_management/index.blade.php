@@ -82,8 +82,8 @@
                 {data:'name', name: 'name', orderable: true},
                 {data:'email', name: 'email', orderable: false},
                 {data:'contact', name: 'contact', orderable: true},
-                {data:'status', name: 'status', orderable: false},
-                {data:'action', name: 'action', orderable: false},
+                {data:'status', name: 'status', searchable:false, orderable: false},
+                {data:'action', name: 'action', searchable:false, orderable: false},
             ]
         })
     </script>
