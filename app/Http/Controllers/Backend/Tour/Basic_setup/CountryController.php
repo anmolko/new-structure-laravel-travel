@@ -77,7 +77,6 @@ class CountryController extends BackendBaseController
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e);
             Session::flash('error',$this->panel.'  was not created. Something went wrong.');
         }
 

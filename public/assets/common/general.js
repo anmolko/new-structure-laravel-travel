@@ -7,7 +7,19 @@ $(document).ready(function() {
         ordering:  true,
         lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
     });
+    loadEditor();
 });
+
+function loadEditor(){
+    let selector =  $('.ck-editor');
+    if(selector.length > 0){
+        $(selector).each(function () {
+            CKEDITOR.replace($(this).prop('id'),{
+                allowedContent: true
+            });
+        });
+    }
+}
 
 function reinitializeSelect2(){
     if(document.getElementById('offcanvasRight')){
@@ -30,6 +42,14 @@ $("form.submit_form").on('submit', function (e){
            CKEDITOR.instances[instance].updateElement();
        }
    }
+
+    let selector =  $('.ck-editor');
+    if(selector.length > 0){
+        $(selector).each(function () {
+            var editor_data = CKEDITOR.instances[$(this).prop('id')].getData();
+            $('#'+$(this).prop('id')).text(editor_data);
+        });
+    }
 
    let route = $(this).attr('action');
    let method = $(this).attr('method');

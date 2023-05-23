@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\Tour\Basic_setup\CountryController;
+use App\Http\Controllers\Backend\Tour\Basic_setup\PackageCategoryController;
+use App\Http\Controllers\Backend\Tour\Basic_setup\PackageTypeController;
 use App\Http\Controllers\Backend\Tour\PackageController;
 use App\Http\Controllers\Backend\User\UserController;
 use App\Http\Controllers\Backend\User\UserProfileController;
@@ -60,15 +62,27 @@ Route::prefix('tour/')->name('tour.')->middleware(['auth'])->group(function () {
 
     Route::prefix('basic-setup/')->name('basic_setup.')->middleware(['auth'])->group(function () {
        //country
-        Route::post('/user-management/status-update', [UserController::class,'statusUpdate'])->name('country.status-update');
         Route::get('/country/trash', [CountryController::class,'trash'])->name('country.trash');
         Route::post('/country/trash/{id}/restore', [CountryController::class,'restore'])->name('country.restore');
         Route::delete('/country/trash/{id}/remove', [CountryController::class,'removeTrash'])->name('country.remove-trash');
         Route::resource('country', CountryController::class);
 
+        //country
+        Route::get('/category/trash', [PackageCategoryController::class,'trash'])->name('category.trash');
+        Route::post('/category/trash/{id}/restore', [PackageCategoryController::class,'restore'])->name('category.restore');
+        Route::delete('/category/trash/{id}/remove', [PackageCategoryController::class,'removeTrash'])->name('category.remove-trash');
+        Route::resource('category', PackageCategoryController::class);
+
+        //country
+        Route::get('/type/trash', [PackageTypeController::class,'trash'])->name('type.trash');
+        Route::post('/type/trash/{id}/restore', [PackageTypeController::class,'restore'])->name('type.restore');
+        Route::delete('/type/trash/{id}/remove', [PackageTypeController::class,'removeTrash'])->name('type.remove-trash');
+        Route::resource('type', PackageTypeController::class);
+
     });
 
     //package
+    Route::post('/package/status-update', [PackageController::class,'statusUpdate'])->name('package.status-update');
     Route::post('/package/data', [PackageController::class,'getDataForDataTable'])->name('package.data');
     Route::get('/package/trash', [PackageController::class,'trash'])->name('package.trash');
     Route::post('/package/trash/{id}/restore', [PackageController::class,'restore'])->name('package.restore');

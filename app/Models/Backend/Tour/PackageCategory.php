@@ -8,11 +8,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Country extends BackendBaseModel
+class PackageCategory extends BackendBaseModel
 {
     use HasFactory, SoftDeletes, Sluggable, Slug;
 
-    protected $table    ='countries';
+    protected $table    ='package_categories';
     protected $fillable = ['id','title','key','slug','status','created_by','updated_by'];
 
     public function packages()

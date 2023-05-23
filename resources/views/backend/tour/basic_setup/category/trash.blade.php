@@ -43,7 +43,6 @@
                                            <td>{{ $row->title ?? ''}} </td>
                                            <td>
                                                @include($module.'includes.status_display',['status'=>$row->status])
-
                                            </td>
                                            <td>
                                                @include($module.'includes.trash_action')

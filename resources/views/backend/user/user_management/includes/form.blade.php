@@ -72,7 +72,7 @@
     <div class="col-lg-12">
         <div class="mb-3">
             {!! Form::label('user_type', 'User Type', ['class' => 'form-label']) !!}
-            {!! Form::select('user_type', ['admin' => 'Admin', 'general' => 'General'], $page_method == 'edit' ? $data['row']->user_type:'admin',['class'=>'form-select mb-3 select2','id'=>'User Type']) !!}
+            {!! Form::select('user_type', ['admin' => 'Admin', 'general' => 'General'], $page_method == 'edit' ? $data['row']->user_type:'admin',['class'=>'form-select mb-3 select2','id'=>'user_type']) !!}
         </div>
     </div>
     <div class="col-lg-12 border-top mt-3">

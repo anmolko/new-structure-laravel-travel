@@ -1,7 +1,6 @@
 @extends('backend.layouts.master')
 @section('title', "Edit Job")
 @section('css')
-
     <link href="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 @endsection
 @section('content')

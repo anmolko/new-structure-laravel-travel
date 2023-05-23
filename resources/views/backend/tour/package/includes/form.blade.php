@@ -7,41 +7,39 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="mb-3">
-            {!! Form::label('name', 'Name', ['class' => 'form-label required']) !!}
-            {!! Form::text('name', null,['class'=>'form-control','id'=>'name','placeholder'=>'Enter name']) !!}
+            {!! Form::label('country_id', 'Country', ['class' => 'form-label required']) !!}
+            {!! Form::select('country_id', $data['countries'], $data['row']->country_id ?? '',['class'=>'form-select mb-3 select2','id'=>'country_id','placeholder'=>'Select country']) !!}
         </div>
     </div>
     <div class="col-lg-12">
         <div class="mb-3">
-            {!! Form::label('email', 'Name', ['class' => 'form-label required']) !!}
-            {!! Form::text('email', null,['class'=>'form-control','id'=>'email','placeholder'=>'Enter email']) !!}
+            {!! Form::label('title', 'Title', ['class' => 'form-label required']) !!}
+            {!! Form::text('title', null,['class'=>'form-control','id'=>'name','placeholder'=>'Enter title']) !!}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {!! Form::label('package_category_id', 'Category', ['class' => 'form-label required']) !!}
+            {!! Form::select('package_category_id', $data['categories'], $data['row']->package_category_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_category_id','placeholder'=>'Select category']) !!}
+        </div>
+    </div>
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {!! Form::label('package_type_id', 'Category', ['class' => 'form-label required']) !!}
+            {!! Form::select('package_type_id', $data['types'], $data['row']->package_type_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_type_id','placeholder'=>'Select type']) !!}
         </div>
     </div>
     <div class="col-lg-12">
         <div class="mb-3">
-            {!! Form::label('password', 'Password', ['class' => 'form-label required']) !!}
-            <div class="position-relative auth-pass-inputgroup mb-3">
-                {!!Form::password('password_input', ['class' => 'form-control pe-5', 'placeholder'=>'Enter password','id'=>'password-input']) !!}
-                {!! Form::button('<i class="ri-eye-fill align-middle"></i>',['class' => 'btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted','id'=>'password-addon']) !!}
-            </div>
+            {!! Form::label('description', 'Description', ['class' => 'form-label']) !!}
+            {!! Form::textarea('description', null,['class'=>'form-control ck-editor','id'=>'description','placeholder'=>'Enter description']) !!}
+
         </div>
     </div>
     <div class="col-lg-6">
         <div class="mb-3">
-            {!! Form::label('contact', 'Contact', ['class' => 'form-label required']) !!}
-            {!! Form::number('contact', null,['class'=>'form-control','id'=>'contact','placeholder'=>'Enter contact']) !!}
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-3">
-            {!! Form::label('address', 'Address', ['class' => 'form-label']) !!}
-            {!! Form::text('address', null,['class'=>'form-control','id'=>'address','placeholder'=>'Enter address']) !!}
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-3">
-            {!! Form::label('gender', 'Gender', ['class' => 'form-label']) !!}
-            {!! Form::select('gender', ['male' => 'Male', 'female' => 'Female','others'=>'Others'], $page_method == 'edit' ? $data['row']->user_type:'male',['class'=>'form-select mb-3 select2','id'=>'gender']) !!}
+            {!! Form::label('image', 'Profile Images', ['class' => 'form-label']) !!}
+            {!! Form::file('image', ['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="col-lg-6">
@@ -55,24 +53,6 @@
                 {!! Form::radio('status', 0, false,['class'=>'form-check-input','id'=>'status2']) !!}
                 {!! Form::label('status2', 'Inactive', ['class' => 'form-check-label']) !!}
             </div>
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-4">
-            {!! Form::label('image', 'Profile Images', ['class' => 'form-label']) !!}
-            {!! Form::file('image', ['class'=>'form-control']) !!}
-        </div>
-    </div>
-    <div class="col-lg-6">
-        <div class="mb-4">
-            {!! Form::label('cover', 'Cover Photo', ['class' => 'form-label']) !!}
-            {!! Form::file('cover', ['class'=>'form-control']) !!}
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="mb-3">
-            {!! Form::label('user_type', 'User Type', ['class' => 'form-label']) !!}
-            {!! Form::select('user_type', ['admin' => 'Admin', 'general' => 'General'], $page_method == 'edit' ? $data['row']->user_type:'admin',['class'=>'form-select mb-3 select2','id'=>'User Type']) !!}
         </div>
     </div>
     <div class="col-lg-12 border-top mt-3">

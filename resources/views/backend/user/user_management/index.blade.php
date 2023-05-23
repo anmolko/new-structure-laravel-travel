@@ -25,7 +25,7 @@
                                         <a class="btn btn-outline-danger waves-effect waves-light" href="{{ route($base_route.'trash') }}">
                                             <i class="ri-delete-bin-7-line align-bottom me-1"></i>  Trash </a>
                                     </div>
-                                    @include('backend.user.user_management.create')
+                                    @include($view_path.'create')
                                 </div>
                             </div>
                         </div>

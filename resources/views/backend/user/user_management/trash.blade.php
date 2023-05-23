@@ -38,12 +38,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($data['users'] as $data)
+                                    @foreach($data['users'] as $row)
                                        <tr>
                                            <td>{{ $loop->iteration }}</td>
-                                           <td>{{ $data->name ?? ''}} </td>
-                                           <td>{{ $data->email ?? ''}}</td>
-                                           <td>{{ $data->contact ?? ''}}</td>
+                                           <td>{{ $row->name ?? ''}} </td>
+                                           <td>{{ $row->email ?? ''}}</td>
+                                           <td>{{ $row->contact ?? ''}}</td>
                                            <td>
                                                @include($module.'includes.trash_action')
                                            </td>

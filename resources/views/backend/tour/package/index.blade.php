@@ -4,6 +4,11 @@
     <link rel="stylesheet" href="{{asset('assets/backend/css/jquery.dataTables.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/backend/custom_css/datatable_style.css')}}">
     <link href="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+    <style>
+    .cke_contents{
+        height: 400px!important;
+    }
+    </style>
 @endsection
 @section('content')
     <div class="page-content">
@@ -25,7 +30,7 @@
                                         <a class="btn btn-outline-danger waves-effect waves-light" href="{{ route($base_route.'trash') }}">
                                             <i class="ri-delete-bin-7-line align-bottom me-1"></i>  Trash </a>
                                     </div>
-                                    @include('backend.user.user_management.create')
+                                    @include($view_path.'create')
                                 </div>
                             </div>
                         </div>
@@ -35,9 +40,9 @@
                                     <thead class="table-light">
                                     <tr>
                                         <th>S.N</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Contact</th>
+                                        <th>Title</th>
+                                        <th>Country</th>
+                                        <th>Category</th>
                                         <th>Status</th>
                                         <th class="text-right">Action</th>
                                     </tr>
@@ -57,7 +62,7 @@
 
 @section('js')
     <script src="{{asset('assets/backend/js/jquery.dataTables.min.js')}}"></script>
-    <script src="{{asset('assets/backend/js/pages/password-addon.init.js')}}"></script>
+    <script src="{{asset('assets/backend/plugins/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.js')}}"></script>
     <script src="{{asset('assets/common/general.js')}}"></script>
     @include($module.'includes.toast_message')
@@ -79,9 +84,9 @@
             },
             columns :[
                 {data:'DT_RowIndex', name: 'DT_RowIndex', searchable:false, orderable: false},
-                {data:'name', name: 'name', orderable: true},
-                {data:'email', name: 'email', orderable: false},
-                {data:'contact', name: 'contact', orderable: true},
+                {data:'title', name: 'title', orderable: true},
+                {data:'country', name: 'country', orderable: false},
+                {data:'category', name: 'category', orderable: true},
                 {data:'status', name: 'status', searchable:false, orderable: false},
                 {data:'action', name: 'action', searchable:false, orderable: false},
             ]
