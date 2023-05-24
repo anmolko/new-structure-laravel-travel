@@ -85,8 +85,8 @@
             columns :[
                 {data:'DT_RowIndex', name: 'DT_RowIndex', searchable:false, orderable: false},
                 {data:'title', name: 'title', orderable: true},
-                {data:'country', name: 'country', orderable: false},
-                {data:'category', name: 'category', orderable: true},
+                {data:'country', name: 'country', searchable:true, orderable: false},
+                {data:'category', name: 'category', searchable:true, orderable: true},
                 {data:'status', name: 'status', searchable:false, orderable: false},
                 {data:'action', name: 'action', searchable:false, orderable: false},
             ]

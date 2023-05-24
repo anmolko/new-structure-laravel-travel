@@ -31,23 +31,24 @@
                                     <thead class="table-light">
                                     <tr>
                                         <th>S.N</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Contact</th>
+                                        <th>Title</th>
+                                        <th>Status</th>
                                         <th class="text-right">Action</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($data['users'] as $data)
-                                       <tr>
-                                           <td>{{ $loop->iteration }}</td>
-                                           <td>{{ $data->name ?? ''}} </td>
-                                           <td>{{ $data->email ?? ''}}</td>
-                                           <td>{{ $data->contact ?? ''}}</td>
-                                           <td>
-                                               @include($module.'includes.trash_action')
-                                           </td>
-                                       </tr>
+                                    @foreach($data['users'] as $row)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $row->title ?? ''}} </td>
+                                            <td>
+                                                @include($module.'includes.status_display',['status'=>$row->status])
+
+                                            </td>
+                                            <td>
+                                                @include($module.'includes.trash_action')
+                                            </td>
+                                        </tr>
                                     @endforeach
                                     </tbody>
                                 </table>

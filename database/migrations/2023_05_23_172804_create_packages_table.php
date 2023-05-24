@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('key');
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
+            $table->string('cover')->nullable();
             $table->longText('description')->nullable();
             $table->additionalColumns();
         });

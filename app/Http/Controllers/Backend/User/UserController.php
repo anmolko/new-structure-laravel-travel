@@ -78,13 +78,13 @@ class UserController extends BackendBaseController
             $request->request->add(['password' => bcrypt($request['password_input']) ]);
 
             $request->request->add(['password',]);
-            if($request->hasFile('image')){
-                $image_name = $this->uploadImage($request->file('image'),'200','200');
-                $request->request->add(['image',$image_name]);
+            if($request->hasFile('image_input')){
+                $image_name = $this->uploadImage($request->file('image_input'),'200','200');
+                $request->request->add(['image'=>$image_name]);
             }
-            if($request->hasFile('cover')){
-                $image_name = $this->uploadImage($request->file('cover'),'2000','850');
-                $request->request->add(['cover',$image_name]);
+            if($request->hasFile('cover_image')){
+                $image_name = $this->uploadImage($request->file('cover_image'),'2000','850');
+                $request->request->add(['cover'=>$image_name]);
             }
 
             $this->model->create($request->all());
@@ -141,13 +141,13 @@ class UserController extends BackendBaseController
             if($request->has('password_input')) {
                 $request->request->add(['password', bcrypt($request['password_input'])]);
             }
-            if($request->hasFile('image')){
-                $image_name = $this->updateImage($request->file('image'),$data['row']->image,'200','200');
-                $request->request->add(['image',$image_name]);
+            if($request->hasFile('image_input')){
+                $image_name = $this->uploadImage($request->file('image_input'),'200','200');
+                $request->request->add(['image'=>$image_name]);
             }
-            if($request->hasFile('cover')){
-                $image_name = $this->updateImage($request->file('cover'),$data['row']->cover,'2000','850');
-                $request->request->add(['cover',$image_name]);
+            if($request->hasFile('cover_image')){
+                $image_name = $this->uploadImage($request->file('cover_image'),'2000','850');
+                $request->request->add(['cover'=>$image_name]);
             }
 
             $data['row']->update($request->all());
@@ -171,15 +171,16 @@ class UserController extends BackendBaseController
     public function destroy($id)
     {
         $data['row']       = $this->model->find($id);
-        DB::beginTransaction();
         try {
-            $data['row']->delete();
+            DB::beginTransaction();
+//            $status = $data['row']->forceDelete();
+//            DB::rollBack();
 
-            Session::flash('success',$this->panel.' was removed successfully');
+            $data['row']->delete();
             DB::commit();
+            Session::flash('success',$this->panel.' was removed successfully');
         } catch (\Exception $e) {
-            DB::rollback();
-            Session::flash('error',$this->panel.' was not removed. Something went wrong.');
+            Session::flash('error',$this->panel.' was not removed as data is already in use.');
         }
 
         return response()->json(route($this->base_route.'index'));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend\Tour;
 
 use App\Http\Controllers\Backend\BackendBaseController;
+use App\Http\Requests\Backend\Tour\PackageRequest;
 use App\Http\Requests\Backend\UserRequest;
 use App\Models\Backend\Tour\Country;
 use App\Models\Backend\Tour\Package;
@@ -71,7 +72,7 @@ class PackageController extends BackendBaseController
     public function getData(){
         $data['countries']  =  Country::active()->descending()->pluck('title','id');
         $data['categories'] =  PackageCategory::active()->descending()->pluck('title','id');
-        $data['types']       =  PackageType::active()->descending()->pluck('title','id');
+        $data['types']      =  PackageType::active()->descending()->pluck('title','id');
 
         return $data;
     }
@@ -79,27 +80,29 @@ class PackageController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param UserRequest $request
+     * @param PackageRequest $request
      * @return JsonResponse
      */
-    public function store(UserRequest $request)
+    public function store(PackageRequest $request)
     {
         DB::beginTransaction();
         try {
-            $request->request->add(['password',bcrypt($request['password'])]);
-            if($request->hasFile('image')){
-                $image_name = $this->uploadImage($request->file('image'),'200','200');
-                $request->request->add(['image',$image_name]);
+            $request->request->add(['key' => $this->model->changeTokey($request['title'])]);
+            $request->request->add(['created_by' => auth()->user()->id ]);
+            if($request->hasFile('image_input')){
+                $image_name = $this->uploadImage($request->file('image_input'),'200','200');
+                $request->request->add(['image'=>$image_name]);
             }
-            if($request->hasFile('cover')){
-                $image_name = $this->uploadImage($request->file('cover'),'2000','850');
-                $request->request->add(['cover',$image_name]);
+            if($request->hasFile('cover_image')){
+                $image_name = $this->uploadImage($request->file('cover_image'),'2000','850');
+                $request->request->add(['cover'=>$image_name]);
             }
-            User::create($request->all());
+            $this->model->create($request->all());
             Session::flash('success',$this->panel.' was created successfully');
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
+            dd($e);
             Session::flash('error',$this->panel.'  was not created. Something went wrong.');
         }
 
@@ -136,26 +139,25 @@ class PackageController extends BackendBaseController
     /**
      * Update the specified resource in storage.
      *
-     * @param UserRequest $request
+     * @param PackageRequest $request
      * @param int $id
      * @return JsonResponse
      */
-    public function update(UserRequest $request, $id)
+    public function update(PackageRequest $request, $id)
     {
         $data['row']       = $this->model->find($id);
 
         DB::beginTransaction();
         try {
-            if($request->has('password_input')) {
-                $request->request->add(['password', bcrypt($request['password_input'])]);
+            $request->request->add(['updated_by' => auth()->user()->id ]);
+
+            if($request->hasFile('image_input')){
+                $image_name = $this->updateImage($request->file('image_input'),$data['row']->image,'200','200');
+                $request->request->add(['image'=>$image_name]);
             }
-            if($request->hasFile('image')){
-                $image_name = $this->updateImage($request->file('image'),$data['row']->image,'200','200');
-                $request->request->add(['image',$image_name]);
-            }
-            if($request->hasFile('cover')){
-                $image_name = $this->updateImage($request->file('cover'),$data['row']->cover,'2000','850');
-                $request->request->add(['cover',$image_name]);
+            if($request->hasFile('cover_image')){
+                $image_name = $this->updateImage($request->file('cover_image'),$data['row']->cover,'2000','850');
+                $request->request->add(['cover'=>$image_name]);
             }
 
             $data['row']->update($request->all());
@@ -169,7 +171,6 @@ class PackageController extends BackendBaseController
         return response()->json(route($this->base_route.'index'));
     }
 
-
     /**
      * Remove the specified resource from storage.
      *
@@ -179,15 +180,16 @@ class PackageController extends BackendBaseController
     public function destroy($id)
     {
         $data['row']       = $this->model->find($id);
-        DB::beginTransaction();
         try {
-            $data['row']->delete();
+            DB::beginTransaction();
+//            $status = $data['row']->forceDelete();
+//            DB::rollBack();
 
-            Session::flash('success',$this->panel.' was removed successfully');
+            $data['row']->delete();
             DB::commit();
+            Session::flash('success',$this->panel.' was removed successfully');
         } catch (\Exception $e) {
-            DB::rollback();
-            Session::flash('error',$this->panel.' was not removed. Something went wrong.');
+            Session::flash('error',$this->panel.' was not removed as data is already in use.');
         }
 
         return response()->json(route($this->base_route.'index'));
@@ -223,6 +225,7 @@ class PackageController extends BackendBaseController
     public function removeTrash(Request $request, $id)
     {
         $data['row']       = $this->model->withTrashed()->find($id);
+
         DB::beginTransaction();
         try {
             $this->deleteImage($data['row']->image);

@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
 
-class PackageTypeRequest extends FormRequest
+class PackageRequest extends FormRequest
 {
 
     /**
@@ -27,15 +27,19 @@ class PackageTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'     => 'required|string|max:191|unique:package_categories,title,'.$this->category,
+            'title'                     => 'required|string|unique:packages,title,'.$this->package,
+            'country_id'                => 'required',
+            'package_category_id'       => 'required',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required'      => 'Please enter a title',
-            'title.unique'        => 'Title already in use',
+            'title.required'                => 'Please enter a title',
+            'title.unique'                  => 'Title already in use',
+            'country_id.required'           => 'Please select a country',
+            'package_category_id.required'  => 'Please select a category',
         ];
     }
 }

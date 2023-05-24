@@ -25,24 +25,57 @@
     </div>
     <div class="col-lg-6">
         <div class="mb-3">
-            {!! Form::label('package_type_id', 'Category', ['class' => 'form-label required']) !!}
+            {!! Form::label('package_type_id', 'Category', ['class' => 'form-label']) !!}
             {!! Form::select('package_type_id', $data['types'], $data['row']->package_type_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_type_id','placeholder'=>'Select type']) !!}
         </div>
     </div>
     <div class="col-lg-12">
-        <div class="mb-3">
+        <div class="mb-3 editor">
             {!! Form::label('description', 'Description', ['class' => 'form-label']) !!}
             {!! Form::textarea('description', null,['class'=>'form-control ck-editor','id'=>'description','placeholder'=>'Enter description']) !!}
-
         </div>
     </div>
     <div class="col-lg-6">
         <div class="mb-3">
-            {!! Form::label('image', 'Profile Images', ['class' => 'form-label']) !!}
-            {!! Form::file('image', ['class'=>'form-control']) !!}
+            {!! Form::label('image_input', 'Images', ['class' => 'form-label']) !!}
+            {!! Form::file('image_input', ['class'=>'form-control','id'=>'image_input']) !!}
         </div>
+        @if($page_method=='edit' && $data['row']->image)
+            <div class="col-xxl-4 col-xl-4 col-sm-6">
+                <div class="gallery-box card">
+                    <div class="gallery-container">
+                        <a class="image-popup" href="{{ asset(imagePath($folder_name).$data['row']->image)}}" title="">
+                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($folder_name).$data['row']->image)}}" alt="" />
+                            <div class="gallery-overlay">
+                                <h5 class="overlay-caption">Feature Image</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="col-lg-6">
+        <div class="mb-3">
+            {!! Form::label('cover_image', 'Cover Image', ['class' => 'form-label']) !!}
+            {!! Form::file('cover_image', ['class'=>'form-control','id'=>'cover_image']) !!}
+        </div>
+        @if($page_method=='edit' && $data['row']->cover)
+            <div class="col-xxl-4 col-xl-4 col-sm-6">
+                <div class="gallery-box card">
+                    <div class="gallery-container">
+                        <a class="image-popup" href="{{ asset(imagePath($folder_name).$data['row']->cover)}}" title="">
+                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($folder_name).$data['row']->cover)}}" alt="" />
+                            <div class="gallery-overlay">
+                                <h5 class="overlay-caption">Cover Image</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
+    </div>
+    <div class="col-lg-12">
         {!! Form::label('status', 'Status', ['class' => 'form-label']) !!}
         <div class="mb-3 mt-2">
             <div class="form-check form-check-inline form-radio-success">
@@ -57,7 +90,7 @@
     </div>
     <div class="col-lg-12 border-top mt-3">
         <div class="hstack gap-2">
-            {!! Form::submit('CREATE',['class'=>'btn btn-success mt-3','id'=>'user-add-button']) !!}
+            {!! Form::submit($button,['class'=>'btn btn-success mt-3','id'=>'user-add-button']) !!}
         </div>
     </div>
 </div>

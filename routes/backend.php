@@ -54,7 +54,7 @@ Route::prefix('user/')->name('user.')->middleware(['auth'])->group(function () {
     Route::get('/user-management/trash', [UserController::class,'trash'])->name('user-management.trash');
     Route::post('/user-management/trash/{id}/restore', [UserController::class,'restore'])->name('user-management.restore');
     Route::delete('/user-management/trash/{id}/remove', [UserController::class,'removeTrash'])->name('user-management.remove-trash');
-    Route::resource('user-management', UserController::class);
+    Route::resource('user-management', UserController::class)->names('user-management');
 
 });
 
@@ -65,19 +65,19 @@ Route::prefix('tour/')->name('tour.')->middleware(['auth'])->group(function () {
         Route::get('/country/trash', [CountryController::class,'trash'])->name('country.trash');
         Route::post('/country/trash/{id}/restore', [CountryController::class,'restore'])->name('country.restore');
         Route::delete('/country/trash/{id}/remove', [CountryController::class,'removeTrash'])->name('country.remove-trash');
-        Route::resource('country', CountryController::class);
+        Route::resource('country', CountryController::class)->names('country');
 
         //country
         Route::get('/category/trash', [PackageCategoryController::class,'trash'])->name('category.trash');
         Route::post('/category/trash/{id}/restore', [PackageCategoryController::class,'restore'])->name('category.restore');
         Route::delete('/category/trash/{id}/remove', [PackageCategoryController::class,'removeTrash'])->name('category.remove-trash');
-        Route::resource('category', PackageCategoryController::class);
+        Route::resource('category', PackageCategoryController::class)->names('category');
 
         //country
         Route::get('/type/trash', [PackageTypeController::class,'trash'])->name('type.trash');
         Route::post('/type/trash/{id}/restore', [PackageTypeController::class,'restore'])->name('type.restore');
         Route::delete('/type/trash/{id}/remove', [PackageTypeController::class,'removeTrash'])->name('type.remove-trash');
-        Route::resource('type', PackageTypeController::class);
+        Route::resource('type', PackageTypeController::class)->names('type');
 
     });
 
@@ -87,6 +87,6 @@ Route::prefix('tour/')->name('tour.')->middleware(['auth'])->group(function () {
     Route::get('/package/trash', [PackageController::class,'trash'])->name('package.trash');
     Route::post('/package/trash/{id}/restore', [PackageController::class,'restore'])->name('package.restore');
     Route::delete('/package/trash/{id}/remove', [PackageController::class,'removeTrash'])->name('package.remove-trash');
-    Route::resource('package', PackageController::class);
+    Route::resource('package', PackageController::class)->names('package');
 
 });

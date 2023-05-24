@@ -80,8 +80,8 @@ class BackendBaseController extends Controller
 
     protected function deleteImage($image)
     {
-        if (!empty($image_name) && file_exists($this->image_path.DIRECTORY_SEPARATOR.$image_name)){
-            @unlink($this->image_path.DIRECTORY_SEPARATOR.$image_name);
+        if (!empty($image) && file_exists($this->image_path.DIRECTORY_SEPARATOR.$image)){
+            @unlink($this->image_path.DIRECTORY_SEPARATOR.$image);
         }
     }
 

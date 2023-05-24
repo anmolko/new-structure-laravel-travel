@@ -23,13 +23,14 @@ class PackageService {
 
     public function getDataForDatatable(Request $request){
 
-        $query = $this->model->query()->orderBy('created_at', 'desc');
+        $query = $this->model->query()
+            ->orderBy('created_at', 'desc');
         return $this->dataTables->eloquent($query)
             ->editColumn('country',function ($item){
                 return $item->country->title ?? '-';
             })
             ->editColumn('category',function ($item){
-                return $item->category->title ?? '-';
+                return $item->packageCategory->title ?? '-';
             })
             ->editColumn('status',function ($item){
                 $params = [
@@ -53,7 +54,7 @@ class PackageService {
                 });
             })
             ->filterColumn('category', function($query, $keyword) {
-                $query->whereHas('category', function($category) use($keyword){
+                $query->whereHas('packageCategory', function($category) use($keyword){
                     $category->where('title', 'like', "%" . $keyword . "%");
                 });
             })

@@ -59,14 +59,14 @@
     </div>
     <div class="col-lg-6">
         <div class="mb-4">
-            {!! Form::label('image', 'Profile Images', ['class' => 'form-label']) !!}
-            {!! Form::file('image', ['class'=>'form-control']) !!}
+            {!! Form::label('image_input', 'Profile Images', ['class' => 'form-label']) !!}
+            {!! Form::file('image_input', ['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="col-lg-6">
         <div class="mb-4">
-            {!! Form::label('cover', 'Cover Photo', ['class' => 'form-label']) !!}
-            {!! Form::file('cover', ['class'=>'form-control']) !!}
+            {!! Form::label('cover_image', 'Cover Photo', ['class' => 'form-label']) !!}
+            {!! Form::file('cover_image', ['class'=>'form-control']) !!}
         </div>
     </div>
     <div class="col-lg-12">

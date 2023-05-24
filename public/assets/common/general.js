@@ -1,14 +1,21 @@
 //handle form requests via ajax
 $(document).ready(function() {
     reinitializeSelect2();
-    dataTable = $('#NormalDataTable').DataTable({
-        paging: true,
-        searching: true,
-        ordering:  true,
-        lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
-    });
     loadEditor();
+    loadNormalDatatable();
 });
+
+function loadNormalDatatable(){
+    let selector =  $('#NormalDataTable');
+    if(selector.length > 0){
+        dataTable = $(selector).DataTable({
+            paging: true,
+            searching: true,
+            ordering:  true,
+            lengthMenu: [[5, 10, 25, 50, -1], [5, 10, 25, 50, "All"]],
+        });
+    }
+}
 
 function loadEditor(){
     let selector =  $('.ck-editor');

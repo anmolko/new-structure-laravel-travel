@@ -243,30 +243,13 @@ if (!function_exists('get_country')) {
     }
 }
 
-if (!function_exists('get_legal_documents')) {
+if (!function_exists('imagePath')) {
     /**
-     * @return array
+     * @param $folder_name
+     * @return string
      */
-    function get_legal_documents(): array
+    function imagePath($folder_name): string
     {
-
-        $values = [];
-        $page_detail = Page::with('sections')->where('slug', 'legal-document')->where('status','active')->first() ?? Page::with('sections')->where('slug', 'legal-documents')->where('status','active')->first();
-
-        if($page_detail){
-            $page_section = PageSection::with('page')->where('page_id', $page_detail->id)->orderBy('position', 'ASC')->get();
-            foreach ($page_section as $section){
-                if ($section->section_slug == 'gallery_section'){
-                    $values['data'] = SectionGallery::with('section')
-                        ->where('page_section_id', $section->id)
-                        ->get();
-                    $values['heading'] =$section->gallery_heading;
-                    $values['subheading'] = $section->gallery_subheading;
-                }
-            }
-            return $values;
-        }else{
-            return $values;
-        }
+        return'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$folder_name.DIRECTORY_SEPARATOR;
     }
 }
