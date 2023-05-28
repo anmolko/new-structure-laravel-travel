@@ -248,8 +248,8 @@ if (!function_exists('imagePath')) {
      * @param $folder_name
      * @return string
      */
-    function imagePath($folder_name): string
+    function imagePath($image): string
     {
-        return'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$folder_name.DIRECTORY_SEPARATOR;
+        return 'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$image;
     }
 }

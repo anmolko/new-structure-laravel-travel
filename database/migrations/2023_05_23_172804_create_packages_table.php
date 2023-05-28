@@ -14,14 +14,17 @@ return new class extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('country_id')->constrained()->cascadeOnUpdate();
-            $table->foreignId('package_type_id')->nullable()->constrained()->cascadeOnUpdate();
+            $table->foreignId('package_ribbon_id')->nullable()->constrained()->cascadeOnUpdate();
             $table->foreignId('package_category_id')->constrained()->cascadeOnUpdate();
             $table->string('title');
             $table->string('key');
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
+            $table->string('duration')->nullable();
+            $table->text('map')->nullable();
             $table->string('cover')->nullable();
             $table->longText('description')->nullable();
+            $table->longText('itinerary')->nullable();
             $table->additionalColumns();
         });
     }

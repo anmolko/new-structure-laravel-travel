@@ -35,24 +35,41 @@
                                         <li class="nav-item">
                                             <a href="{{ route('backend.tour.basic_setup.category.index') }}"
                                                class="nav-link {{request()->route()->getName() == 'backend.tour.basic_setup.category.index' ? 'active':''}}"
-                                               data-key="t-level-basic-package"> Package Category </a>
+                                               data-key="t-level-basic-package"> Category </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('backend.tour.basic_setup.type.index') }}"
-                                               class="nav-link {{request()->route()->getName() == 'backend.tour.basic_setup.type.index' ? 'active':''}}"
-                                               data-key="t-level-basic-package"> Package Type </a>
+                                            <a href="{{ route('backend.tour.basic_setup.ribbon.index') }}"
+                                               class="nav-link {{request()->route()->getName() == 'backend.tour.basic_setup.ribbon.index' ? 'active':''}}"
+                                               data-key="t-level-basic-package"> Ribbon </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
                                 <a href="{{ route('backend.tour.package.index') }}"
-                                   class="nav-link {{request()->route()->getName() == 'backend.tour.basic_setup.type.index' ? 'active':''}}"
+                                   class="nav-link {{request()->route()->getName() == 'backend.tour.package.index' ? 'active':''}}"
                                    data-key="t-multi-level-tour"> Package </a>
                             </li>
                         </ul>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link collapsed" href="#sidebarHomepageMultilevel" data-bs-toggle="collapse" role="button" aria-controls="sidebarHomepageMultilevel">
+                        <i class="ri-ancient-pavilion-line"></i> <span data-key="t-multi-level-homepage">Homepage</span>
+                    </a>
+                    <div class="menu-dropdown collapse" id="sidebarHomepageMultilevel" style="">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('backend.homepage.slider.index') }}"
+                                   class="nav-link {{request()->route()->getName() == 'backend.homepage.slider.index' ? 'active':''}}"
+                                   data-key="t-multi-level-homepage"> Slider </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{request()->route()->getName() == 'backend.user.user_management.index' ? 'active':''}}" href="{{route('backend.user.user-management.index')}}">

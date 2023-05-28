@@ -3,8 +3,10 @@
 namespace App\Http\Requests\Backend\Tour;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
-class CountryRequest extends FormRequest
+class PackageRibbonRequest extends FormRequest
 {
 
     /**
@@ -25,7 +27,7 @@ class CountryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'     => 'required|string|max:191|unique:countries,title,'.$this->country,
+            'title'     => 'required|string|max:191|unique:package_ribbons,title,'.$this->ribbon,
         ];
     }
 

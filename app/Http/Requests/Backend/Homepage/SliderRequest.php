@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Backend\Tour;
+namespace App\Http\Requests\Backend\Homepage;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Request;
-use Illuminate\Validation\Rules\Password;
 
-class PackageTypeRequest extends FormRequest
+class SliderRequest extends FormRequest
 {
 
     /**
@@ -27,15 +25,14 @@ class PackageTypeRequest extends FormRequest
     public function rules()
     {
         return [
-            'title'     => 'required|string|max:191|unique:package_types,title,'.$this->type,
+            'image_input'   => 'required|image|mimes:jpg,jpeg,png,gif|max:2048',
         ];
     }
 
     public function messages()
     {
         return [
-            'title.required'      => 'Please enter a title',
-            'title.unique'        => 'Title already in use',
+            'image_input.required'     => 'Please select a image',
         ];
     }
 }

@@ -62,12 +62,40 @@
             {!! Form::label('image_input', 'Profile Images', ['class' => 'form-label']) !!}
             {!! Form::file('image_input', ['class'=>'form-control']) !!}
         </div>
+        @if($page_method=='edit' && $data['row']->image)
+            <div class="col-xxl-4 col-xl-4 col-sm-6">
+                <div class="gallery-box card">
+                    <div class="gallery-container">
+                        <a class="image-popup" href="{{ asset(imagePath($data['row']->image))}}" title="">
+                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($data['row']->image))}}" alt="" />
+                            <div class="gallery-overlay">
+                                <h5 class="overlay-caption">Feature Image</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="col-lg-6">
         <div class="mb-4">
             {!! Form::label('cover_image', 'Cover Photo', ['class' => 'form-label']) !!}
             {!! Form::file('cover_image', ['class'=>'form-control']) !!}
         </div>
+        @if($page_method=='edit' && $data['row']->cover)
+            <div class="col-xxl-4 col-xl-4 col-sm-6">
+                <div class="gallery-box card">
+                    <div class="gallery-container">
+                        <a class="image-popup" href="{{ asset(imagePath($data['row']->cover))}}" title="">
+                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($data['row']->cover))}}" alt="" />
+                            <div class="gallery-overlay">
+                                <h5 class="overlay-caption">Cover Image</h5>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        @endif
     </div>
     <div class="col-lg-12">
         <div class="mb-3">

@@ -1,8 +1,8 @@
 @extends('backend.layouts.master')
-@section('title', "Edit Job")
+@section('title', $page_title)
 @section('css')
     <link rel="stylesheet" href="{{asset('assets/backend/libs/glightbox/css/glightbox.min.css')}}" />
-    <link href="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+
 @endsection
 @section('content')
     <div class="page-content">
@@ -31,7 +31,8 @@
 
 @section('js')
     <script src="{{asset('assets/backend/js/pages/form-validation.init.js')}}"></script>
-    <script src="{{asset('assets/backend/js/pages/password-addon.init.js')}}"></script>
+    <script src="{{asset('assets/backend/plugins/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/common/general.js')}}"></script>
     @include($module.'includes/gallery')
+
 @endsection

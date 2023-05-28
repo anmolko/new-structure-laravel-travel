@@ -21,8 +21,8 @@ class Package extends BackendBaseModel
         return $this->belongsTo(Country::class);
     }
 
-    public function type(){
-        return $this->belongsTo(PackageType::class);
+    public function packageRibbon(){
+        return $this->belongsTo(PackageRibbon::class);
     }
 
     public function packageCategory(){

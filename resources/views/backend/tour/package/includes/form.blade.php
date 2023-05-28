@@ -1,7 +1,7 @@
 @if($page_method == 'edit')
-    {!! Form::model($data['row'], ['route' => [$base_route.'update',$data['row']->id ], 'method' => 'PUT','class'=>'submit_form']) !!}
+    {!! Form::model($data['row'], ['route' => [$base_route.'update',$data['row']->id ], 'method' => 'PUT','class'=>'submit_form','enctype'=>'multipart/form-data']) !!}
 @else
-    {!! Form::open(['route' => $base_route.'store', 'method'=>'POST', 'class'=>'submit_form']) !!}
+    {!! Form::open(['route' => $base_route.'store', 'method'=>'POST', 'class'=>'submit_form','enctype'=>'multipart/form-data']) !!}
 @endif
 
 <div class="row">
@@ -25,8 +25,8 @@
     </div>
     <div class="col-lg-6">
         <div class="mb-3">
-            {!! Form::label('package_type_id', 'Category', ['class' => 'form-label']) !!}
-            {!! Form::select('package_type_id', $data['types'], $data['row']->package_type_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_type_id','placeholder'=>'Select type']) !!}
+            {!! Form::label('package_ribbon_id', 'Category', ['class' => 'form-label']) !!}
+            {!! Form::select('package_ribbon_id', $data['types'], $data['row']->package_ribbon_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_ribbon_id','placeholder'=>'Select ribbon']) !!}
         </div>
     </div>
     <div class="col-lg-12">
@@ -44,8 +44,8 @@
             <div class="col-xxl-4 col-xl-4 col-sm-6">
                 <div class="gallery-box card">
                     <div class="gallery-container">
-                        <a class="image-popup" href="{{ asset(imagePath($folder_name).$data['row']->image)}}" title="">
-                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($folder_name).$data['row']->image)}}" alt="" />
+                        <a class="image-popup" href="{{ asset(imagePath($data['row']->image))}}" title="">
+                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($data['row']->image))}}" alt="" />
                             <div class="gallery-overlay">
                                 <h5 class="overlay-caption">Feature Image</h5>
                             </div>
@@ -64,8 +64,8 @@
             <div class="col-xxl-4 col-xl-4 col-sm-6">
                 <div class="gallery-box card">
                     <div class="gallery-container">
-                        <a class="image-popup" href="{{ asset(imagePath($folder_name).$data['row']->cover)}}" title="">
-                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($folder_name).$data['row']->cover)}}" alt="" />
+                        <a class="image-popup" href="{{ asset(imagePath($data['row']->cover))}}" title="">
+                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($data['row']->cover))}}" alt="" />
                             <div class="gallery-overlay">
                                 <h5 class="overlay-caption">Cover Image</h5>
                             </div>

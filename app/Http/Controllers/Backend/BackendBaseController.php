@@ -43,15 +43,15 @@ class BackendBaseController extends Controller
         return $view_path;
     }
 
-    protected function generalUploadImage($image,$height,$width){
-        $name        = uniqid().$image->getClientOriginalName();
+    protected function generalUploadImage($image,$width,$height){
+        $name        = $this->folder_name.'/'.uniqid().$image->getClientOriginalName();
         if (!is_dir($this->image_path)) {
             File::makeDirectory($this->image_path, 0777, true);
         }
 
         $status = Image::make($image->getRealPath())->orientate();
-        if($height && $width){
-            $status = $status->fit($height, $width);
+        if($width && $height){
+            $status = $status->fit($width,$height);
         }
         $status = $status->save($this->image_path.DIRECTORY_SEPARATOR.$name);
 
@@ -59,17 +59,17 @@ class BackendBaseController extends Controller
     }
 
 
-    protected function uploadImage($image,$height=null,$width=null)
+    protected function uploadImage($image,$width=null,$height=null)
     {
-        $result = $this->generalUploadImage($image,$height,$width);
+        $result = $this->generalUploadImage($image,$width,$height);
         if ($result['status']) {
             return $result['name'];
         }
     }
 
-    protected function updateImage($image,$image_name=null,$height=null,$width=null)
+    protected function updateImage($image,$image_name=null,$width=null,$height=null)
     {
-        $result = $this->generalUploadImage($image,$height,$width);
+        $result = $this->generalUploadImage($image,$width,$height);
         if ($result['status']) {
             if (!empty($image_name) && file_exists($this->image_path.DIRECTORY_SEPARATOR.$image_name)){
                 @unlink($this->image_path.DIRECTORY_SEPARATOR.$image_name);

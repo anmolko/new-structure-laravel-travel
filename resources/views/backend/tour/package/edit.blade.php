@@ -15,7 +15,7 @@
                     <div class="flex-shrink-0">
 
                         <div class="d-flex justify-content-sm-end">
-                            <a class="btn btn-success" href="{{route($base_route.'index')}}">
+                            <a class="btn btn-outline-success waves-effect waves-light" href="{{route($base_route.'index')}}">
                                 <i class="ri-menu-2-line align-bottom me-1"></i> {{ $panel . ' List'}} </a>
                         </div>
 

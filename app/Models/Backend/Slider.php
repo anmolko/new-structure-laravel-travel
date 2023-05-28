@@ -8,15 +8,11 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class PackageType extends BackendBaseModel
+class Slider extends BackendBaseModel
 {
     use HasFactory, SoftDeletes, Sluggable, Slug;
 
-    protected $table    ='package_types';
-    protected $fillable = ['id','title','key','slug','status','created_by','updated_by'];
+    protected $table    ='sliders';
+    protected $fillable = ['id','title','subtitle','button','link','image','status','created_by','updated_by'];
 
-    public function packages()
-    {
-        return $this->hasMany(Package::class);
-    }
 }

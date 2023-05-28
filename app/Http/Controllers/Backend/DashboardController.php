@@ -53,4 +53,10 @@ class DashboardController extends BackendBaseController
 
     }
 
+    public function errorPage()
+    {
+        $data               = [];
+        return view($this->loadView($this->view_path.'errors.404'), compact('data'));
+    }
+
 }

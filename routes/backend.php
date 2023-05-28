@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\Homepage\SliderController;
 use App\Http\Controllers\Backend\Tour\Basic_setup\CountryController;
 use App\Http\Controllers\Backend\Tour\Basic_setup\PackageCategoryController;
-use App\Http\Controllers\Backend\Tour\Basic_setup\PackageTypeController;
+use App\Http\Controllers\Backend\Tour\Basic_setup\PackageRibbonController;
 use App\Http\Controllers\Backend\Tour\PackageController;
 use App\Http\Controllers\Backend\User\UserController;
 use App\Http\Controllers\Backend\User\UserProfileController;
@@ -30,7 +31,10 @@ Route::any('/register', function() {
     abort(404);
 });
 
+
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/404', [DashboardController::class, 'errorPage'])->name('404');
 //Route::post('/dashboard/theme-mode', 'App\Http\Controllers\SettingController@themeMode')->name('settings.theme');
 
 
@@ -74,10 +78,10 @@ Route::prefix('tour/')->name('tour.')->middleware(['auth'])->group(function () {
         Route::resource('category', PackageCategoryController::class)->names('category');
 
         //country
-        Route::get('/type/trash', [PackageTypeController::class,'trash'])->name('type.trash');
-        Route::post('/type/trash/{id}/restore', [PackageTypeController::class,'restore'])->name('type.restore');
-        Route::delete('/type/trash/{id}/remove', [PackageTypeController::class,'removeTrash'])->name('type.remove-trash');
-        Route::resource('type', PackageTypeController::class)->names('type');
+        Route::get('/ribbon/trash', [PackageRibbonController::class,'trash'])->name('ribbon.trash');
+        Route::post('/ribbon/trash/{id}/restore', [PackageRibbonController::class,'restore'])->name('ribbon.restore');
+        Route::delete('/ribbon/trash/{id}/remove', [PackageRibbonController::class,'removeTrash'])->name('ribbon.remove-trash');
+        Route::resource('ribbon', PackageRibbonController::class)->names('ribbon');
 
     });
 
@@ -90,3 +94,14 @@ Route::prefix('tour/')->name('tour.')->middleware(['auth'])->group(function () {
     Route::resource('package', PackageController::class)->names('package');
 
 });
+
+Route::prefix('homepage/')->name('homepage.')->middleware(['auth'])->group(function () {
+    Route::get('/slider/trash', [SliderController::class,'trash'])->name('slider.trash');
+    Route::post('/slider/trash/{id}/restore', [SliderController::class,'restore'])->name('slider.restore');
+    Route::delete('/slider/trash/{id}/remove', [SliderController::class,'removeTrash'])->name('slider.remove-trash');
+    Route::resource('slider', SliderController::class)->names('slider');
+});
+
+//Route::fallback(function () {
+//    return redirect()->route('backend.404');
+//});
