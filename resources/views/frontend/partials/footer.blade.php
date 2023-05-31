@@ -398,5 +398,7 @@
 <script src="{{ asset('assets/frontend/js/jquery.superslides.min.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/superslider-script.js') }}"></script>
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
+@yield('js')
+@stack('scripts')
 </body>
 </html>

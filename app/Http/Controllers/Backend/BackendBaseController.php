@@ -15,7 +15,9 @@ class BackendBaseController extends Controller
         View::composer($view_path, function ($view){
             $view->with('base_route', $this->base_route);
             $view->with('view_path', $this->view_path);
-            $view->with('panel', $this->panel);
+            if(isset($this->panel)) {
+                $view->with('panel', $this->panel);
+            }
             $view->with('folder_name', property_exists($this,'folder_name') ? $this->folder_name:'');
             if(isset($this->module)){
                 $view->with('module', $this->module);
@@ -45,15 +47,14 @@ class BackendBaseController extends Controller
 
     protected function generalUploadImage($image,$width,$height){
         $name        = $this->folder_name.'/'.uniqid().$image->getClientOriginalName();
-        if (!is_dir($this->image_path)) {
-            File::makeDirectory($this->image_path, 0777, true);
+        if (!is_dir($this->image_path.$this->folder_name)) {
+            File::makeDirectory($this->image_path.$this->folder_name, 0777, true);
         }
-
         $status = Image::make($image->getRealPath())->orientate();
         if($width && $height){
             $status = $status->fit($width,$height);
         }
-        $status = $status->save($this->image_path.DIRECTORY_SEPARATOR.$name);
+        $status = $status->save($this->image_path.$name);
 
         return ['status'=>$status,'name'=>$name];
     }
@@ -71,8 +72,8 @@ class BackendBaseController extends Controller
     {
         $result = $this->generalUploadImage($image,$width,$height);
         if ($result['status']) {
-            if (!empty($image_name) && file_exists($this->image_path.DIRECTORY_SEPARATOR.$image_name)){
-                @unlink($this->image_path.DIRECTORY_SEPARATOR.$image_name);
+            if (!empty($image_name) && file_exists($this->image_path.$image_name)){
+                @unlink($this->image_path.$image_name);
             }
             return $result['name'];
         }
@@ -80,7 +81,7 @@ class BackendBaseController extends Controller
 
     protected function deleteImage($image)
     {
-        if (!empty($image) && file_exists($this->image_path.DIRECTORY_SEPARATOR.$image)){
+        if (!empty($image) && file_exists($this->image_path.$image)){
             @unlink($this->image_path.DIRECTORY_SEPARATOR.$image);
         }
     }

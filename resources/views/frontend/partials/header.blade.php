@@ -27,6 +27,9 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/jquery-ui.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flag-icon.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/frontend/custom_css/custom.css') }}" />
+    @yield('css')
+    @stack('styles')
 </head>
 <body>
 <!-- start cssload-loader -->

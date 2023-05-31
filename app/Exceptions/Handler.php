@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
@@ -29,31 +30,20 @@ class Handler extends ExceptionHandler
         });
     }
 
-    public function render($request, Throwable $e)
+    public function render($request, Throwable $exception)
     {
-        if($this->isHttpException($e)){
-            $code = $e->getStatusCode();
-            $message = $e->getMessage();
+
+        if($this->isHttpException($exception)){
+            $code = $exception->getStatusCode();
+            $message = $exception->getMessage();
             switch ($code){
                 case 404:
-                    if ($e instanceof NotFoundHttpException) {
-                        // Check if the request URL belongs to the backend
-                        if ($request->is('adminsite/*')) {
-                            return redirect()->route('backend.404');
-                        }
-
-                        // Handle frontend 404 route
-                        return redirect()->route('frontend.404');
-                    }
-                    return \Response::view('error.404',compact('message','code'),404);
+                    return \Response::view('error.404',compact('message','code'));
                     break;
             }
         }else{
-            return parent::render($request,$e);
+            return parent::render($request,$exception);
 
         }
-
-
-
     }
 }

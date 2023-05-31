@@ -1,53 +1,52 @@
-@extends('backend.layouts.master')
-@section('title','404 - Not Found')
-@section('css')
-@endsection
-
+@extends('frontend.layouts.master')
+@section('title')  Page Not Found @endsection
 @section('content')
-    <div class="auth-page-wrapper pt-5 pb-5">
-        <!-- auth page bg -->
-        <div class="auth-one-bg-position auth-one-bg"  id="auth-particles">
-            <div class="bg-overlay"></div>
 
-            <div class="shape">
-                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 120">
-                    <path d="M 0,36 C 144,53.6 432,123.2 720,124 C 1008,124.8 1296,56.8 1440,40L1440 140L0 140z"></path>
-                </svg>
-            </div>
+    <section class="page-title" style="background-image: url({{asset('assets/frontend/images/background/6.jpg')}})">
+        <div class="auto-container">
+            <h1>404 Error</h1>
+            <ul class="page-breadcrumb">
+                <li><a href="/">home</a></li>
+                <li>404 Error</li>
+            </ul>
         </div>
+    </section>
 
-        <!-- auth page content -->
-        <div class="auth-page-content">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="text-center pt-4">
-                            <div class="">
-                                <img src="{{asset('assets/backend/images/error.svg')}}" alt="" class="error-basic-img move-animation">
-                            </div>
-                            <div class="mt-n4">
-                                <h1 class="display-1 display-0 fw-medium">404</h1>
-                                <h3 class="text-uppercase">Sorry, Page not Found.</h3>
-                                <p class="text-muted mb-4">The page you are looking for not available!</p>
-                                <a href="{{route('backend.dashboard')}}" class="btn btn-success"><i class="mdi mdi-home me-1"></i>Back To Dashboard</a>
-                            </div>
+    <section class="about-section">
+        <div class="auto-container">
+            <div class="row clearfix">
+
+                <!--Title Column-->
+                <div class="title-column col-lg-5 col-md-12 col-sm-12">
+                    <div class="inner-column">
+                        <!--Sec Title-->
+                        <div class="sec-title">
+                            <h2>404 ERROR</h2>
+                            <div class="title-text">Oops ! Looks like you took a wrong turn.</div>
                         </div>
+                        <div class="text">
+                            It seems like we couldn't find what you are looking for. Please try looking for something else or go to another URL.
+                        </div>
+                        <a href="#" class="theme-btn btn-style-five">Homepage</a>
                     </div>
                 </div>
-                <!-- end row -->
+
+                <!--Video Column-->
+                <div class="video-column col-lg-7 col-md-12 col-sm-12">
+                    <div class="inner-column wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+
+                        <!--Video Box-->
+                        <div class="video-box">
+                            <figure class="image">
+                                <img src="{{ asset('assets/frontend/images/resource/video-img.jpg') }}" alt="">
+                            </figure>
+                        </div>
+
+                    </div>
+                </div>
 
             </div>
-            <!-- end container -->
         </div>
-    </div>
-
+    </section>
 
 @endsection
-
-@section('js')
-    <!-- particles js -->
-    <script src="{{asset('assets/backend/libs/particles.js/particles.js')}}"></script>
-    <!-- particles app js -->
-    <script src="{{asset('assets/backend//js/pages/particles.app.js')}}"></script>
-@endsection
-

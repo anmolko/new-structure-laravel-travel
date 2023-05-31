@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Backend\Tour;
+namespace App\Models\Backend\Activity;
 
 use App\Models\Backend\BackendBaseModel;
 use App\Traits\Slug;

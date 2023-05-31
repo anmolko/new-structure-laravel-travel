@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Backend\Tour\Package;
+use App\Models\Backend\Activity\Package;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 
@@ -11,7 +11,7 @@ class PackageService {
 
 
     protected string $module        = 'backend.';
-    protected string $base_route    = 'backend.tour.package.';
+    protected string $base_route    = 'backend.activity.package.';
     private DataTables $dataTables;
     private Package $model;
 

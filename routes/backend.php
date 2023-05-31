@@ -2,10 +2,13 @@
 
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\Homepage\SliderController;
-use App\Http\Controllers\Backend\Tour\Basic_setup\CountryController;
-use App\Http\Controllers\Backend\Tour\Basic_setup\PackageCategoryController;
-use App\Http\Controllers\Backend\Tour\Basic_setup\PackageRibbonController;
-use App\Http\Controllers\Backend\Tour\PackageController;
+use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\TestimonialController;
+use App\Http\Controllers\Backend\Activity\Basic_setup\CountryController;
+use App\Http\Controllers\Backend\Activity\Basic_setup\PackageCategoryController;
+use App\Http\Controllers\Backend\Activity\Basic_setup\PackageRibbonController;
+use App\Http\Controllers\Backend\Activity\PackageController;
 use App\Http\Controllers\Backend\User\UserController;
 use App\Http\Controllers\Backend\User\UserProfileController;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +37,6 @@ Route::any('/register', function() {
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-Route::get('/404', [DashboardController::class, 'errorPage'])->name('404');
 //Route::post('/dashboard/theme-mode', 'App\Http\Controllers\SettingController@themeMode')->name('settings.theme');
 
 
@@ -62,7 +64,7 @@ Route::prefix('user/')->name('user.')->middleware(['auth'])->group(function () {
 
 });
 
-Route::prefix('tour/')->name('tour.')->middleware(['auth'])->group(function () {
+Route::prefix('activity/')->name('activity.')->middleware(['auth'])->group(function () {
 
     Route::prefix('basic-setup/')->name('basic_setup.')->middleware(['auth'])->group(function () {
        //country
@@ -102,6 +104,33 @@ Route::prefix('homepage/')->name('homepage.')->middleware(['auth'])->group(funct
     Route::resource('slider', SliderController::class)->names('slider');
 });
 
-//Route::fallback(function () {
-//    return redirect()->route('backend.404');
-//});
+//testimonials
+Route::get('/testimonial/trash', [SliderController::class,'trash'])->name('testimonial.trash');
+Route::post('/testimonial/trash/{id}/restore', [SliderController::class,'restore'])->name('testimonial.restore');
+Route::delete('/testimonial/trash/{id}/remove', [SliderController::class,'removeTrash'])->name('testimonial.remove-trash');
+Route::resource('testimonial', TestimonialController::class)->names('testimonial');
+
+//services
+Route::get('/service/trash', [ServiceController::class,'trash'])->name('service.trash');
+Route::post('/service/trash/{id}/restore', [ServiceController::class,'restore'])->name('service.restore');
+Route::delete('/service/trash/{id}/remove', [ServiceController::class,'removeTrash'])->name('service.remove-trash');
+Route::resource('service', ServiceController::class)->names('service');
+
+
+//for menu
+Route::get('/add-page-to-menu',[MenuController::class,'addPage'])->name('menu.page');
+Route::get('/add-package-to-menu',[MenuController::class,'addPackage'])->name('menu.package');
+Route::get('/add-service-to-menu',[MenuController::class,'addService'])->name('menu.service');
+Route::get('add-post-to-menu',[MenuController::class,'addPost'])->name('menu.post');
+Route::get('add-custom-link',[MenuController::class,'addCustomLink'])->name('menu.custom');
+Route::get('/update-menu',[MenuController::class,'updateMenu'])->name('menu.updateMenu');
+Route::post('/update-menuitem/{id}',[MenuController::class,'updateMenuItem'])->name('menu.update_menu_item');
+Route::get('/delete-menuitem/{id}/{key}/{in?}/{inside?}',[MenuController::class,'deleteMenuItem'])->name('menu.delete_menu_item');
+Route::post('menu', [MenuController::class,'store'])->name('menu.store');
+Route::get('/menu/{slug?}', [MenuController::class,'index'])->name('menu.index');
+Route::get('/menu/{id}',[MenuController::class,'destroy'])->name('menu.delete');
+Route::resource('menu', MenuController::class)->names('menu');
+
+
+
+//Route::get('/404', [DashboardController::class, 'errorPage'])->name('404');

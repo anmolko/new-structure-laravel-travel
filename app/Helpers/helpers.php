@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Backend\Menu;
+use App\Models\Backend\MenuItem;
 use App\Models\Backend\User;
 
 if (!function_exists('getNepaliMonth')) {
@@ -102,18 +104,22 @@ if (!function_exists('profile_percentage')) {
 }
 
 
-//if (!function_exists('get_slugs_to_disable')) {
-//    function get_slugs_to_disable($id): array
-//    {
-//        $disable    = [];
-//        $desiredMenu   = Menu::where('slug',$id)->first();
-//        $menuitems     = MenuItem::where('menu_id',$desiredMenu->id)->get();
-//        foreach ($menuitems as $items){
-//            array_push($disable,$items->slug);
-//        }
-//        return $disable;
-//    }
-//}
+if (!function_exists('get_slugs_to_disable')) {
+    /**
+     * @param $id
+     * @return array
+     */
+    function get_slugs_to_disable($id): array
+    {
+        $disable    = [];
+        $desiredMenu   = Menu::where('slug',$id)->first();
+        $menuitems     = MenuItem::where('menu_id',$desiredMenu->id)->get();
+        foreach ($menuitems as $items){
+            array_push($disable,$items->slug);
+        }
+        return $disable;
+    }
+}
 
 if (!function_exists('get_menu_url')) {
     /**
@@ -166,7 +172,7 @@ if (!function_exists('elipsis')) {
             }
         }
         // Returns "ellipsed" text, or just the string, if it's less than X words wide.
-        return $text;
+        return  strip_tags($text);
     }
 }
 

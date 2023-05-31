@@ -20,10 +20,16 @@ trait Crud {
     {
         $this->page_method = 'index';
         $this->page_title  = 'List '.$this->panel;
-        $data              = [];
-        $data['row']       = $this->model->orderBy('id','desc')->get();
+        $data              = $this->getData();
+        $data['row']       = $this->model->descending()->get();
 
         return view($this->loadView($this->view_path.'index'), compact('data'));
+    }
+
+    public function getData(){
+        $data = [];
+
+        return $data;
     }
 
     public function create()

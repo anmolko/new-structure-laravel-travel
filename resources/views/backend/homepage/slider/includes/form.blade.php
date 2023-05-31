@@ -14,8 +14,8 @@
             <div class="col-xxl-4 col-xl-4 col-sm-6">
                 <div class="gallery-box card">
                     <div class="gallery-container">
-                        <a class="image-popup" href="{{ asset(imagePath($folder_name).$data['row']->image)}}" title="">
-                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($folder_name).$data['row']->image)}}" alt="" />
+                        <a class="image-popup" href="{{ asset(imagePath($data['row']->image))}}" title="">
+                            <img class="gallery-img img-fluid mx-auto lazy" data-src="{{ asset(imagePath($data['row']->image))}}" alt="" />
                             <div class="gallery-overlay">
                                 <h5 class="overlay-caption">Image</h5>
                             </div>

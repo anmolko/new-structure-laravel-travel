@@ -16,7 +16,7 @@
 
                 <li class="nav-item">
                     <a class="nav-link menu-link collapsed" href="#sidebarTourMultilevel" data-bs-toggle="collapse" role="button" aria-controls="sidebarTourMultilevel">
-                        <i class="ri-haze-line"></i> <span data-key="t-multi-level-tour">Tours</span>
+                        <i class="ri-haze-line"></i> <span data-key="t-multi-level-tour">Activity</span>
                     </a>
                     <div class="menu-dropdown collapse" id="sidebarTourMultilevel" style="">
                         <ul class="nav nav-sm flex-column">
@@ -27,27 +27,27 @@
                                 <div class="menu-dropdown collapse" id="sidebarBasicSetupPackage" style="">
                                     <ul class="nav nav-sm flex-column">
                                         <li class="nav-item">
-                                            <a href="{{ route('backend.tour.basic_setup.country.index') }}"
-                                               class="nav-link {{request()->route()->getName() == 'backend.tour.basic_setup.country.index' ? 'active':''}}"
+                                            <a href="{{ route('backend.activity.basic_setup.country.index') }}"
+                                               class="nav-link {{request()->route()->getName() == 'backend.activity.basic_setup.country.index' ? 'active':''}}"
                                                data-key="t-level-basic-package">
                                                 Country </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('backend.tour.basic_setup.category.index') }}"
-                                               class="nav-link {{request()->route()->getName() == 'backend.tour.basic_setup.category.index' ? 'active':''}}"
+                                            <a href="{{ route('backend.activity.basic_setup.category.index') }}"
+                                               class="nav-link {{request()->route()->getName() == 'backend.activity.basic_setup.category.index' ? 'active':''}}"
                                                data-key="t-level-basic-package"> Category </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="{{ route('backend.tour.basic_setup.ribbon.index') }}"
-                                               class="nav-link {{request()->route()->getName() == 'backend.tour.basic_setup.ribbon.index' ? 'active':''}}"
+                                            <a href="{{ route('backend.activity.basic_setup.ribbon.index') }}"
+                                               class="nav-link {{request()->route()->getName() == 'backend.activity.basic_setup.ribbon.index' ? 'active':''}}"
                                                data-key="t-level-basic-package"> Ribbon </a>
                                         </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('backend.tour.package.index') }}"
-                                   class="nav-link {{request()->route()->getName() == 'backend.tour.package.index' ? 'active':''}}"
+                                <a href="{{ route('backend.activity.package.index') }}"
+                                   class="nav-link {{request()->route()->getName() == 'backend.activity.package.index' ? 'active':''}}"
                                    data-key="t-multi-level-tour"> Package </a>
                             </li>
                         </ul>
@@ -69,7 +69,11 @@
                     </div>
                 </li>
 
-
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{request()->route()->getName() == 'backend.testimonial.index' ? 'active':''}}" href="{{route('backend.testimonial.index')}}">
+                        <i class="ri-hand-heart-line"></i> <span data-key="t-widgets">Testimonial</span>
+                    </a>
+                </li>
 
                 <li class="nav-item">
                     <a class="nav-link menu-link {{request()->route()->getName() == 'backend.user.user_management.index' ? 'active':''}}" href="{{route('backend.user.user-management.index')}}">

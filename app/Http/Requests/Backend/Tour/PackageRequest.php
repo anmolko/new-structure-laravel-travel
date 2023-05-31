@@ -30,6 +30,7 @@ class PackageRequest extends FormRequest
             'title'                     => 'required|string|unique:packages,title,'.$this->package,
             'country_id'                => 'required',
             'package_category_id'       => 'required',
+            'image_input'               => 'required_if:image,null|mimes:jpeg,png,jpg|size:1024',
         ];
     }
 
@@ -40,6 +41,7 @@ class PackageRequest extends FormRequest
             'title.unique'                  => 'Title already in use',
             'country_id.required'           => 'Please select a country',
             'package_category_id.required'  => 'Please select a category',
+            'image_input.required'          => 'Please choose a image',
         ];
     }
 }
