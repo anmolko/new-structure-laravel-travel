@@ -79,7 +79,7 @@
             var name = item.name;
             var newname = name.replace(new RegExp('_', 'g')," ");
             var replacements = '<li class="'+item.name+'" id="'+i+'">' +
-                '<div class="col-md-10 div-center">' +
+                '<div class="col-md-12 div-center">' +
                 '<label class="text-capitalize">'+ newname +'</label>' +
                 '<img width="100%" src="/assets/backend/images/pages/sections/'+item.image+'"/>' +
                 '</div>' +
@@ -131,8 +131,8 @@
             var newname = name.replace(new RegExp('_', 'g')," ");
             //adding the original sections that were created with the page in the list first
             var dbsection = '<li class="'+item.name+'" id="' + i + '">' +
-                '<div class="col-md-10 div-center">' +
-                '<label class="upper-case">' + newname + '</label>' +
+                '<div class="col-md-12 div-center">' +
+                '<label class="text-capitalize">' + newname + '</label>' +
                 '<img width="100%" src="/assets/backend/images/pages/sections/'+item.image+'"/>' +
                 '</div>' +
                 '</li> ';
@@ -153,8 +153,8 @@
             var name = item.name;
             var newname = name.replace(new RegExp('_', 'g')," ");
             var replacements = '<li class="'+item.name+'" id="' + j + '">' +
-                '<div class="col-md-10 div-center">' +
-                '<label class="upper-case">' + newname + '</label>' +
+                '<div class="col-md-12 div-center">' +
+                '<label class="text-capitalize">' + newname + '</label>' +
                 '<img width="100%" src="/assets/backend/images/pages/sections/'+item.image+'"/>' +
                 '</div>' +
                 '</li> ';
@@ -177,10 +177,12 @@
             form_data.append('position[]', i+1); //send the position array in terms of number of li present in sortable UL
             form_data.append('sorted_sections[]', section_name[i]); //send the section names listed in sortable UL
         }
+        var post_url       = $('#submit_page_detail').attr("action"); //get form action url
+        var request_method = $('#submit_page_detail').attr("method"); //get form GET/POST method
 
         $.ajax({
-            url : "{{route($base_route.'store')}}",
-            type: 'POST',
+            url : post_url,
+            type: request_method,
             dataType:"JSON",
             data : form_data,
             cache:false,

@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="text-center mb-3 mt-4">
-                    <button id="submit_page_detail" class="btn btn-success w-sm">Create Page</button>
+                    <button id="submit_page_detail" class="btn btn-success w-sm">{{ $button }} Page</button>
                 </div>
             </div>
 

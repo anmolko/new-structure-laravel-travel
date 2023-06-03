@@ -27,7 +27,7 @@
                                             <i class="ri-delete-bin-7-line align-bottom me-1"></i>  Trash </a>
                                     </div>
                                     @include($view_path.'create')
-                                    @include($view_path.'partials.page_structure')
+                                    @include($view_path.'partials.page_structure',['button'=>'Create'])
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
     <script src="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.js')}}"></script>
     <script src="{{asset('assets/common/general.js')}}"></script>
     <script src="{{asset('assets/backend/js/jquery-sortable.js')}}"></script>
-    @include($view_path.'includes.script')
+    @include($view_path.'partials.script')
     @include($module.'includes.toast_message')
     @include($module.'includes.status_alert')
     <script type="text/javascript">

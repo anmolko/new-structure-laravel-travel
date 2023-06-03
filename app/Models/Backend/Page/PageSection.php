@@ -19,13 +19,13 @@ class PageSection extends BackendBaseModel
 
     public function page()
     {
-        return $this->belongsTo(Menu::class);
+        return $this->belongsTo(Page::class);
     }
 
-//    public function elements()
-//    {
-//        return $this->hasMany('App\Models\SectionElement');
-//    }
+    public function pageSectionElements()
+    {
+        return $this->hasMany(PageSectionElement::class);
+    }
 
     public function menuItems()
     {

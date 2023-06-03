@@ -259,3 +259,37 @@ if (!function_exists('imagePath')) {
         return 'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.$image;
     }
 }
+
+if (!function_exists('get_page_section_icons')) {
+    /**
+     * @param $value
+     * @return string
+     */
+    function get_page_section_icons($value){
+        $icon   = '';
+        if($value == 'basic_section'){
+            $icon = ' ri-layout-2-line';
+        }else if($value == 'call_to_action'){
+            $icon = 'ri-honour-line';
+        }else if($value == 'flash_card'){
+            $icon = 'ri-file-copy-2-line';
+        }else if($value == 'gallery'){
+            $icon = 'ri-gallery-line';
+        }else if($value == 'faq'){
+            $icon = 'ri-question-line';
+        }else if($value == 'header_description'){
+            $icon = 'ri-price-tag-2-line';
+        }else if($value == 'map_description'){
+            $icon = 'ri-map-2-line';
+        }else if($value == 'slider_list'){
+            $icon = 'ri-list-check-2';
+        } else if($value == 'small_box_description'){
+            $icon = 'ri-inbox-line';
+        }else{
+            $icon = 'ri-flag-line';
+        }
+
+        return $icon;
+    }
+}
+

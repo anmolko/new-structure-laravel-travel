@@ -150,15 +150,14 @@ class PageController extends BackendBaseController
     }
 
 
-
     /**
      * Update the specified resource in storage.
      *
-     * @param ServiceRequest $request
+     * @param PageRequest $request
      * @param int $id
      * @return JsonResponse
      */
-    public function update(ServiceRequest $request, $id)
+    public function update(PageRequest $request, $id)
     {
         $data['row']       = $this->model->find($id);
 

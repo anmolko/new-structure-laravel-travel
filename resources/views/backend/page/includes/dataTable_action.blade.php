@@ -1,6 +1,6 @@
 <div class="row">
     <div class="hstack gap-2">
-        <a href="{{ route('backend.page-section.create',$params['id']) }}" title="Create Page Sections"
+        <a href="{{ route('backend.section-element.show',$params['id']) }}" title="Create Page Sections"
            class="btn btn-outline-info waves-effect waves-light"><i class="ri-pencil-ruler-line"></i></a>
         <a href="{{ route($params['base_route'].'edit',$params['id']) }}" title="Edit"
            class="btn btn-outline-success waves-effect waves-light"><i class="ri-pencil-fill"></i></a>

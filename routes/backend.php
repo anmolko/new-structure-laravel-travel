@@ -170,13 +170,19 @@ Route::delete('/page/trash/{id}/remove', [PageController::class,'removeTrash'])-
 Route::resource('page', PageController::class)->names('page');
 
 
-//pages
-Route::post('/page-section/status-update', [PageSectionElementController::class,'statusUpdate'])->name('page-section.status-update');
-Route::post('/page-section/data', [PageSectionElementController::class,'getDataForDataTable'])->name('page-section.data');
-Route::get('/page-section/trash', [PageSectionElementController::class,'trash'])->name('page-section.trash');
-Route::post('/page-section/trash/{id}/restore', [PageSectionElementController::class,'restore'])->name('page-section.restore');
-Route::delete('/page-section/trash/{id}/remove', [PageSectionElementController::class,'removeTrash'])->name('page-section.remove-trash');
-Route::resource('page-section', PageSectionElementController::class)->names('page-section');
+//page section and element
+Route::post('/section-element/multiple-list-update', [PageSectionElementController::class,'multipleSectionUpdate'])->name('section-element.multiple-section-update');
+Route::post('/section-element/status-update', [PageSectionElementController::class,'statusUpdate'])->name('section-element.status-update');
+Route::post('/section-element/data', [PageSectionElementController::class,'getDataForDataTable'])->name('section-element.data');
+Route::get('/section-element/trash', [PageSectionElementController::class,'trash'])->name('section-element.trash');
+Route::post('/section-element/trash/{id}/restore', [PageSectionElementController::class,'restore'])->name('section-element.restore');
+Route::delete('/section-element/trash/{id}/remove', [PageSectionElementController::class,'removeTrash'])->name('section-element.remove-trash');
+Route::resource('section-element', PageSectionElementController::class)->names('section-element');
+
+
+Route::put('/section-element-upload-gallery/{id}', [PageSectionElementController::class,'uploadGallery'])->name('section-element.gallery-update');
+Route::post('/section-element/image-delete', [PageSectionElementController::class,'deleteGallery'])->name('section-element.gallery-delete');
+Route::get('/section-element/gallery/{id}', [PageSectionElementController::class,'getGallery'])->name('section-element.gallery-display');
 
 
 //Route::get('/404', [DashboardController::class, 'errorPage'])->name('404');

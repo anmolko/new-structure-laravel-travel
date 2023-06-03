@@ -27,13 +27,12 @@
             </div>
         </div>
     </div>
-    @include($view_path.'partials.page_structure')
+    @include($view_path.'partials.page_structure',['button'=>'Update'])
 @endsection
 
 @section('js')
     <script src="{{asset('assets/common/general.js')}}"></script>
     <script src="{{asset('assets/backend/js/jquery-sortable.js')}}"></script>
     @include($module.'includes/gallery')
-    @include($view_path.'includes.script')
-
+    @include($view_path.'partials.script')
 @endsection
