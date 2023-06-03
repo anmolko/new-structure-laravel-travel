@@ -7,7 +7,10 @@ use App\Http\Requests\Backend\ServiceRequest;
 use App\Models\Backend\Activity\Package;
 use App\Models\Backend\Menu;
 use App\Models\Backend\MenuItem;
+use App\Models\Backend\News\Blog;
+use App\Models\Backend\Page\Page;
 use App\Models\Backend\Service;
+use App\Services\MenuService;
 use App\Traits\Crud;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -26,111 +29,24 @@ class MenuController extends BackendBaseController
     protected string $folder_name   = 'menu';
     protected string $page_title, $page_method, $image_path, $file_path;
     protected object $model;
+    private MenuService $menuService;
 
 
-    public function __construct()
+    public function __construct(MenuService $menuService)
     {
         $this->model            = new Menu();
+        $this->menuService      = $menuService;
         $this->image_path       = public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR);
     }
 
     public function getData(){
-        $data                = [];
+        $data                = $this->menuService->getMenuStructureData();
         $data['services']    = Service::active()->descending()->get();
         $data['menus']       = Menu::active()->descending()->get();
-//        $data['pages']       = Page::active()->descending()->get();
-//        $data['blogs']       = Blog::active()->descending()->get();
+        $data['pages']       = Page::active()->descending()->get();
+        $data['blogs']       = Blog::active()->descending()->get();
         $data['packages']    = Package::active()->descending()->get();
 
-        if(isset($_GET['slug']) && $_GET['slug'] != 'new'){
-            $id = $_GET['slug'];
-            $data['desiredMenu'] = Menu::where('slug',$id)->first();
-            $data['menuTitle']   =  $data['desiredMenu']->title;
-            if($data['desiredMenu']->content != ''){
-                $data['menuitems'] = json_decode($data['desiredMenu']->content);
-                if(@$data['menuitems'][0] != null){
-                    $data['menuitems'] = $data['menuitems'][0];
-                    foreach($data['menuitems'] as $menu){
-                        $menu->title    = MenuItem::where('id',$menu->id)->value('title');
-                        $menu->name     = MenuItem::where('id',$menu->id)->value('name');
-                        $menu->slug     = MenuItem::where('id',$menu->id)->value('slug');
-                        $menu->target   = MenuItem::where('id',$menu->id)->value('target');
-                        $menu->type     = MenuItem::where('id',$menu->id)->value('type');
-                        if(!empty($menu->children[0])){
-                            foreach ($menu->children[0] as $child) {
-                                $child->title   = MenuItem::where('id',$child->id)->value('title');
-                                $child->name    = MenuItem::where('id',$child->id)->value('name');
-                                $child->slug    = MenuItem::where('id',$child->id)->value('slug');
-                                $child->target  = MenuItem::where('id',$child->id)->value('target');
-                                $child->type    = MenuItem::where('id',$child->id)->value('type');
-                                if(!empty($child->children[0])){
-                                    foreach ($child->children[0] as $minichild) {
-                                        $minichild->title   = MenuItem::where('id',$minichild->id)->value('title');
-                                        $minichild->name    = MenuItem::where('id',$minichild->id)->value('name');
-                                        $minichild->slug    = MenuItem::where('id',$minichild->id)->value('slug');
-                                        $minichild->target  = MenuItem::where('id',$minichild->id)->value('target');
-                                        $minichild->type    = MenuItem::where('id',$minichild->id)->value('type');
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }else{
-                    $data['desiredMenu']->content = null;
-                    $data['desiredMenu']->update();
-                }
-            }else{
-                $data['menuitems'] = MenuItem::where('menu_id', $data['desiredMenu']->id)->get();
-            }
-        }
-        else{
-            $data['desiredMenu'] = Menu::orderby('id','DESC')->first();
-            if( $data['desiredMenu'] !== null){
-                $data['menuTitle']   =  $data['desiredMenu']->title;
-            }else{
-                $data['menuTitle']   = "";
-            }
-            if( $data['desiredMenu']){
-                if( $data['desiredMenu']->content != ''){
-                    $data['menuitems'] = json_decode( $data['desiredMenu']->content);
-                    if(@$data['menuitems'][0] != null){
-                        $data['menuitems'] = $data['menuitems'][0];
-                        foreach($data['menuitems'] as $menu){
-                            $menu->title    = MenuItem::where('id',$menu->id)->value('title');
-                            $menu->name     = MenuItem::where('id',$menu->id)->value('name');
-                            $menu->slug     = MenuItem::where('id',$menu->id)->value('slug');
-                            $menu->target   = MenuItem::where('id',$menu->id)->value('target');
-                            $menu->type     = MenuItem::where('id',$menu->id)->value('type');
-                            if(!empty($menu->children[0])){
-                                foreach ($menu->children[0] as $child) {
-                                    $child->title   = MenuItem::where('id',$child->id)->value('title');
-                                    $child->name    = MenuItem::where('id',$child->id)->value('name');
-                                    $child->slug    = MenuItem::where('id',$child->id)->value('slug');
-                                    $child->target  = MenuItem::where('id',$child->id)->value('target');
-                                    $child->type    = MenuItem::where('id',$child->id)->value('type');
-                                    if(!empty($child->children[0])){
-                                        foreach ($child->children[0] as $minichild) {
-                                            $minichild->title   = MenuItem::where('id',$minichild->id)->value('title');
-                                            $minichild->name    = MenuItem::where('id',$minichild->id)->value('name');
-                                            $minichild->slug    = MenuItem::where('id',$minichild->id)->value('slug');
-                                            $minichild->target  = MenuItem::where('id',$minichild->id)->value('target');
-                                            $minichild->type    = MenuItem::where('id',$minichild->id)->value('type');
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }else{
-                        $data['desiredMenu']->content = null;
-                        $data['desiredMenu']->update();
-                    }
-                }else{
-                    $data['menuitems'] = MenuItem::where('menu_id', $data['desiredMenu']->id)->get();
-                }
-            }
-        }
-
-//        return view($this->loadView($this->view_path.'index'), compact('data'));
         return $data;
     }
 

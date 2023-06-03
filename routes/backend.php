@@ -3,6 +3,10 @@
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\Homepage\SliderController;
 use App\Http\Controllers\Backend\MenuController;
+use App\Http\Controllers\Backend\News\BlogCategoryController;
+use App\Http\Controllers\Backend\News\BlogController;
+use App\Http\Controllers\Backend\Page\PageController;
+use App\Http\Controllers\Backend\Page\PageSectionElementController;
 use App\Http\Controllers\Backend\ServiceController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\Activity\Basic_setup\CountryController;
@@ -73,7 +77,7 @@ Route::prefix('activity/')->name('activity.')->middleware(['auth'])->group(funct
         Route::delete('/country/trash/{id}/remove', [CountryController::class,'removeTrash'])->name('country.remove-trash');
         Route::resource('country', CountryController::class)->names('country');
 
-        //country
+        //category
         Route::get('/category/trash', [PackageCategoryController::class,'trash'])->name('category.trash');
         Route::post('/category/trash/{id}/restore', [PackageCategoryController::class,'restore'])->name('category.restore');
         Route::delete('/category/trash/{id}/remove', [PackageCategoryController::class,'removeTrash'])->name('category.remove-trash');
@@ -131,6 +135,48 @@ Route::get('/menu/{slug?}', [MenuController::class,'index'])->name('menu.index')
 Route::get('/menu/{id}',[MenuController::class,'destroy'])->name('menu.delete');
 Route::resource('menu', MenuController::class)->names('menu');
 
+
+Route::prefix('news/')->name('news.')->middleware(['auth'])->group(function () {
+
+    Route::prefix('basic-setup/')->name('basic_setup.')->middleware(['auth'])->group(function () {
+        //category
+        Route::get('/category/trash', [BlogCategoryController::class,'trash'])->name('category.trash');
+        Route::post('/category/trash/{id}/restore', [BlogCategoryController::class,'restore'])->name('category.restore');
+        Route::delete('/category/trash/{id}/remove', [BlogCategoryController::class,'removeTrash'])->name('category.remove-trash');
+        Route::resource('category', BlogCategoryController::class)->names('category');
+    });
+
+    //blog
+    Route::get('/blog/trash', [BlogController::class,'trash'])->name('blog.trash');
+    Route::post('/blog/trash/{id}/restore', [BlogController::class,'restore'])->name('blog.restore');
+    Route::delete('/blog/trash/{id}/remove', [BlogController::class,'removeTrash'])->name('blog.remove-trash');
+    Route::resource('blog', BlogController::class)->names('blog');
+});
+
+Route::prefix('homepage/')->name('homepage.')->middleware(['auth'])->group(function () {
+    Route::get('/slider/trash', [SliderController::class,'trash'])->name('slider.trash');
+    Route::post('/slider/trash/{id}/restore', [SliderController::class,'restore'])->name('slider.restore');
+    Route::delete('/slider/trash/{id}/remove', [SliderController::class,'removeTrash'])->name('slider.remove-trash');
+    Route::resource('slider', SliderController::class)->names('slider');
+});
+
+
+//pages
+Route::post('/page/status-update', [PageController::class,'statusUpdate'])->name('page.status-update');
+Route::post('/page/data', [PageController::class,'getDataForDataTable'])->name('page.data');
+Route::get('/page/trash', [PageController::class,'trash'])->name('page.trash');
+Route::post('/page/trash/{id}/restore', [PageController::class,'restore'])->name('page.restore');
+Route::delete('/page/trash/{id}/remove', [PageController::class,'removeTrash'])->name('page.remove-trash');
+Route::resource('page', PageController::class)->names('page');
+
+
+//pages
+Route::post('/page-section/status-update', [PageSectionElementController::class,'statusUpdate'])->name('page-section.status-update');
+Route::post('/page-section/data', [PageSectionElementController::class,'getDataForDataTable'])->name('page-section.data');
+Route::get('/page-section/trash', [PageSectionElementController::class,'trash'])->name('page-section.trash');
+Route::post('/page-section/trash/{id}/restore', [PageSectionElementController::class,'restore'])->name('page-section.restore');
+Route::delete('/page-section/trash/{id}/remove', [PageSectionElementController::class,'removeTrash'])->name('page-section.remove-trash');
+Route::resource('page-section', PageSectionElementController::class)->names('page-section');
 
 
 //Route::get('/404', [DashboardController::class, 'errorPage'])->name('404');

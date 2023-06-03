@@ -26,10 +26,9 @@ trait Crud {
         return view($this->loadView($this->view_path.'index'), compact('data'));
     }
 
-    public function getData(){
-        $data = [];
-
-        return $data;
+    public function getData(): array
+    {
+        return [];
     }
 
     public function create()
@@ -89,7 +88,7 @@ trait Crud {
     {
         $this->page_method = 'edit';
         $this->page_title  = 'Edit '.$this->panel;
-        $data              = [];
+        $data              = $this->getData();
         $data['row']       = $this->model->find($id);
 
         return view($this->loadView($this->view_path.'edit'), compact('data'));

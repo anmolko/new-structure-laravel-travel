@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests\Backend\Homepage;
+namespace App\Http\Requests\Backend\News;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 
-class SliderRequest extends FormRequest
+class BlogCategoryRequest extends FormRequest
 {
 
     /**
@@ -25,14 +27,15 @@ class SliderRequest extends FormRequest
     public function rules()
     {
         return [
-            'image_input'   => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'title'     => 'required|string|max:191|unique:blog_categories,title,'.$this->category,
         ];
     }
 
     public function messages()
     {
         return [
-            'image_input.required'     => 'Please select a image',
+            'title.required'      => 'Please enter a title',
+            'title.unique'        => 'Title already in use',
         ];
     }
 }

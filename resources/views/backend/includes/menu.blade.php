@@ -15,6 +15,12 @@
                 <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-components">Components</span></li>
 
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{request()->route()->getName() == 'backend.menu.index' ? 'active':''}}" href="{{route('backend.menu.index')}}">
+                        <i class="ri-stack-line"></i> <span data-key="t-widgets">Menu</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link menu-link collapsed" href="#sidebarTourMultilevel" data-bs-toggle="collapse" role="button" aria-controls="sidebarTourMultilevel">
                         <i class="ri-haze-line"></i> <span data-key="t-multi-level-tour">Activity</span>
                     </a>
@@ -49,6 +55,35 @@
                                 <a href="{{ route('backend.activity.package.index') }}"
                                    class="nav-link {{request()->route()->getName() == 'backend.activity.package.index' ? 'active':''}}"
                                    data-key="t-multi-level-tour"> Package </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link collapsed" href="#sidebarBlogMultilevel" data-bs-toggle="collapse" role="button" aria-controls="sidebarBlogMultilevel">
+                        <i class="ri-newspaper-line"></i> <span data-key="t-multi-level-news">News</span>
+                    </a>
+                    <div class="menu-dropdown collapse" id="sidebarBlogMultilevel" style="">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="#sidebarBasicSetupBlog" class="nav-link collapsed" data-bs-toggle="collapse" role="button" aria-controls="sidebarBasicSetupBlog"
+                                   data-key="t-level-basic-blogs"> Basic Setup
+                                </a>
+                                <div class="menu-dropdown collapse" id="sidebarBasicSetupBlog" style="">
+                                    <ul class="nav nav-sm flex-column">
+                                        <li class="nav-item">
+                                            <a href="{{ route('backend.news.basic_setup.category.index') }}"
+                                               class="nav-link {{request()->route()->getName() == 'backend.news.basic_setup.category.index' ? 'active':''}}"
+                                               data-key="t-level-basic-blogs"> Category </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('backend.news.blog.index') }}"
+                                   class="nav-link {{request()->route()->getName() == 'backend.news.blog.index' ? 'active':''}}"
+                                   data-key="t-multi-level-news"> Blog </a>
                             </li>
                         </ul>
                     </div>
