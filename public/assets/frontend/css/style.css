@@ -3561,7 +3561,7 @@ body {
       position: absolute;
       top: 50px;
       left: 0;
-      width: 210px;
+      width: 200px;
       background-color: #fff;
       padding-top: 10px;
       padding-bottom: 10px;
@@ -3914,9 +3914,7 @@ body {
     -o-transform: perspective(300px) rotateX(0);
     transform: perspective(300px) rotateX(0);
     opacity: 1;
-    visibility: visible;
-  }
-
+    visibility: visible; }
   .main-menu-content ul li .dropdown-menu-item li:hover .sub-menu {
     opacity: 1;
     visibility: visible;

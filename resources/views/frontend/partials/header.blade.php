@@ -14,8 +14,7 @@
     @else
         <title>@yield('title') |  {{ucwords($setting_data->website_name ?? 'Advanced Travels')}} </title>
     @endif
-    <!-- Favicon -->
-    <link rel="icon" href="{{asset('assets/frontend/images/favicon.png')}}" />
+
     <link rel="shortcut icon" type="image/x-icon" href="{{ $setting_data->favicon ?  asset(imagePath($setting_data->favicon)) : ''}}">
 
     <meta property="og:title" content="{{ucwords(@$setting_data->meta_title ?? 'Advanced Travels')}}" />

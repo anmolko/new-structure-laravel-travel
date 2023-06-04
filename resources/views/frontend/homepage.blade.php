@@ -1,6 +1,7 @@
 @extends('frontend.layouts.master')
 @section('title') Home @endsection
 @section('css')
+
 @endsection
 @section('content')
 
@@ -196,7 +197,6 @@
         </svg>
     </section>
 
-{{--    call action--}}
     <section class="discount-area">
         <div class="container">
             <div class="row">
@@ -233,8 +233,6 @@
         </div>
         <!-- end container -->
     </section>
-
-    <!-- Country wise list -->
 
     <section class="destination-area padding-top-130px padding-bottom-80px">
         <div class="container">
@@ -342,6 +340,7 @@
             ></path>
         </svg>
     </section>
+
     <section class="testimonial-area section-padding">
         <div class="container">
             <div class="row">
@@ -968,56 +967,6 @@
         <!-- end container -->
     </section>
     <!-- end cta-area -->
-
-    <section class="clientlogo-area padding-top-80px padding-bottom-80px">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading text-center">
-                        <h2 class="sec__title font-size-35">We were featured in</h2>
-                    </div>
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-12 -->
-            </div>
-            <!-- end row -->
-            <div class="row padding-top-10px">
-                <div class="col-lg-12">
-                    <div class="client-logo">
-                        <div class="client-logo-item">
-                            <img src="images/client-logo.png" alt="brand image"/>
-                        </div>
-                        <!-- end client-logo-item -->
-                        <div class="client-logo-item">
-                            <img src="images/client-logo2.png" alt="brand image"/>
-                        </div>
-                        <!-- end client-logo-item -->
-                        <div class="client-logo-item">
-                            <img src="images/client-logo3.png" alt="brand image"/>
-                        </div>
-                        <!-- end client-logo-item -->
-                        <div class="client-logo-item">
-                            <img src="images/client-logo4.png" alt="brand image"/>
-                        </div>
-                        <!-- end client-logo-item -->
-                        <div class="client-logo-item">
-                            <img src="images/client-logo5.png" alt="brand image"/>
-                        </div>
-                        <!-- end client-logo-item -->
-                        <div class="client-logo-item">
-                            <img src="images/client-logo6.png" alt="brand image"/>
-                        </div>
-                        <!-- end client-logo-item -->
-                    </div>
-                    <!-- end client-logo -->
-                </div>
-                <!-- end col-lg-12 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end client logo-area -->
 
 @endsection
 
