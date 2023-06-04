@@ -3,15 +3,14 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>@yield('title') | @if(!empty(@$setting_data->website_name)) {{ucwords(@$setting_data->website_name)}} @else BIRAT OVERSEAS PVT. LTD - leading manpower company @endif </title>
+    <title>@yield('title') | {{ucwords(@$setting_data->website_name ?? 'Advanced Travels')}}</title>
 
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
-    <meta name="description" content="@if(!empty(@$setting_data->website_description)) {{ucwords(@$setting_data->website_description)}} @else BIRAT OVERSEAS PVT. LTD - leading manpower company @endif">
+    <meta name="description" content="{{ $setting_data->website_description ?? 'Advanced Travels' }}">
     <meta name="author" content="Canosoft Technology" />
     <!-- App favicon -->
-    <link rel="shortcut icon" type="image/x-icon"  href="<?php if(@$setting_data->favicon){?>{{asset('/images/settings/'.@$setting_data->favicon)}}<?php }else{ echo "/assets/backend/images/canosoft-favicon.png"; }?>">
+    <link rel="shortcut icon" type="image/x-icon"  href="{{ $setting_data->favicon ?  asset(imagePath($setting_data->favicon)) : ''}}">
 
     <!-- jsvectormap css -->
     <link href="{{asset('assets/backend/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
@@ -52,20 +51,19 @@
                     <div class="navbar-brand-box horizontal-logo">
                         <a href="{{route('backend.dashboard')}}" class="logo logo-dark">
                             <span class="logo-sm">
-                                <img src="{{asset('assets/backend/images/canosoft-favicon.png')}}" alt="" height="25">
+                                <img src="{{ $setting_data->favicon ?  asset(imagePath($setting_data->favicon)) : ''}}" alt="" height="25">
                             </span>
                             <span class="logo-lg">
-                                    <img src="<?php if(@$setting_data->logo){?>{{asset('/images/settings/'.@$setting_data->logo)}}<?php }else{ echo '/assets/backend/images/canosoft-logo.png'; }?>" alt="Logo" height="55">
+                                    <img src="{{ $setting_data->logo ?  asset(imagePath($setting_data->logo)) : ''}}" alt="Logo" height="55">
                             </span>
                         </a>
 
                         <a href="{{route('backend.dashboard')}}" class="logo logo-light">
                             <span class="logo-sm">
-                                <img src="{{asset('assets/backend/images/canosoft-favicon.png')}}" alt="" height="25">
+                                <img src="{{ $setting_data->favicon ?  asset(imagePath($setting_data->favicon)) : ''}}" alt="" height="25">
                             </span>
                             <span class="logo-lg">
-                                <img src="<?php if(@$setting_data->logo_white){?>{{asset('/images/settings/'.@$setting_data->logo_white)}}<?php }else{ echo '/assets/backend/images/canosoft-logo.png'; }?>" alt="Logo" height="55">
-
+                                <img src="{{ $setting_data->logo_white ?  asset(imagePath($setting_data->logo_white)) : ''}}" alt="Logo" height="55">
                             </span>
                         </a>
                     </div>
@@ -79,7 +77,6 @@
                     </span>
                     </button>
 
-                    <!-- App Search-->
                     <form class="app-search d-none d-md-block" style="display: none!important;">
                         <div class="position-relative">
                             <input type="text" class="form-control" placeholder="Search..." autocomplete="off"
@@ -205,7 +202,7 @@
                         <button type="button" class="btn" id="page-header-user-dropdown" data-bs-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
                         <span class="d-flex align-items-center">
-                            <img class="rounded-circle header-profile-user" id="header-profile-user-updates" src="{{ (auth()->user()->image !== null) ? asset('images/user/'.Auth::user()->image) :  asset('assets/backend/images/default.png')}}"
+                            <img class="rounded-circle header-profile-user" id="header-profile-user-updates" src="{{ auth()->user()->image ?  asset(imagePath(auth()->user()->image)) : asset('assets/backend/images/default.png')}}"
                                  alt="Header Avatar">
                             <span class="text-start ms-xl-2">
                                 <span class="d-none d-xl-inline-block ms-1 fw-medium user-name-text">{{ucfirst(auth()->user()->name)}}</span>

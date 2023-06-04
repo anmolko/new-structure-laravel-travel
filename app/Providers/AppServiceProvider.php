@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Backend\Setting;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -31,6 +32,22 @@ class AppServiceProvider extends ServiceProvider
             $this->timestamps();
         });
 
+        $this->sensitiveComposer();
+        $this->sensitiveBackendComposer();
+
         Builder::macro('withWhereHas', fn($relation, $constraint)=> $this->whereHas($relation, $constraint)->with([$relation=>$constraint]));
     }
+
+    public function sensitiveComposer(){
+        view()->composer(['frontend.partials.header', 'frontend.partials.footer'], 'App\Http\ViewComposer\SensitiveComposer');
+    }
+
+    public function sensitiveBackendComposer(){
+        view()->composer(['backend.partials.header', 'backend.partials.footer','backend.partials.sidebar'], function ($view) {
+            $view->with([
+                'setting_data' => Setting::first(),
+            ]);
+        });
+    }
+
 }

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Models\Backend\Setting;
 use App\Models\Backend\User;
-use App\Models\Setting;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
@@ -45,11 +45,9 @@ class DashboardController extends BackendBaseController
     public function themeMode(Request $request)
     {
         $id                  = $request->input('setting_id');
-//        $theme               = Setting::find($id);
-//        $theme->theme_mode   = $request->input('mode');
-//        $status              = $theme->update();
-//        return response()->json(['status'=>'success','mode'=>$theme->theme_mode]);
-        return response()->json(['status'=>'success']);
+        $theme               = Setting::find($id);
+        $theme               = $theme->update($request->all());
+        return response()->json(['status'=>'success','mode'=>$theme->theme_mode]);
 
     }
 

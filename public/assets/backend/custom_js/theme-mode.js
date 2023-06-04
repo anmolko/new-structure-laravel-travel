@@ -3,8 +3,8 @@ $(document).on('click','#change-theme-mode', function (e) {
     var mode = $('html').attr('data-layout-mode');
     var formData = new FormData();
     formData.append('setting_id', set_id);
-    formData.append('mode', mode);
-    var url = "/adminsite/dashboard/theme-mode/"
+    formData.append('theme_mode', mode);
+    var url = "/adminsite/setting/theme-mode"
     $.ajax({
         type : 'POST',
         url : url,
@@ -16,8 +16,6 @@ $(document).on('click','#change-theme-mode', function (e) {
         processData: false,
         data : formData,
         success: function(response){
-            if(response.status=='success') {
-            }
 
         }, error: function(response) {
             console.log(response);

@@ -42,7 +42,7 @@ Route::any('/register', function() {
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-//Route::post('/dashboard/theme-mode', 'App\Http\Controllers\SettingController@themeMode')->name('settings.theme');
+Route::post('/setting/theme-mode',  [DashboardController::class, 'themeMode'])->name('setting.theme-mode');
 
 
 Route::prefix('user/')->name('user.')->middleware(['auth'])->group(function () {

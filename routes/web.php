@@ -25,10 +25,9 @@ Route::any('/register', function() {
     return redirect()->route('frontend.404');
 });
 
-//
-//Route::fallback(function () {
-//    return redirect()->route('frontend.404');
-//});
+
+Route::get('/contact-us', [HomePageController::class, 'index'])->name('contact-us');
+
 
 
 
