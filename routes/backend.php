@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\News\BlogController;
 use App\Http\Controllers\Backend\Page\PageController;
 use App\Http\Controllers\Backend\Page\PageSectionElementController;
 use App\Http\Controllers\Backend\ServiceController;
+use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\TestimonialController;
 use App\Http\Controllers\Backend\Activity\Basic_setup\CountryController;
 use App\Http\Controllers\Backend\Activity\Basic_setup\PackageCategoryController;
@@ -20,10 +21,10 @@ use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Web Routes
+| Backend Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can register backend routes for your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
@@ -183,6 +184,9 @@ Route::resource('section-element', PageSectionElementController::class)->names('
 Route::put('/section-element-upload-gallery/{id}', [PageSectionElementController::class,'uploadGallery'])->name('section-element.gallery-update');
 Route::post('/section-element/image-delete', [PageSectionElementController::class,'deleteGallery'])->name('section-element.gallery-delete');
 Route::get('/section-element/gallery/{id}', [PageSectionElementController::class,'getGallery'])->name('section-element.gallery-display');
+
+
+Route::resource('setting', SettingController::class)->names('setting');
 
 
 //Route::get('/404', [DashboardController::class, 'errorPage'])->name('404');
