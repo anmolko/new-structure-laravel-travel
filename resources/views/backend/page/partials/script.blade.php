@@ -71,6 +71,11 @@
             });
         });
 
+        if(selected.length<1){
+            Toastify({ newWindow: !0, text: "please select minimum of one section for the page !", gravity: 'top', position: 'right', stopOnFocus: !0, duration: 3000, close: "close",className: "bg-warning" }).showToast();
+            return;
+        }
+
         //activate the modal
         $("#addStructure").modal("toggle");
         $('#sortable').empty();//empty the sortable div data to avoid repetition
@@ -93,8 +98,8 @@
     //restoring previously stored structure of page sections
     function editStructure(){
 
-        var section_list = new Array();
-        var section_names = new Array();
+        var section_list = [];
+        var section_names = [];
 
         <?php
             if(isset($data['section_slug'])){
@@ -107,8 +112,8 @@
         <?php }} ?>
 
 
-        var namelist = new Array();
-        var newaddition = new Array();
+        var namelist = [];
+        var newaddition = [];
 
         $("input:checkbox:checked").each(function() {
             //creating the array of section names only to check with db section names
@@ -122,6 +127,13 @@
                 });
             }
         });
+
+        if(namelist.length<1 && newaddition.length<1){
+            //show alert if sections are empty
+            Toastify({ newWindow: !0, text: "please select minimum of one section for the page !", gravity: 'top', position: 'right', stopOnFocus: !0, duration: 3000, close: "close",className: "bg-warning" }).showToast();
+            return;
+        }
+
 
         $("#addStructure").modal("toggle");//activate the modal
         $('#sortable').empty();//empty the sortable div data to avoid repetition
@@ -171,14 +183,15 @@
         var form_data           = new FormData(form); //Creates new FormData object
         var section_name        = $('#sortable li').map(function(i) {
             return $(this).attr('class'); }).get();
+
         //get the names of the section present as class in sortable UL's li
 
         for (var i = 0; i < section_name.length; i++) {
             form_data.append('position[]', i+1); //send the position array in terms of number of li present in sortable UL
             form_data.append('sorted_sections[]', section_name[i]); //send the section names listed in sortable UL
         }
-        var post_url       = $('#submit_page_detail').attr("action"); //get form action url
-        var request_method = $('#submit_page_detail').attr("method"); //get form GET/POST method
+        var post_url       = $('.custom_form').attr("action"); //get form action url
+        var request_method = $('.custom_form').attr("method"); //get form GET/POST method
 
         $.ajax({
             url : post_url,

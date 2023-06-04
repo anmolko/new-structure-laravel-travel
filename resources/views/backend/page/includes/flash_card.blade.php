@@ -51,19 +51,19 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
-                                                <label>Heading <span class="text-muted text-danger">*</span></label>
+                                                <label class="required">Heading</label>
                                                 <input type="hidden" class="form-control" value="{{$key}}"    name="page_section_id" required>
                                                 <input type="hidden" class="form-control" value="{{$value}}"  name="section_name" required>
                                                 <input type="hidden" class="form-control" value="3" name="list_number_1" required>
-                                                <input type="hidden" class="form-control" value="{{@$faq[$i-1]->id}}" name="id[]">
-                                                <input type="text" class="form-control" name="list_title[]" value="{{@$flash_card[$i-1]->list_title}}" required>
+                                                <input type="hidden" class="form-control" value="{{$flash_card[$i-1]->id}}" name="id[]">
+                                                <input type="text" class="form-control" name="list_title[]" value="{{@$flash_card[$i-1]->list_title ?? null}}" required>
                                                 <div class="invalid-feedback">
                                                     Please enter the heading.
                                                 </div>
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label>Description </label>
-                                                <textarea class="form-control" rows="6" name="list_description[]" id="accordian_two_editor_{{$i}}">{{@$flash_card[$i-1]->list_description}}</textarea>
+                                                <textarea class="form-control" rows="6" name="list_description[]" id="accordian_two_editor_{{$i}}">{{$flash_card[$i-1]->list_description ?? null}}</textarea>
                                                 <div class="invalid-feedback">
                                                     Please write the description.
                                                 </div>

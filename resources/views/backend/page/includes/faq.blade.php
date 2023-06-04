@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success mt-3" id="accordionBordered5">
-                    <input type="hidden" class="form-control" value="{{@$faq_section}}" name="faq_section">
+                    <input type="hidden" class="form-control" value="{{@$faq_section->id}}" name="faq_section">
                     @for ($i = 1; $i <=$faq_section->list_number_1; $i++)
                         <div class="accordion-item">
                             <h2 class="accordion-header" id="accordian-heading-{{$i}}">
@@ -51,7 +51,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group mb-3">
-                                                <label>Heading <span class="text-muted text-danger">*</span></label>
+                                                <label class="required">Heading </label>
                                                 <input type="hidden" class="form-control" value="{{$key}}"    name="page_section_id" required>
                                                 <input type="hidden" class="form-control" value="{{$value}}"  name="section_name" required>
                                                 <input type="hidden" class="form-control" value="{{$faq_section->list_number_1}}" name="list_number_1" required>

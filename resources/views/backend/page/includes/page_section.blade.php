@@ -101,7 +101,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('faq_list', 'Number of FAQs', ['class' => 'form-label']) !!}
-                                    {!! Form::number('faq_list', 1,['class'=>'form-control','id'=>'name','min'=>'1','placeholder'=>'Enter number of FAQ']) !!}
+                                    {!! Form::number('faq_list', $page_method == 'edit' ? (isset($data['section_position']['faq']) ? $data['section_position']['faq']:1) : 1,['class'=>'form-control','id'=>'name','min'=>'1','placeholder'=>'Enter number of FAQ']) !!}
                                 </div>
                             </div>
                             <div class="col-md-12 mt-3">
@@ -126,11 +126,11 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     {!! Form::label('gallery_title', 'Title', ['class' => 'form-label']) !!}
-                                    {!! Form::text('gallery_title', null,['class'=>'form-control','id'=>'gallery_title','placeholder'=>'Gallery Subtitle']) !!}
+                                    {!! Form::text('gallery_title', $page_method == 'edit' ?  ($data['gallery'] ? $data['gallery']->list_number_1:null):null,['class'=>'form-control','id'=>'gallery_title','placeholder'=>'Gallery Subtitle']) !!}
                                 </div>
                                 <div class="form-group mt-2">
                                     {!! Form::label('gallery_subtitle', 'Subtitle', ['class' => 'form-label']) !!}
-                                    {!! Form::text('gallery_subtitle', null,['class'=>'form-control','id'=>'gallery_subtitle','placeholder'=>'Gallery Subtitle']) !!}
+                                    {!! Form::text('gallery_subtitle', $page_method == 'edit' ?  ($data['gallery'] ? $data['gallery']->list_number_2:null):null,['class'=>'form-control','id'=>'gallery_subtitle','placeholder'=>'Gallery Subtitle']) !!}
                                 </div>
                             </div>
                             <div class="col-md-12 mt-2">

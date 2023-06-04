@@ -32,4 +32,9 @@ class PageSection extends BackendBaseModel
         return $this->hasMany(MenuItem::class);
     }
 
+    public function pageSectionGalleries()
+    {
+        return $this->hasMany(PageSectionGallery::class);
+    }
+
 }
