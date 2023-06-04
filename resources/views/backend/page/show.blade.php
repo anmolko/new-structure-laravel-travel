@@ -60,6 +60,12 @@
                                         @if($value == 'faq')
                                             @include($view_path.'includes.faq')
                                         @endif
+                                        @if($value == 'header_description')
+                                            @include($view_path.'includes.header_description')
+                                        @endif
+                                        @if($value == 'flash_card')
+                                            @include($view_path.'includes.flash_card')
+                                        @endif
                                         @if($value == 'gallery')
                                             @include($view_path.'includes.gallery')
                                         @endif
@@ -79,6 +85,7 @@
 @section('js')
     <script src="{{asset('assets/backend/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('assets/backend/libs/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{asset('assets/backend/plugins/ckeditor/ckeditor.js')}}"></script>
     <script src="{{asset('assets/backend/plugins/dropzone/dropzone.js')}}"></script>
     <script src="{{asset('assets/backend/plugins/dropzone/dropzone.config.js')}}"></script>
     <script src="{{asset('assets/common/general.js')}}"></script>

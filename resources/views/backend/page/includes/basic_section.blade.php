@@ -65,8 +65,8 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="mb-1">
-                            {!! Form::label('basic_image_input', 'Images', ['class' => 'form-label required']) !!}
-                            {!! Form::file('basic_image_input', ['class'=>'form-control','id'=>'basic_image_input']) !!}
+                            {!! Form::label('image_input', 'Images', ['class' => 'form-label required']) !!}
+                            {!! Form::file('image_input', ['class'=>'form-control','id'=>'basic_image_input']) !!}
                             <p class="text-muted mb-2">Recommended size: 400 x 545px</p>
                         </div>
                         @if($basic_element && $basic_element->image)

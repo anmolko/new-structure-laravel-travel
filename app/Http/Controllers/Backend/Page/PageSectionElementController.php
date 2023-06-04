@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend\Page;
 
 use App\Http\Controllers\Backend\BackendBaseController;
 use App\Http\Requests\Backend\PageRequest;
+use App\Http\Requests\Backend\PageSectionElementRequest;
 use App\Http\Requests\Backend\ServiceRequest;
 use App\Models\Backend\Page\Page;
 use App\Models\Backend\Page\PageSection;
@@ -53,10 +54,10 @@ class PageSectionElementController extends BackendBaseController
     /**
      * Store a newly created resource in storage.
      *
-     * @param PageRequest $request
+     * @param PageSectionElementRequest $request
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(PageSectionElementRequest $request)
     {
         $section_name = $request['section_name'];
         $section_id   = $request['page_section_id'];
@@ -66,17 +67,6 @@ class PageSectionElementController extends BackendBaseController
             $request->request->add(['created_by' => auth()->user()->id ]);
             $request->request->add(['status' => true ]);
 
-            if($section_name == 'basic_section') {
-                if ($request->hasFile('basic_image_input')) {
-                    $image_name = $this->uploadImage($request->file('basic_image_input'), '400', '545');
-                    $request->request->add(['image' => $image_name]);
-                }
-                PageSectionElement::create($request->all());
-            }
-
-            if($section_name == 'map_description') {
-                PageSectionElement::create($request->all());
-            }
             if($section_name == 'faq') {
                 $faq_num   = $request['list_number_1'];
                 for ($i=0;$i<$faq_num;$i++){
@@ -94,6 +84,30 @@ class PageSectionElementController extends BackendBaseController
                     ];
                     PageSectionElement::create($data);
                 }
+            }elseif ($section_name == 'flash_card'){
+                $flash_card_num   = $request['list_number_1'];
+                for ($i=0;$i<$flash_card_num;$i++){
+                    $heading     =  array_key_exists($i, $request->input('title')) ? $request->input('title')[$i] : null;
+                    $subheading  =  array_key_exists($i, $request->input('subtitle')) ? $request->input('subtitle')[$i] : null;
+
+                    $data=[
+                        'page_section_id'     => $section_id,
+                        'title'               => $heading,
+                        'subtitle'            => $subheading,
+                        'list_title'          => $request['list_title'][$i],
+                        'list_description'    => $request['list_description'][$i],
+                        'status'              => $request['status'],
+                        'created_by'          => $request['created_by'],
+                    ];
+                    PageSectionElement::create($data);
+                }
+            }
+            else{
+                if ($request->hasFile('image_input')) {
+                    $image_name = $this->uploadImage($request->file('image_input'), '400', '545');
+                    $request->request->add(['image' => $image_name]);
+                }
+                PageSectionElement::create($request->all());
             }
 
             Session::flash('success',str_replace('_',' ',$section_name).' was created successfully');
