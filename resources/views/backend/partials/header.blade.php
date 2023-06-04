@@ -7,7 +7,7 @@
 
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+{{--    <meta name="csrf-token" content="{{ csrf_token() }}">--}}
     <meta name="description" content="@if(!empty(@$setting_data->website_description)) {{ucwords(@$setting_data->website_description)}} @else BIRAT OVERSEAS PVT. LTD - leading manpower company @endif">
     <meta name="author" content="Canosoft Technology" />
     <!-- App favicon -->

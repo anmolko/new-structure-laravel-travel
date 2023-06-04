@@ -8,7 +8,9 @@
                 <p class="text-danger">Note* Please add the images in the multiplication of 4 (like 4, 8, 12) for perfect design  </p>
             </div>
             <div class="card-body">
-                <h2 class="page-heading">Upload your Images <span id="counter"></span></h2>
+                <img class="img-responsive pb-4 border-bottom lazy" data-src="{{asset('assets/backend/images/pages/sections/'.$value.'.png')}}" width="100%"/>
+
+                <h2 class="page-heading mt-3">Upload your Images <span id="counter"></span></h2>
                 <div class="invalid-feedback">    </div>
                 <script type="text/javascript">
                     var page_section_id = "{{$key}}";

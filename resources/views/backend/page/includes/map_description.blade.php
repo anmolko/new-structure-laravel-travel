@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <img class="img-responsive pb-4 border-bottom" src="{{asset('assets/backend/images/pages/sections/'.$value.'.png')}}" width="100%"/>
+                    <img class="img-responsive pb-4 border-bottom lazy" data-src="{{asset('assets/backend/images/pages/sections/'.$value.'.png')}}" width="100%"/>
 
                     <div class="col-lg-6 mt-3">
                         <div class="mb-1">

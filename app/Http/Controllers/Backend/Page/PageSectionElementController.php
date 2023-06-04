@@ -148,24 +148,24 @@ class PageSectionElementController extends BackendBaseController
     public function getGallery(Request $request,$id)
     {
         $images = PageSectionGallery::where('page_section_id',$id)->get()->toArray();
-
+        $tableImages = [];
         if (count($images) > 0){
             foreach($images as $image){
-                $tableImages[] = $image['filename'];
+                $tableImages[] = $image['resized_name'];
             }
-            $storeFolder = public_path('storage/images/section_elements/');
-            $file_path = public_path('storage/images/section_elements/');
+            $storeFolder = public_path('storage/images/section_element/gallery/');
+            $file_path = public_path('storage/images/section_element/gallery/');
             $files = scandir($storeFolder);
             foreach ( $files as $file ) {
                 if ($file !='.' && $file !='..' && in_array($file,$tableImages)) {
                     $obj['name'] = $file;
-                    $file_path = public_path('storage/images/section_elements/').$file;
+                    $file_path = public_path('storage/images/section_element/gallery/').$file;
                     $obj['size'] = filesize($file_path);
-                    $obj['path'] = url('/storage/images/section_elements/'.$file);
+                    $obj['path'] = url('/storage/images/section_element/gallery/'.$file);
                     $data[] = $obj;
                 }
-
             }
+//            dd($files,$tableImages);
             return response()->json($data);
         }
     }
@@ -186,6 +186,12 @@ class PageSectionElementController extends BackendBaseController
             $photos = [$photos];
         }
 
+
+        if (!is_dir($this->image_path . '/section_element/gallery/')) {
+            mkdir($this->image_path . '/section_element/gallery/', 0777);
+        }
+
+
         for ($i = 0; $i < count($photos); $i++) {
             $photo = $photos[$i];
             $name = $page_section->page->slug."_page_gallery_".date('YmdHis') . uniqid();
@@ -193,10 +199,12 @@ class PageSectionElementController extends BackendBaseController
 
             $resize_name = "Thumb_".$name . '.' . $photo->getClientOriginalExtension();
 
-            Image::make($photo)
+            $image_save = Image::make($photo)
                 ->orientate()
                 // ->resize(500, 500)
-                ->save($this->image_path . '/' . $resize_name);
+                ->save($this->image_path . '/section_element/gallery/' . $resize_name);
+
+
 
             $photo->move($this->image_path, $save_name);
 
@@ -214,15 +222,15 @@ class PageSectionElementController extends BackendBaseController
 
     public function deleteGallery(Request $request)
     {
-        $filename = $request->get('filename');
-        $uploaded_image = PageSectionGallery::where('filename', $filename)->first();
+        $resized_name = $request->get('filename');
+        $uploaded_image = PageSectionGallery::where('resized_name', $resized_name)->first();
 
         if (empty($uploaded_image)) {
             return Response::json(['message' => 'Sorry file does not exist'], 400);
         }
 
-        $file_path = $this->image_path . '/' . $uploaded_image->filename;
-        $resized_file = $this->image_path . '/' . $uploaded_image->resized_name;
+        $file_path = $this->image_path . '/section_element/gallery/' . $uploaded_image->filename;
+        $resized_file = $this->image_path . '/section_element/gallery/' . $uploaded_image->resized_name;
 
         if (file_exists($file_path)) {
             @unlink($file_path);
@@ -236,7 +244,7 @@ class PageSectionElementController extends BackendBaseController
             $uploaded_image->delete();
         }
 
-        return Response::json(['success' => $filename], 200);
+        return Response::json(['success' => $resized_name], 200);
     }
 
 

@@ -85,5 +85,4 @@
     @include($view_path.'partials.section_element_script')
     @include($module.'includes.toast_message')
     @include($module.'includes/gallery')
-
 @endsection

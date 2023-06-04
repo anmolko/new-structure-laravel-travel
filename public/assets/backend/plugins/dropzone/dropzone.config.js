@@ -43,10 +43,15 @@ Dropzone.options.myDropzone = {
                     var name = file.name;
                 }
                 // console.log(name);
+                $.ajaxSetup({
+                    headers:{
+                        'X_CSRF_TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
                 $.ajax({
                     type: 'POST',
                     url: '/adminsite/section-element/image-delete',
-                    data: { filename: name, _token: $('[name="_token"]').val() },
+                    data: { filename: name},
                     success: function(data) {
                         total_photos_counter--;
                         $("#counter").text("# " + total_photos_counter);
