@@ -27,7 +27,7 @@ class BlogRequest extends FormRequest
         return [
             'blog_category_id'      => 'required',
             'title'                 => 'required|string|max:191|unique:blog_categories,title,'.$this->category,
-            'image_input'           => 'required|image|mimes:jpg,jpeg,png|max:2048',
+            'image_input'           => request()->method() == 'POST' ? 'required':'nullable'.'|image|mimes:jpg,jpeg,png|max:2048',
         ];
     }
 

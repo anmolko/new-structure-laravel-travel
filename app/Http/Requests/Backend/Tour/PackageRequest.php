@@ -30,7 +30,7 @@ class PackageRequest extends FormRequest
             'title'                     => 'required|string|unique:packages,title,'.$this->package,
             'country_id'                => 'required',
             'package_category_id'       => 'required',
-            'image_input'               => 'required_if:image,null|mimes:jpeg,png,jpg',
+            'image_input'               => request()->method() == 'POST' ? 'required':'nullable'.'|image|mimes:jpeg,png,jpg',
         ];
     }
 

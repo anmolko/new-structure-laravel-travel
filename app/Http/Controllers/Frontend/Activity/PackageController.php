@@ -78,12 +78,12 @@ class PackageController extends BackendBaseController
         return view($this->loadView($this->view_path.'search'), compact('data'));
     }
 
-    public function show($id)
+    public function show($slug)
     {
         $this->page_method      = 'show';
         $this->page_title       = $this->panel.' Details';
-        $data                   = [];
-        $data['package']        =  $this->model->find($id);
+        $data                   = $this->getCommonData();
+        $data['row']            =  $this->model->where('slug',$slug)->first();
 
         return view($this->loadView($this->view_path.'show'), compact('data'));
     }

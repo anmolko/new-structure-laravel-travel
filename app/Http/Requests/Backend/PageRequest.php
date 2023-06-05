@@ -26,7 +26,7 @@ class PageRequest extends FormRequest
     {
         return [
             'title'         => 'required|string|max:30|unique:pages,title,'.$this->page,
-            'image_input'   => 'required_if:title,null|mimes:jpeg,png,jpg',
+            'image_input'   => request()->method() == 'POST' ? 'required':'nullable'.'|image|mimes:jpeg,png,jpg',
         ];
     }
 

@@ -27,7 +27,7 @@ class SettingRequest extends FormRequest
         return [
             'title'         => 'required|string|max:60',
             'email'         => 'required|email',
-            'logo_input'    => request()->method() == 'POST' ? 'required':'nullable'.'|mimes:jpeg,png,jpg',
+            'logo_input'    => request()->method() == 'POST' ? 'required':'nullable'.'|image|mimes:jpeg,png,jpg',
         ];
     }
 

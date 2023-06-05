@@ -27,7 +27,7 @@ class ServiceRequest extends FormRequest
         return [
             'title'         => 'required|string|max:50',
             'description'   => 'required|string|max:191',
-            'image_input'   => 'required_if:title,null|mimes:jpeg,png,jpg',
+            'image_input'   => request()->method() == 'POST' ? 'required':'nullable'.'|image|mimes:jpeg,png,jpg',
         ];
     }
 

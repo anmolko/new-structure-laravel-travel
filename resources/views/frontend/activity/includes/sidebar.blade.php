@@ -1,6 +1,6 @@
-<div class="sidebar mt-0">
+<div class="sidebar {{ $page_method !== 'show' ? 'mt-0':'single-content-sidebar' }} ">
     @if(count( $data['categories']) > 0)
-        <div class="sidebar-widget">
+        <div class="sidebar-widget {{ $page_method !== 'show' ? '':'single-content-widget' }}">
             <h3 class="title stroke-shape">Our Categories</h3>
             <div class="sidebar-list">
                 <ul class="list-items">
@@ -15,7 +15,7 @@
     @endif
 
     @if(count($data['ribbons'])>0)
-        <div class="sidebar-widget">
+        <div class="sidebar-widget {{ $page_method !== 'show' ? '':'single-content-widget' }}">
             <div class="section-tab section-tab-2 pb-3">
                 <ul class="nav nav-tabs justify-content-center" id="myTab3" role="tablist">
                     @foreach($data['ribbons'] as $ribbon)
@@ -35,7 +35,7 @@
                             <div class="card-item card-item-list recent-post-card">
                                 <div class="card-img">
                                     <a href="{{ route('frontend.activity.show',$package->slug) }}" class="d-block">
-                                        <img class="lazy" data-src="{{ asset(imagePath($package->image)) }}" alt="blog-img">
+                                        <img class="lazy" data-src="{{ asset(imagePath($package->image)) }}" alt="img">
                                     </a>
                                 </div>
                                 <div class="card-body">
@@ -59,51 +59,92 @@
     @endif
 </div>
 
-<div class="form-box mt-3">
-    <div class="form-title-wrap">
-        <h3 class="title">Contact Us</h3>
-    </div><!-- form-title-wrap -->
-    <div class="form-content">
-        <div class="address-book">
-            <ul class="list-items contact-address">
-                <li>
-                    <i class="la la-phone icon-element"></i>
-                    <h5 class="title font-size-16 pb-1">Phone</h5>
-                    <p class="map__desc">Telephone:
-                        <a href="tel:{{$setting_data->phone ?? ''}}">
-                            {{$setting_data->phone ?? ''}}
-                        </a>
-                    </p>
-                    <p class="map__desc">Mobile:
-                        {{ $setting_data->mobile ?? $setting_data->whatsapp ?? $setting_data->viber ?? ''}}
-                    </p>
-                </li>
-                <li>
-                    <i class="la la-envelope-o icon-element"></i>
-                    <h5 class="title font-size-16 pb-1">Email</h5>
-                    <p class="map__desc"> {{ $setting_data->email ?? ''}}</p>
-                </li>
-            </ul>
-            <ul class="social-profile text-center">
-                @if(@$setting_data->facebook)
-                    <li><a href="{{@$setting_data->facebook}}"><span class="fa-brands fa-facebook"></span></a></li>
-                @endif
-                @if(@$setting_data->youtube)
-                    <li><a href="{{@$setting_data->youtube}}"><span class="fa-brands fa-youtube"></span></a></li>
+@if($page_method !== 'show')
 
-                @endif
-                @if(@$setting_data->instagram)
-                    <li><a href="{{@$setting_data->instagram}}"><span class="fa-brands fa-instagram"></span></a></li>
-                @endif
-                @if(@$setting_data->linkedin)
-                    <li><a href="{{@$setting_data->linkedin}}"><span class="fa-brands fa-linkedin"></span></a></li>
-                @endif
-                @if(!empty(@$setting_data->ticktock))
-                    <li><a href="{{@$setting_data->ticktock}}"><span class="fa-brands fa-tiktok"></span></a></li>
-                @endif
-            </ul>
-        </div>
-    </div><!-- end form-content -->
-</div>
+    <div class="form-box mt-3">
+        <div class="form-title-wrap">
+            <h3 class="title">Contact Us</h3>
+        </div><!-- form-title-wrap -->
+        <div class="form-content">
+            <div class="address-book">
+                <ul class="list-items contact-address">
+                    <li>
+                        <i class="la la-phone icon-element"></i>
+                        <h5 class="title font-size-16 pb-1">Phone</h5>
+                        <p class="map__desc">Telephone:
+                            <a href="tel:{{$setting_data->phone ?? ''}}">
+                                {{$setting_data->phone ?? ''}}
+                            </a>
+                        </p>
+                        <p class="map__desc">Mobile:
+                            {{ $setting_data->mobile ?? $setting_data->whatsapp ?? $setting_data->viber ?? ''}}
+                        </p>
+                    </li>
+                    <li>
+                        <i class="la la-envelope-o icon-element"></i>
+                        <h5 class="title font-size-16 pb-1">Email</h5>
+                        <p class="map__desc"> {{ $setting_data->email ?? ''}}</p>
+                    </li>
+                </ul>
+                <ul class="social-profile text-center">
+                    @if(@$setting_data->facebook)
+                        <li><a href="{{@$setting_data->facebook}}"><span class="fa-brands fa-facebook"></span></a></li>
+                    @endif
+                    @if(@$setting_data->youtube)
+                        <li><a href="{{@$setting_data->youtube}}"><span class="fa-brands fa-youtube"></span></a></li>
+
+                    @endif
+                    @if(@$setting_data->instagram)
+                        <li><a href="{{@$setting_data->instagram}}"><span class="fa-brands fa-instagram"></span></a></li>
+                    @endif
+                    @if(@$setting_data->linkedin)
+                        <li><a href="{{@$setting_data->linkedin}}"><span class="fa-brands fa-linkedin"></span></a></li>
+                    @endif
+                    @if(!empty(@$setting_data->ticktock))
+                        <li><a href="{{@$setting_data->ticktock}}"><span class="fa-brands fa-tiktok"></span></a></li>
+                    @endif
+                </ul>
+            </div>
+        </div><!-- end form-content -->
+    </div>
+@else
+    <div class="sidebar-widget single-content-widget mt-3">
+        <h3 class="title stroke-shape">Enquiry Form</h3>
+        <div class="enquiry-forum">
+            <div class="form-box">
+                <div class="form-content">
+                    <div class="contact-form-action">
+                        <form method="post">
+                            <div class="input-box">
+                                <label class="label-text">Your Name</label>
+                                <div class="form-group">
+                                    <span class="la la-user form-icon"></span>
+                                    <input class="form-control" type="text" name="name" placeholder="Your name">
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                <label class="label-text">Your Email</label>
+                                <div class="form-group">
+                                    <span class="la la-envelope-o form-icon"></span>
+                                    <input class="form-control" type="email" name="email" placeholder="Email address">
+                                </div>
+                            </div>
+                            <div class="input-box">
+                                <label class="label-text">Message</label>
+                                <div class="form-group">
+                                    <span class="la la-pencil form-icon"></span>
+                                    <textarea class="message-control form-control" name="message" placeholder="Write message"></textarea>
+                                </div>
+                            </div>
+                            <div class="btn-box">
+                                <button type="button" class="theme-btn">Submit Enquiry</button>
+                            </div>
+                        </form>
+                    </div><!-- end contact-form-action -->
+                </div><!-- end form-content -->
+            </div><!-- end form-box -->
+        </div><!-- end enquiry-forum -->
+    </div>
+@endif
 
 

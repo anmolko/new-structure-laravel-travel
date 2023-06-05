@@ -28,7 +28,7 @@ class TestimonialRequest extends FormRequest
             'title'         => 'required|string|max:50',
             'position'      => 'nullable|string|max:40',
             'description'   => 'required|string',
-            'image_input'   => 'required_if:title,null|mimes:jpeg,png,jpg',
+            'image_input'   => request()->method() == 'POST' ? 'required':'nullable'.'|image|mimes:jpeg,png,jpg',
         ];
     }
 

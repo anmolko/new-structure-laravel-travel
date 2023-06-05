@@ -14,7 +14,7 @@ class Package extends BackendBaseModel
     use HasFactory, SoftDeletes, Sluggable, Slug;
 
     protected $table    ='packages';
-    protected $fillable = ['id','country_id','package_ribbon_id','package_category_id','title','key','slug','image','cover','duration','description','status','created_by','updated_by'];
+    protected $fillable = ['id','country_id','package_ribbon_id','package_category_id','title','key','slug','map','image','video','cover','duration','description','itinerary','status','created_by','updated_by'];
 
     public function country(): BelongsTo
     {

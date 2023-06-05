@@ -29,12 +29,19 @@
             {!! Form::select('package_ribbon_id', $data['ribbons'], $data['row']->package_ribbon_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_ribbon_id','placeholder'=>'Select ribbon']) !!}
         </div>
     </div>
-    <div class="col-lg-12">
-        <div class="mb-3 editor">
-            {!! Form::label('description', 'Description', ['class' => 'form-label']) !!}
-            {!! Form::textarea('description', null,['class'=>'form-control ck-editor','id'=>'description','placeholder'=>'Enter description']) !!}
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {!! Form::label('map', 'Map URL', ['class' => 'form-label']) !!}
+            {!! Form::text('map',null,['class'=>'form-control','id'=>'map','placeholder'=>'Map URL']) !!}
         </div>
     </div>
+    <div class="col-lg-6">
+        <div class="mb-3">
+            {!! Form::label('video', 'video URL', ['class' => 'form-label']) !!}
+            {!! Form::text('video',null,['class'=>'form-control','id'=>'video','placeholder'=>'video URL']) !!}
+        </div>
+    </div>
+
     <div class="col-lg-6">
         <div class="mb-3">
             {!! Form::label('image_input', 'Images', ['class' => 'form-label']) !!}
@@ -77,6 +84,19 @@
             </div>
         @endif
     </div>
+    <div class="col-lg-12">
+        <div class="mb-3 editor">
+            {!! Form::label('description', 'Description', ['class' => 'form-label']) !!}
+            {!! Form::textarea('description', null,['class'=>'form-control ck-editor','id'=>'description','placeholder'=>'Enter description']) !!}
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="mb-3 editor">
+            {!! Form::label('itinerary', 'Itinerary', ['class' => 'form-label']) !!}
+            {!! Form::textarea('itinerary', null,['class'=>'form-control ck-editor','id'=>'itinerary','placeholder'=>'Enter itinerary']) !!}
+        </div>
+    </div>
+
     <div class="col-lg-12">
         {!! Form::label('status', 'Status', ['class' => 'form-label']) !!}
         <div class="mb-3 mt-2">

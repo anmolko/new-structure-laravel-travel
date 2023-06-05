@@ -1,4 +1,4 @@
-<section class="breadcrumb-area bread-bg"
+<section class="breadcrumb-area"
          style="background-image: url( {{asset('assets/frontend/images/bread-bg.jpg')}} );">
     <div class="breadcrumb-wrap">
         <div class="container">

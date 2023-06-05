@@ -686,3 +686,73 @@
     display: inline-block;
     text-align: left;
 }
+
+.ck-editor-description blockquote{
+    border-left: none;
+    background-image: url(../images/img9.jpg);
+    background-size: cover;
+    background-position: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    z-index: 1;
+    padding: 40px;
+    position: relative;
+    margin-top: 10px;
+}
+
+.ck-editor-description blockquote:after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #0d233e;
+    opacity: 0.8;
+    z-index: -1;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.ck-editor-description blockquote p{
+    line-height: 30px;
+    font-weight: 500;
+    font-style: italic;
+    color: #fff;
+}
+
+.ck-editor-description ul, .ck-editor-description ol{
+    padding-bottom: 1rem!important;
+    list-style-type: none;
+}
+
+.ck-editor-description ul li, .ck-editor-description ol{
+    margin-bottom: 6px;
+    color: #5d646d;
+}
+
+.ck-editor-description ul li:before, .ck-editor-description ol li:before{
+    font-family: 'Line Awesome Free';
+    font-weight: 900;
+    -webkit-font-smoothing: antialiased;
+    display: inline-block;
+    font-style: normal;
+    font-variant: normal;
+    text-rendering: auto;
+    line-height: 1;
+    content: "\f192";
+    margin-right: 5px;
+}
+
+.ck-editor-description ul li:before{
+    color: #287dfa !important;
+    content: "\f192";
+}
+.ck-editor-description ol li:before{
+    color: #28a745!important;
+    content: "\f00c";
+}
+
+
