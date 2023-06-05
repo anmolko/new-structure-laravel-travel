@@ -33,7 +33,7 @@
         <div class="btn-box pt-3 pl-3">
             <button type="submit" class="theme-btn search-for-tours">Search Now</button>
         </div>
-    </form>
+    {!! Form::close() !!}
 </div>
 
 

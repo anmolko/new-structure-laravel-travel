@@ -22,10 +22,13 @@
                             <div class="flex-shrink-0">
 
                                 <div class="d-flex justify-content-sm-end gap-2">
+                                    <a href="#" class="btn btn-outline-primary waves-effect waves-light"
+                                       target="_blank"
+                                       title="View in Frontend">
+                                        <i class="ri-eye-line align-bottom me-1"></i>
                                     <a class="btn btn-outline-success waves-effect waves-light" href="{{route($base_route.'index')}}" title="list">
                                         <i class="ri-menu-2-line align-bottom me-1"></i> Page List</a>
-                                    <a href="#" class="btn btn-outline-primary waves-effect waves-light" title="View in Frontend">
-                                        <i class="ri-eye-line align-bottom me-1"></i>
+
                                     </a>
                                 </div>
                             </div>

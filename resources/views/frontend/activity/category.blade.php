@@ -12,7 +12,7 @@
                     <div class="filter-wrap margin-bottom-30px">
                         <div class="filter-top d-flex align-items-center justify-content-between pb-4">
                             <div>
-                                <h3 class="title font-size-24">{{ count($data['all_packages']) }} Tours found</h3>
+                                <h3 class="title font-size-24">{{ count($data['rows']) }} Tours found</h3>
                                 <p class="font-size-14 line-height-20 pt-1">Find your next best trip right here !</p>
                             </div>
                         </div><!-- end filter-top -->
@@ -25,7 +25,7 @@
                 </div><!-- end col-lg-4 -->
                 <div class="col-lg-8">
                     <div class="row">
-                        @foreach($data['all_packages'] as $package)
+                        @foreach($data['rows'] as $package)
                             <div class="col-lg-6 responsive-column ">
                                 <div class="card-item">
 
@@ -53,7 +53,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="btn-box mt-3 text-center">
-                                {{ $data['all_packages']->links('vendor.pagination.simple-bootstrap-4') }}
+                                {{ $data['rows']->links('vendor.pagination.simple-bootstrap-4') }}
                             </div>
                         </div>
                     </div>

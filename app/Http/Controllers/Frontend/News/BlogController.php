@@ -1,36 +1,35 @@
 <?php
 
-namespace App\Http\Controllers\Frontend\Activity;
+namespace App\Http\Controllers\Frontend\News;
 
 use App\Http\Controllers\Backend\BackendBaseController;
 use App\Models\Backend\Activity\PackageCategory;
 use App\Models\Backend\Activity\PackageRibbon;
 use App\Models\Backend\Activity\Package;
+use App\Models\Backend\News\Blog;
+use App\Models\Backend\News\BlogCategory;
 use App\Services\Frontend\PackageSearchService;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 
-class PackageController extends BackendBaseController
+class BlogController extends BackendBaseController
 {
     protected string $module        = 'frontend.';
-    protected string $base_route    = 'frontend.activity.';
-    protected string $view_path     = 'frontend.activity.';
-    protected string $panel         = 'Activity';
-    protected string $folder_name   = 'activity';
+    protected string $base_route    = 'frontend.blog.';
+    protected string $view_path     = 'frontend.blog.';
+    protected string $panel         = 'Blog';
+    protected string $folder_name   = 'blog';
     protected string $page_title, $page_method, $image_path;
     protected object $model;
-    private PackageSearchService $packageSearchService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct(PackageSearchService $packageSearchService)
+    public function __construct()
     {
-        $this->model                = new Package();
-        $this->image_path           = public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'package');
-        $this->packageSearchService = $packageSearchService;
+        $this->model                = new Blog();
     }
 
     /**
@@ -43,7 +42,7 @@ class PackageController extends BackendBaseController
         $this->page_method      = 'index';
         $this->page_title       = 'All '.$this->panel;
         $data                   = $this->getCommonData();
-        $data['rows']           = $this->model->active()->descending()->paginate(6);
+        $data['rows']           = $this->model->active()->descending()->get();
 
         return view($this->loadView($this->view_path.'index'), compact('data'));
     }
@@ -51,13 +50,7 @@ class PackageController extends BackendBaseController
 
     public function getCommonData(): array
     {
-        $data['categories']     = PackageCategory::active()->descending()->has('packages')->withCount('packages')->get();
-        $data['ribbons']        = PackageRibbon::active()->descending()->whereHas('packages', function ($package){
-            return $package->descending()->take(3);
-        })->withCount('packages')->limit(3)->get();
-
-        $data['search_countries']   = $this->getCountries();
-        $data['search_categories']  = $this->getPackageCategory();
+        $data['categories']     = BlogCategory::active()->descending()->has('blogs')->withCount('blogs')->get();
 
         return $data;
     }
@@ -68,7 +61,9 @@ class PackageController extends BackendBaseController
         $this->page_method      = 'search';
         $this->page_title       = 'Search '.$this->panel;
         $data                   = $this->getCommonData();
-        $data['rows']           = $this->packageSearchService->getSearchedPackages($request);
+        $data['query']          = $request['title'];
+        $data['rows']           = $this->model->where('title', 'LIKE', '%' . $data['query']  . '%')->active()->paginate(6);
+
 
         return view($this->loadView($this->view_path.'search'), compact('data'));
     }
@@ -80,18 +75,16 @@ class PackageController extends BackendBaseController
         $data                   = $this->getCommonData();
         $data['row']            = $this->model->where('slug',$slug)->first();
 
-//        dd($data['row']->packageGalleries);
-
         return view($this->loadView($this->view_path.'show'), compact('data'));
     }
 
     public function category($slug)
     {
-        $data                   = $this->getCommonData();
-        $data['category']       = PackageCategory::where('slug',$slug)->active()->first();
         $this->page_method      = 'category';
+        $data                   = $this->getCommonData();
+        $data['category']       = BlogCategory::where('slug',$slug)->active()->first();
         $this->page_title       = $data['category']->title.' '.$this->panel;
-        $data['rows']           = $this->model->where('package_category_id', $data['category']->id)->active()->descending()->paginate(6);
+        $data['rows']           = $this->model->where('blog_category_id', $data['category']->id)->active()->descending()->paginate(6);
 
         return view($this->loadView($this->view_path.'category'), compact('data'));
     }

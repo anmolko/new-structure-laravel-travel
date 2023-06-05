@@ -34,7 +34,7 @@
                         @foreach($ribbon->packages as $package)
                             <div class="card-item card-item-list recent-post-card">
                                 <div class="card-img">
-                                    <a href="{{ route('frontend.activity.show',$package->slug) }}" class="d-block">
+                                    <a href="{{ route($module.'activity.show',$package->slug) }}" class="d-block">
                                         <img class="lazy" data-src="{{ asset(imagePath($package->image)) }}" alt="img">
                                     </a>
                                 </div>
