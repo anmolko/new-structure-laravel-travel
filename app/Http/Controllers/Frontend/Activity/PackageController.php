@@ -23,7 +23,7 @@ class PackageController extends BackendBaseController
     protected string $view_path     = 'frontend.activity.';
     protected string $panel         = 'Activity';
     protected string $folder_name   = 'activity';
-    protected string $page_title, $page_method;
+    protected string $page_title, $page_method, $image_path;
     protected object $model;
     private PackageSearchService $packageSearchService;
 
@@ -34,8 +34,9 @@ class PackageController extends BackendBaseController
      */
     public function __construct(PackageSearchService $packageSearchService)
     {
-        $this->model            = new Package();
-        $this->packageSearchService   = $packageSearchService;
+        $this->model                = new Package();
+        $this->image_path           = public_path(DIRECTORY_SEPARATOR.'storage'.DIRECTORY_SEPARATOR.'images'.DIRECTORY_SEPARATOR.'package');
+        $this->packageSearchService = $packageSearchService;
     }
 
     /**
@@ -83,7 +84,9 @@ class PackageController extends BackendBaseController
         $this->page_method      = 'show';
         $this->page_title       = $this->panel.' Details';
         $data                   = $this->getCommonData();
-        $data['row']            =  $this->model->where('slug',$slug)->first();
+        $data['row']            = $this->model->where('slug',$slug)->first();
+
+//        dd($data['row']->packageGalleries);
 
         return view($this->loadView($this->view_path.'show'), compact('data'));
     }

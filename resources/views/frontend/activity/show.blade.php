@@ -12,9 +12,10 @@
                     <div class="col-lg-12">
                         <div class="single-content-nav" id="single-content-nav">
                             <ul>
-                                {{--                                <li><a data-scroll="photo" href="#photo" class="scroll-link">Gallery</a></li>--}}
-
                                 <li><a data-scroll="description" href="#description" class="scroll-link active">Description</a></li>
+                                @if(count($data['row']->packageGalleries)>0)
+                                    <li><a data-scroll="photo" href="#photo" class="scroll-link">Gallery</a></li>
+                                @endif
                                 <li><a data-scroll="itinerary" href="#itinerary" class="scroll-link">Itinerary</a></li>
 
                                 {{--                                @if($data['row']->map)--}}
@@ -32,6 +33,9 @@
                     <div class="col-lg-8">
                         <div class="single-content-wrap padding-top-60px">
                             @include($view_path.'partials.description')
+                            @if(count($data['row']->packageGalleries)>0)
+                                @include($view_path.'partials.gallery')
+                            @endif
                             @include($view_path.'partials.itinerary')
                         </div>
                     </div>

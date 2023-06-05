@@ -28,28 +28,23 @@
                                     <i class="la la-video-camera mr-2"></i>Video
                                 </a>
                             @endif
-{{--                            <a class="theme-btn" data-src="images/destination-img.jpg"--}}
-{{--                               data-fancybox="gallery"--}}
-{{--                               data-caption="Showing image - 01"--}}
-{{--                               data-speed="700">--}}
-{{--                                <i class="la la-photo mr-2"></i>More Photos--}}
-{{--                            </a>--}}
+                            @if(count($data['row']->packageGalleries)>0)
+                                <a class="theme-btn lazy" data-src="{{ asset(imagePath($data['row']->image)) }}"
+                                   data-fancybox="gallery"
+                                   data-caption="Showing featured image"
+                                   data-speed="700">
+                                    <i class="la la-photo mr-2"></i>Photos
+                                </a>
+                            @endif
                         </div>
-{{--                        <a class="d-none"--}}
-{{--                           data-fancybox="gallery"--}}
-{{--                           data-src="images/destination-img2.jpg"--}}
-{{--                           data-caption="Showing image - 02"--}}
-{{--                           data-speed="700"></a>--}}
-{{--                        <a class="d-none"--}}
-{{--                           data-fancybox="gallery"--}}
-{{--                           data-src="images/destination-img3.jpg"--}}
-{{--                           data-caption="Showing image - 03"--}}
-{{--                           data-speed="700"></a>--}}
-{{--                        <a class="d-none"--}}
-{{--                           data-fancybox="gallery"--}}
-{{--                           data-src="images/destination-img4.jpg"--}}
-{{--                           data-caption="Showing image - 04"--}}
-{{--                           data-speed="700"></a>--}}
+                        @foreach($data['row']->packageGalleries as $index=>$gallery)
+                            <a class="d-none lazy"
+                               data-fancybox="gallery"
+                               data-src="{{ asset(galleryImagePath('package').$gallery->resized_name) }}"
+                               data-caption="Showing gallery image - {{$index+1}}"
+                               data-speed="700"></a>
+                        @endforeach
+
                     </div><!-- end breadcrumb-btn -->
                 </div><!-- end col-lg-12 -->
             </div><!-- end row -->

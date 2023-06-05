@@ -205,7 +205,6 @@ class PackageController extends BackendBaseController
         }
     }
 
-
     public function uploadGallery(Request $request,$id)
     {
         $package                 =  $this->model->find($id);
