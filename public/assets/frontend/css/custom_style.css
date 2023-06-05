@@ -677,9 +677,9 @@
 }
 
 .theme-btn-disabled{
-    border: 1px solid #287dfa;
+    border: 1px solid #0089cf;
     background-color: #fff;
-    color: #287dfa;
+    color: #0089cf;
 }
 
 .pagination-nav{
@@ -747,7 +747,7 @@
 }
 
 .ck-editor-description ul li:before{
-    color: #287dfa !important;
+    color: #0089cf !important;
     content: "\f192";
 }
 .ck-editor-description ol li:before{

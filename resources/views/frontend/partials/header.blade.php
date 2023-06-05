@@ -157,9 +157,9 @@
                         <a href="#" class="down-button"
                         ><i class="la la-angle-down"></i
                             ></a>
-                        <div class="logo">
+                        <div class="logo" style="padding: 5px;">
                             <a href="/">
-                                <img src="{{ $setting_data->logo ?  asset(imagePath($setting_data->logo)) : ''}}" style="width:135px; height:40px"/>
+                                <img src="{{ $setting_data->logo ?  asset(imagePath($setting_data->logo)) : ''}}" style="height:60px"/>
                             </a>
                             <div class="menu-toggler">
                                 <i class="la la-bars"></i>

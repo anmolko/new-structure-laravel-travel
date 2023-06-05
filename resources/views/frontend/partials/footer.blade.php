@@ -45,7 +45,7 @@
                 <div class="footer-item">
                     <div class="footer-logo padding-bottom-30px">
                         <a href="/" class="foot__logo">
-                            <img src="{{ $setting_data->logo ?  asset(imagePath($setting_data->logo)) : ''}}" alt="" style="width:40%" />
+                            <img src="{{ $setting_data->logo ?  asset(imagePath($setting_data->logo)) : ''}}" alt="" style="height: 60px;" />
                         </a>
                     </div>
                     <!-- end logo -->

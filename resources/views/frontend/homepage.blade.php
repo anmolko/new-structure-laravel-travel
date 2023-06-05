@@ -37,28 +37,28 @@
                         <!-- end hero-content -->
                         <div class="section-tab text-center pl-4">
                             <ul class="nav nav-tabs" id="myTab" role="tablist">
+{{--                                <li class="nav-item">--}}
+{{--                                    <a--}}
+{{--                                        class="nav-link d-flex align-items-center active"--}}
+{{--                                        id="flight-tab"--}}
+{{--                                        data-toggle="tab"--}}
+{{--                                        href="#flight"--}}
+{{--                                        role="tab"--}}
+{{--                                        aria-controls="flight"--}}
+{{--                                        aria-selected="true"--}}
+{{--                                    >--}}
+{{--                                        <i class="la la-plane mr-1"></i>Flights--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
                                 <li class="nav-item">
                                     <a
                                         class="nav-link d-flex align-items-center active"
-                                        id="flight-tab"
-                                        data-toggle="tab"
-                                        href="#flight"
-                                        role="tab"
-                                        aria-controls="flight"
-                                        aria-selected="true"
-                                    >
-                                        <i class="la la-plane mr-1"></i>Flights
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a
-                                        class="nav-link d-flex align-items-center"
                                         id="tour-tab"
                                         data-toggle="tab"
                                         href="#tour"
                                         role="tab"
                                         aria-controls="tour"
-                                        aria-selected="false"
+                                        aria-selected="true"
                                     >
                                         <i class="la la-globe mr-1"></i>Tours
                                     </a>
@@ -67,8 +67,8 @@
                         </div>
                         <!-- end section-tab -->
                         <div class="tab-content search-fields-container" id="myTabContent">
-                        @include($module.'includes.flight_tab')
-                        <div class="tab-pane fade" id="tour" role="tabpanel" aria-labelledby="tour-tab">
+{{--                        @include($module.'includes.flight_tab')--}}
+                        <div class="tab-pane fade show active" id="tour" role="tabpanel" aria-labelledby="tour-tab">
                             @include($module.'includes.tour_tab')
                         </div>
                         <!-- end tab-pane -->
@@ -93,10 +93,9 @@
                         </div>
                         <!-- end info-icon-->
                         <div class="info-content">
-                            <h4 class="info__title">Best Selection</h4>
+                            <h4 class="info__title">Best Tour Packages</h4>
                             <p class="info__desc">
-                                Praesent commodo cursus magna, vel scelerisque nisl
-                                consectetur et.
+                                We have wide variety of tours and travel packages for your selection
                             </p>
                         </div>
                         <!-- end info-content -->
@@ -111,10 +110,9 @@
                         </div>
                         <!-- end info-icon-->
                         <div class="info-content">
-                            <h4 class="info__title">Best Price Guarantee</h4>
+                            <h4 class="info__title">Best Price Guaranteed</h4>
                             <p class="info__desc">
-                                Praesent commodo cursus magna, vel scelerisque nisl
-                                consectetur et.
+                                All of our packages are evaluated to make sure you get the fair price
                             </p>
                         </div>
                         <!-- end info-content -->
@@ -129,10 +127,9 @@
                         </div>
                         <!-- end info-icon-->
                         <div class="info-content">
-                            <h4 class="info__title">24/7 Support</h4>
+                            <h4 class="info__title">Admired services</h4>
                             <p class="info__desc">
-                                Praesent commodo cursus magna, vel scelerisque nisl
-                                consectetur et.
+                                Our services and packages are loved and appreciated by our customers.
                             </p>
                         </div>
                         <!-- end info-content -->
@@ -215,7 +212,7 @@
                             </div>
                             <!-- end section-heading -->
                             <div class="btn-box">
-                                <a href="{{ route('frontend.contact-us') }}" class="theme-btn border-0">
+                                <a href="{{ route($module.'activity.index') }}" class="theme-btn border-0">
                                     Our Activity <i class="la la-arrow-right ml-1"></i>
                                 </a>
                             </div>

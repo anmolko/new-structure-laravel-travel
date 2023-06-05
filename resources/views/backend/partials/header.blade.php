@@ -213,17 +213,17 @@
                         <div class="dropdown-menu dropdown-menu-end">
                             <!-- item-->
                             <h6 class="dropdown-header">Welcome {{auth()->user()->name}}!</h6>
-                            <a class="dropdown-item" href="{{route('backend.user.profile',auth()->user()->slug)}}"><i
-                                    class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
-                                    class="align-middle">Profile</span></a>
+{{--                            <a class="dropdown-item" href="{{route('backend.user.profile',auth()->user()->slug)}}"><i--}}
+{{--                                    class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span--}}
+{{--                                    class="align-middle">Profile</span></a>--}}
 
-{{--                            @if(Auth::user()->user_type == 'admin')--}}
-{{--                            <a class="dropdown-item" href="{{route('settings.index')}}">--}}
+                            @if(Auth::user()->user_type == 'admin')
+                            <a class="dropdown-item" href="{{route($module.'setting.index')}}">
 {{--                                <span class="badge bg-soft-success text-success mt-1 float-end">New</span>--}}
-{{--                                <i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i>--}}
-{{--                                <span class="align-middle">Settings</span>--}}
-{{--                            </a>--}}
-{{--                            @endif--}}
+                                <i class="mdi mdi-cog-outline text-muted fs-16 align-middle me-1"></i>
+                                <span class="align-middle">Settings</span>
+                            </a>
+                            @endif
                             <div class="dropdown-divider"></div>
 
                             <form id="logout-form-header" action="{{ route('backend.logout') }}" method="POST" style="display: none;">
