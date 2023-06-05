@@ -1,18 +1,13 @@
-
-<!-- ================================
-   START FOOTER AREA
-================================= -->
-<section
-    class="footer-area section-bg padding-top-40px padding-bottom-30px"
->
+<section class="footer-area section-bg padding-top-40px padding-bottom-30px">
     <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <div class="term-box footer-item">
                     <ul class="list-items list--items d-flex align-items-center">
-                        <li><a href="#">Terms & Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Help Center</a></li>
+                        @foreach($footerTopNav as $pageNav)
+                            <li><a href="{{$pageNav}}"> {{ ucfirst(str_replace('-',' ',$pageNav)) }} </a></li>
+                        @endforeach
+                        <li><a href="{{ route('frontend.contact-us') }}">Contact us</a></li>
                     </ul>
                 </div>
             </div>
@@ -20,18 +15,22 @@
             <div class="col-lg-4">
                 <div class="footer-social-box text-right">
                     <ul class="social-profile">
-                        <li>
-                            <a href="#"><i class="lab la-facebook-f"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="lab la-twitter"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="lab la-instagram"></i></a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="lab la-linkedin-in"></i></a>
-                        </li>
+                        @if(@$setting_data->facebook)
+                            <li><a href="{{@$setting_data->facebook}}"><span class="fa-brands fa-facebook"></span></a></li>
+                        @endif
+                        @if(@$setting_data->youtube)
+                            <li><a href="{{@$setting_data->youtube}}"><span class="fa-brands fa-youtube"></span></a></li>
+
+                        @endif
+                        @if(@$setting_data->instagram)
+                            <li><a href="{{@$setting_data->instagram}}"><span class="fa-brands fa-instagram"></span></a></li>
+                        @endif
+                        @if(@$setting_data->linkedin)
+                            <li><a href="{{@$setting_data->linkedin}}"><span class="fa-brands fa-linkedin"></span></a></li>
+                        @endif
+                        @if(!empty(@$setting_data->ticktock))
+                            <li><a href="{{@$setting_data->ticktock}}"><span class="fa-brands fa-tiktok"></span></a></li>
+                        @endif
                     </ul>
                 </div>
             </div>
@@ -45,76 +44,80 @@
             <div class="col-lg-3 responsive-column">
                 <div class="footer-item">
                     <div class="footer-logo padding-bottom-30px">
-                        <a href="index.html" class="foot__logo"
-                        ><img src="images/logo.png" alt="logo"
-                            /></a>
+                        <a href="/" class="foot__logo">
+                            <img src="{{ $setting_data->logo ?  asset(imagePath($setting_data->logo)) : ''}}" alt="" style="width:40%" />
+                        </a>
                     </div>
                     <!-- end logo -->
                     <p class="footer__desc">
-                        Morbi convallis bibendum urna ut viverra. Maecenas consequat
+                        {{ $setting_data->description ?? '' }}
                     </p>
+                </div>
+                <!-- end footer-item -->
+            </div>
+            <!-- end col-lg-3 -->
+            <div class="col-lg-3 responsive-column">
+                <div class="footer-item">
+                    <h4 class="title curve-shape pb-3 margin-bottom-20px" data-text="curvs">
+                        {{ $footer_nav_title1 ?? ''}}
+                    </h4>
+                    @if($footer_nav_data1!==null)
+                        <ul class="list-items list--items">
+                            @foreach(@$footer_nav_data1 as $nav)
+                                @if(empty(@$nav->children[0]))
+                                    <li><a href="{{get_menu_url(@$nav->type, @$nav)}}" target="{{@$nav->target ? '_blank':''}}">
+                                            {{ @$nav->name ?? @$nav->title ?? ''}}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+                <!-- end footer-item -->
+            </div>
+            <!-- end col-lg-3 -->
+            <div class="col-lg-3 responsive-column">
+                <div class="footer-item">
+                    <h4 class="title curve-shape pb-3 margin-bottom-20px" data-text="curvs">
+                        {{ $footer_nav_title2 ?? ''}}
+                    </h4>
+                    @if($footer_nav_data2!==null)
+                        <ul class="list-items list--items">
+                            @foreach(@$footer_nav_data2 as $nav)
+                                @if(empty(@$nav->children[0]))
+                                    <li><a href="{{get_menu_url(@$nav->type, @$nav)}}" target="{{@$nav->target ? '_blank':''}}">
+                                            {{ @$nav->name ?? @$nav->title ?? ''}}
+                                        </a>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+                <!-- end footer-item -->
+            </div>
+            <!-- end col-lg-3 -->
+            <div class="col-lg-3 responsive-column">
+                <div class="footer-item">
+                    <h4 class="title curve-shape pb-3 margin-bottom-20px" data-text="curvs">
+                        Contact Information
+                    </h4>
                     <ul class="list-items pt-3">
                         <li>
-                            3015 Grand Ave, Coconut Grove,<br />
-                            Cerrick Way, FL 12345
+                           {{ $setting_data->address ?? '' }}
                         </li>
-                        <li>+123-456-789</li>
-                        <li><a href="#">trizen@yourwebsite.com</a></li>
+                        <li>
+                            <a href="tel:{{$setting_data->phone ?? $setting_data->mobile ?? $setting_data->whatsapp ?? $setting_data->viber ?? ''}}">
+                                {{$setting_data->phone ?? $setting_data->mobile ?? $setting_data->whatsapp ?? $setting_data->viber ?? ''}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:{{@$setting_data->email ?? ''}}">
+                                {{@$setting_data->email ?? ''}}
+                            </a>
+                        </li>
                     </ul>
-                </div>
-                <!-- end footer-item -->
-            </div>
-            <!-- end col-lg-3 -->
-            <div class="col-lg-3 responsive-column">
-                <div class="footer-item">
-                    <h4
-                        class="title curve-shape pb-3 margin-bottom-20px"
-                        data-text="curvs"
-                    >
-                        Company
-                    </h4>
-                    <ul class="list-items list--items">
-                        <li><a href="about.html">About us</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="#">Jobs</a></li>
-                        <li><a href="blog-grid.html">News</a></li>
-                        <li><a href="contact.html">Support</a></li>
-                    </ul>
-                </div>
-                <!-- end footer-item -->
-            </div>
-            <!-- end col-lg-3 -->
-            <div class="col-lg-3 responsive-column">
-                <div class="footer-item">
-                    <h4
-                        class="title curve-shape pb-3 margin-bottom-20px"
-                        data-text="curvs"
-                    >
-                        Other Links
-                    </h4>
-                    <ul class="list-items list--items">
-                        <li><a href="#">USA Vacation Packages</a></li>
-                        <li><a href="#">USA Flights</a></li>
-                        <li><a href="#">USA Hotels</a></li>
-                        <li><a href="#">USA Car Hire</a></li>
-                        <li><a href="#">Create an Account</a></li>
-                    </ul>
-                </div>
-                <!-- end footer-item -->
-            </div>
-            <!-- end col-lg-3 -->
-            <div class="col-lg-3 responsive-column">
-                <div class="footer-item">
-                    <h4
-                        class="title curve-shape pb-3 margin-bottom-20px"
-                        data-text="curvs"
-                    >
-                        Payment Methods
-                    </h4>
-                    <p class="footer__desc pb-3">
-                        Pay any way you choose, we support all payment options.
-                    </p>
-                    <img src="images/payment-img.png" alt="" />
                 </div>
                 <!-- end footer-item -->
             </div>
@@ -126,11 +129,8 @@
             <div class="col-lg-12">
                 <div class="copy-right padding-top-30px text-center">
                     <p class="copy__desc">
-                        &copy; Copyright Trizen 2020. Made with
-                        <span class="la la-heart"></span> by
-                        <a href="https://themeforest.net/user/techydevs/portfolio"
-                        >TechyDevs</a
-                        >
+                        &copy; {{date("Y")}} {{$setting_data->title ?? 'Advanced Travels'}} by
+                        <a href="https://www.canosoft.com.np/" target="_blank">Canosoft Techonology</a> All Rights Reserved.
                     </p>
                 </div>
                 <!-- end copy-right -->
@@ -142,244 +142,11 @@
     <!-- end container -->
 </section>
 <!-- end footer-area -->
-<!-- ================================
-   START FOOTER AREA
-================================= -->
 
-<!-- start back-to-top -->
 <div id="back-to-top">
     <i class="la la-angle-up" title="Go top"></i>
 </div>
-<!-- end back-to-top -->
 
-<!-- end modal-shared -->
-<div class="modal-popup">
-    <div
-        class="modal fade"
-        id="signupPopupForm"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title title" id="exampleModalLongTitle">
-                            Sign Up
-                        </h5>
-                        <p class="font-size-14">Hello! Welcome Create a New Account</p>
-                    </div>
-                    <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                    >
-                        <span aria-hidden="true" class="la la-close"></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="contact-form-action">
-                        <form method="post">
-                            <div class="input-box">
-                                <label class="label-text">Username</label>
-                                <div class="form-group">
-                                    <span class="la la-user form-icon"></span>
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        name="text"
-                                        placeholder="Type your username"
-                                    />
-                                </div>
-                            </div>
-                            <!-- end input-box -->
-                            <div class="input-box">
-                                <label class="label-text">Email Address</label>
-                                <div class="form-group">
-                                    <span class="la la-envelope form-icon"></span>
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        name="text"
-                                        placeholder="Type your email"
-                                    />
-                                </div>
-                            </div>
-                            <!-- end input-box -->
-                            <div class="input-box">
-                                <label class="label-text">Password</label>
-                                <div class="form-group">
-                                    <span class="la la-lock form-icon"></span>
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        name="text"
-                                        placeholder="Type password"
-                                    />
-                                </div>
-                            </div>
-                            <!-- end input-box -->
-                            <div class="input-box">
-                                <label class="label-text">Repeat Password</label>
-                                <div class="form-group">
-                                    <span class="la la-lock form-icon"></span>
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        name="text"
-                                        placeholder="Type again password"
-                                    />
-                                </div>
-                            </div>
-                            <!-- end input-box -->
-                            <div class="btn-box pt-3 pb-4">
-                                <button type="button" class="theme-btn w-100">
-                                    Register Account
-                                </button>
-                            </div>
-                            <div class="action-box text-center">
-                                <p class="font-size-14">Or Sign up Using</p>
-                                <ul class="social-profile py-3">
-                                    <li>
-                                        <a href="#" class="bg-5 text-white"
-                                        ><i class="lab la-facebook-f"></i
-                                            ></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="bg-6 text-white"
-                                        ><i class="lab la-twitter"></i
-                                            ></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="bg-7 text-white"
-                                        ><i class="lab la-instagram"></i
-                                            ></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="bg-5 text-white"
-                                        ><i class="lab la-linkedin-in"></i
-                                            ></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- end contact-form-action -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal-popup -->
-
-<!-- end modal-shared -->
-<div class="modal-popup">
-    <div
-        class="modal fade"
-        id="loginPopupForm"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
-    >
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <div>
-                        <h5 class="modal-title title" id="exampleModalLongTitle2">
-                            Login
-                        </h5>
-                        <p class="font-size-14">Hello! Welcome to your account</p>
-                    </div>
-                    <button
-                        type="button"
-                        class="close"
-                        data-dismiss="modal"
-                        aria-label="Close"
-                    >
-                        <span aria-hidden="true" class="la la-close"></span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="contact-form-action">
-                        <form method="post">
-                            <div class="input-box">
-                                <label class="label-text">Username</label>
-                                <div class="form-group">
-                                    <span class="la la-user form-icon"></span>
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        name="text"
-                                        placeholder="Type your username"
-                                    />
-                                </div>
-                            </div>
-                            <!-- end input-box -->
-                            <div class="input-box">
-                                <label class="label-text">Password</label>
-                                <div class="form-group mb-2">
-                                    <span class="la la-lock form-icon"></span>
-                                    <input
-                                        class="form-control"
-                                        type="text"
-                                        name="text"
-                                        placeholder="Type your password"
-                                    />
-                                </div>
-                                <div
-                                    class="d-flex align-items-center justify-content-between"
-                                >
-                                    <div class="custom-checkbox mb-0">
-                                        <input type="checkbox" id="rememberchb" />
-                                        <label for="rememberchb">Remember me</label>
-                                    </div>
-                                    <p class="forgot-password">
-                                        <a href="recover.html">Forgot Password?</a>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- end input-box -->
-                            <div class="btn-box pt-3 pb-4">
-                                <button type="button" class="theme-btn w-100">
-                                    Login Account
-                                </button>
-                            </div>
-                            <div class="action-box text-center">
-                                <p class="font-size-14">Or Login Using</p>
-                                <ul class="social-profile py-3">
-                                    <li>
-                                        <a href="#" class="bg-5 text-white"
-                                        ><i class="lab la-facebook-f"></i
-                                            ></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="bg-6 text-white"
-                                        ><i class="lab la-twitter"></i
-                                            ></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="bg-7 text-white"
-                                        ><i class="lab la-instagram"></i
-                                            ></a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="bg-5 text-white"
-                                        ><i class="lab la-linkedin-in"></i
-                                            ></a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </form>
-                    </div>
-                    <!-- end contact-form-action -->
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- end modal-popup -->
 
 <!-- Template JS Files -->
 <script src="{{ asset('assets/frontend/js/jquery-3.4.1.min.js') }}"></script>

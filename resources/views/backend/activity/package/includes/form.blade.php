@@ -25,8 +25,8 @@
     </div>
     <div class="col-lg-6">
         <div class="mb-3">
-            {!! Form::label('package_ribbon_id', 'Category', ['class' => 'form-label']) !!}
-            {!! Form::select('package_ribbon_id', $data['types'], $data['row']->package_ribbon_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_ribbon_id','placeholder'=>'Select ribbon']) !!}
+            {!! Form::label('package_ribbon_id', 'Ribbon', ['class' => 'form-label']) !!}
+            {!! Form::select('package_ribbon_id', $data['ribbons'], $data['row']->package_ribbon_id ?? '',['class'=>'form-select mb-3 select2','id'=>'package_ribbon_id','placeholder'=>'Select ribbon']) !!}
         </div>
     </div>
     <div class="col-lg-12">

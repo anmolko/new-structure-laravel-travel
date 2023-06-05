@@ -51,7 +51,7 @@ class PackageController extends BackendBaseController
     public function getData(){
         $data['countries']  =  Country::active()->descending()->pluck('title','id');
         $data['categories'] =  PackageCategory::active()->descending()->pluck('title','id');
-        $data['types']      =  PackageRibbon::active()->descending()->pluck('title','id');
+        $data['ribbons']    =  PackageRibbon::active()->descending()->pluck('title','id');
 
         return $data;
     }

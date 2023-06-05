@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/jquery-ui.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/flag-icon.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/frontend/css/style.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/frontend/custom_css/custom.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/frontend/css/custom_style.css') }}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 

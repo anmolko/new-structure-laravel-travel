@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Frontend\Activity\PackageController;
 use App\Http\Controllers\Frontend\HomePageController;
 use Illuminate\Support\Facades\Route;
 
@@ -27,6 +28,11 @@ Route::any('/register', function() {
 
 
 Route::get('/contact-us', [HomePageController::class, 'index'])->name('contact-us');
+
+Route::get('/activity', [PackageController::class, 'index'])->name('activity.index');
+Route::get('/activity/{slug}', [PackageController::class, 'show'])->name('activity.show');
+Route::get('/activity/search', [PackageController::class, 'search'])->name('activity.search');
+Route::get('/activity/category/{slug}', [PackageController::class, 'category'])->name('activity.category');
 
 
 

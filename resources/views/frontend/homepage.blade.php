@@ -5,13 +5,12 @@
 @endsection
 @section('content')
 
-
     <section class="hero-wrapper hero-wrapper7">
         <div class="hero-box">
             <div id="fullscreen-slide-contain">
                 <ul class="slides-container">
                     @foreach($data['slider_images']  as $slider)
-                        <li><img src="{{ asset(imagePath($slider)) }}" alt=""/></li>
+                        <li><img class="lazy" data-src="{{ asset(imagePath($slider)) }}" alt=""/></li>
                     @endforeach
                 </ul>
             </div>
@@ -144,58 +143,56 @@
         </div>
         <!-- end container -->
     </section>
-    <!-- end info-area -->
 
-    <section class="trending-area position-relative section-bg padding-top-100px padding-bottom-200px">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading">
-                        <h2 class="sec__title curve-shape padding-bottom-30px" data-text="curvs">
-                          Our Top Tour
-                        </h2>
+    @if(count($data['all_packages'])>0)
+        <section class="trending-area position-relative section-bg padding-top-100px padding-bottom-200px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-heading">
+                            <h2 class="sec__title curve-shape padding-bottom-30px" data-text="curvs">
+                              Our Top Tour
+                            </h2>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row padding-top-50px">
-                @foreach($data['all_packages'] as $packages)
-                    <div class="col-lg-4 responsive-column ">
-                        <div class="card-item">
-                            <div class="card-img">
-                                <a href="#" class="d-block">
-                                    <img class="lazy" data-src="{{ asset(imagePath($packages->image)) }}">
-                                </a>
-                                <div class="ribbon ribbon-top-left {{$packages->packageRibbon->key ?? ''}}"><span>{{$packages->packageRibbon->title ?? ''}}</span></div>
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title"><a href="#">{{ $packages->title ?? '' }}</a></h3>
-{{--                                <p class="card-meta">--}}
-{{--                                    {{ $packages->country->title ?? '' }}--}}
-{{--                                </p>--}}
-                                <div class="card-price d-flex align-items-center justify-content-between">
-                                    <p>
-                                        <span class="price__from">Category</span>
-                                        <span class="price__num">{{ $packages->packageCategory->title ?? '' }}</span>
-                                    </p>
-                                     <span class="tour-hour"><i class="la la-globe mr-1"></i>{{ $packages->country->title }}</span>
-                                </div>
-                            </div>
-                        </div><!-- end card-item -->
-                    </div>
-                @endforeach
+                <div class="row padding-top-50px">
+                    @foreach($data['all_packages'] as $package)
+                        <div class="col-lg-4 responsive-column ">
+                            <div class="card-item">
 
+                                <div class="card-img">
+                                    <a href="{{ route('frontend.activity.show',$package->slug) }}" class="d-block">
+                                        <img class="lazy" data-src="{{ asset(imagePath($package->image)) }}"  alt=""/>
+                                    </a>
+                                    @if($package->package_ribbon_id)
+                                        <div class="ribbon {{ getRibbonClass($package->packageRibbon->key) }} ribbon-shape">{{$package->packageRibbon->title ?? ''}}</div>
+                                    @endif
+                                </div>
+                                <div class="card-body">
+                                    <h3 class="card-title"><a href="#">{{ $package->title ?? '' }}</a></h3>
+                                    <div class="card-price d-flex align-items-center justify-content-between">
+                                        <p>
+                                            <span class="price__from">Category </span>
+                                            <span class="price__num">{{ $package->packageCategory->title ?? '' }}</span>
+                                        </p>
+                                         <span class="tour-hour"><i class="la la-globe mr-1"></i>{{ $package->country->title }}</span>
+                                    </div>
+                                </div>
+                            </div><!-- end card-item -->
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
-        <!-- end container -->
-        <svg
-            class="hero-svg"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 100 10"
-            preserveAspectRatio="none"
-        >
-            <path d="M0 10 0 0 A 90 59, 0, 0, 0, 100 0 L 100 10 Z"></path>
-        </svg>
-    </section>
+            <!-- end container -->
+            <svg class="hero-svg"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 100 10"
+                preserveAspectRatio="none">
+                <path d="M0 10 0 0 A 90 59, 0, 0, 0, 100 0 L 100 10 Z"></path>
+            </svg>
+        </section>
+    @endif
 
     <section class="discount-area">
         <div class="container">
@@ -206,22 +203,20 @@
                             <img class="lazy" data-src="{{ asset('assets/frontend/images/cta-bg-2.jpg') }}" alt="discount img"/>
                         </div>
                         <!-- end discount-img -->
-                        <div
-                            class="discount-content d-flex align-items-center justify-content-between"
-                        >
+                        <div class="discount-content d-flex align-items-center justify-content-between">
                             <div class="section-heading">
                                 <h2 class="sec__title text-white mb-2">
                                     Explore more with us
                                 </h2>
-                                <p class="sec__desc text-white">
-                                    Join 2000+ locals & 1200+ contributors from different cities
+                                <p class="sec__desc text-white text-uppercase">
+                                    Start Your Amazing Journey Right here Us
                                 </p>
                             </div>
                             <!-- end section-heading -->
                             <div class="btn-box">
-                                <a href="#" class="theme-btn border-0"
-                                >Explore <i class="la la-arrow-right ml-1"></i
-                                    ></a>
+                                <a href="{{ route('frontend.contact-us') }}" class="theme-btn border-0">
+                                    Our Activity <i class="la la-arrow-right ml-1"></i>
+                                </a>
                             </div>
                         </div>
                         <!-- end discount-content -->
@@ -234,114 +229,108 @@
         <!-- end container -->
     </section>
 
-    <section class="destination-area padding-top-130px padding-bottom-80px">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-8">
-                    <div class="section-heading">
-                        <h2 class="sec__title">Popular Destinations</h2>
-                        <p class="sec__desc pt-3">
-                            Discover different activities and tours based on our locations
-                        </p>
-                    </div>
-
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-8 -->
-                <div class="col-lg-4">
-                    <div class="btn-box btn--box text-right">
-                        <a href="#" class="theme-btn"
-                        >Discover More <i class="la la-arrow-right ml-1"></i
-                            ></a>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-            <div class="row padding-top-50px">
-
-                @foreach($data['countries'] as $country)
-                    <div class="col-lg-4 responsive-column">
-                    <div class="card-item destination-card destination--card">
-                        <div class="card-img">
-                            <img class="lazy" data-src="{{ asset(imagePath($country->image))}}" />
+    @if(count($data['services'])>0)
+        <section class="destination-area padding-top-130px padding-bottom-80px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-heading text-center">
+                            <h2 class="sec__title curve-shape padding-bottom-30px" data-text="curvs">
+                               Our Services
+                            </h2>
                         </div>
-                        <div
-                            class="card-body d-flex align-items-center justify-content-between"
-                        >
-                            <div>
-                                <h3 class="card-title">
-                                    <a href="#">{{ $country->title }}</a>
-                                </h3>
-                                <p class="card-meta">{{ $country->packages_count }} Activities</p>
-                            </div>
-                            <div>
-                                <a
-                                    href="#"
-                                    class="theme-btn theme-btn-small border-0"
-                                >Explore <i class="la la-arrow-right ml-1"></i
-                                    ></a>
-                            </div>
-                        </div>
+                        <!-- end section-heading -->
                     </div>
+                    <!-- end col-lg-12 -->
                 </div>
-                @endforeach
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
+                <!-- end row -->
+                <div class="row padding-top-50px">
 
-    <section class="destination-area position-relative section-bg padding-top-100px padding-bottom-140px">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading text-center">
-                        <h2 class="sec__title">Top Destinations</h2>
-                    </div>
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-12 -->
-            </div>
-            <!-- end row -->
-            <div class="row padding-top-60px">
-                @foreach($data['services'] as $service)
-                    <div class="col-lg-4">
-                        <div class="card-item destination-card">
-                            <div class="card-img">
-                                <img class="lazy" data-src="{{ asset(imagePath($service->image))}}" alt="destination-img" />
-                            </div>
-                            <div class="card-body">
-                                <h3 class="card-title">
-                                    <a href="#">{{ $service->title }}</a>
-                                    <div class="card-rating d-flex align-items-center">
-                      <span class="ratings d-flex align-items-center mr-1">
-                        <i class="la la-star"></i>
-                        <i class="la la-star"></i>
-                        <i class="la la-star"></i>
-                        <i class="la la-star-o"></i>
-                        <i class="la la-star-o"></i>
-                      </span>
-                                        <span class="rating__text">(70694 Reviews)</span>
+                    @foreach($data['services'] as $service)
+                        <div class="col-lg-4 responsive-column">
+                            <div class="card-item destination-card destination--card">
+                                <div class="card-img">
+                                    <img class="lazy" data-src="{{ asset(imagePath($service->image))}}" />
+                                </div>
+                                <div
+                                    class="card-body d-flex align-items-center justify-content-between"
+                                >
+                                    <div>
+                                        <h3 class="card-title">
+                                            <a href="#">{{ $service->title }}</a>
+                                        </h3>
+                                        <p class="card-meta">{{ $service->description ? elipsis($service->description,20):'' }}</p>
                                     </div>
-                                <div class="card-price d-flex align-items-center justify-content-between">
-                                    <p class="tour__text"> {{ $service->description ? elipsis($service->description,20):'' }} </p>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
+                    @endforeach
+                </div>
+                <!-- end row -->
             </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-        <svg class="cta-svg" viewBox="0 0 500 150" preserveAspectRatio="none">
-            <path
-                d="M-103.55,167.27 C150.39,-132.72 134.59,237.33 517.77,30.09 L500.00,150.00 L0.00,150.00 Z"
-            ></path>
-        </svg>
-    </section>
+        </section>
+    @endif
 
-    <section class="testimonial-area section-padding">
+    @if(count($data['countries'])>0)
+        <section class="top-activity-area section--padding section-bg">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="section-heading">
+                            <h2 class="sec__title curve-shape padding-bottom-30px" data-text="curvs">
+                                Popular Locations
+                            </h2>
+                            <p class="sec__desc pt-3">
+                                Discover different activities and tours based on our locations
+                            </p>
+                        </div>
+
+                        <!-- end section-heading -->
+                    </div>
+                    <!-- end col-lg-8 -->
+                    <div class="col-lg-4">
+                        <div class="btn-box btn--box text-right">
+                            <a href="#" class="theme-btn">Discover More <i class="la la-arrow-right ml-1"></i
+                                ></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- end row -->
+                <div class="row padding-top-50px">
+                    @foreach($data['countries'] as $country)
+                        <div class="col-lg-4 responsive-column">
+                            <div class="flip-box">
+                                <div class="flip-box-front">
+                                    <img src="{{ asset(imagePath($country->image))}}" alt="" class="flip-img"/>
+                                    <a href="#" class="flip-content d-flex align-items-end justify-content-start">
+                                        <h3 class="flip-title">{{ $country->title }}</h3>
+                                    </a><!-- end flip-content -->
+                                </div>
+                                <!-- end flip-box-front -->
+                                <div class="flip-box-back">
+                                    <img src="{{ asset(imagePath($country->image))}}" alt="" class="flip-img"/>
+                                    <a href="#" class="flip-content d-flex align-items-center justify-content-center">
+                                        <div>
+                                            <div class="icon-element mx-auto mb-3 bg-white text-color-2">
+                                                <i class="la la-arrow-right"></i>
+                                            </div>
+                                            <h3 class="flip-title">{{ $country->packages_count }} Activities</h3>
+                                        </div>
+                                    </a><!-- end flip-content -->
+                                </div>
+                                <!-- end flip-box-back -->
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+                <!-- end row -->
+            </div>
+        </section>
+    @endif
+
+    @if(count($data['testimonials'])>0)
+        <section class="testimonial-area section-padding">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -389,305 +378,9 @@
         </div>
         <!-- end container -->
     </section>
+    @endif
 
     <div class="section-block"></div>
-
-    <section class="top-activity-area section--padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading">
-                        <h2
-                            class="sec__title curve-shape padding-bottom-30px"
-                            data-text="curvs"
-                        >
-                            Top Activity
-                        </h2>
-                    </div>
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-12 -->
-            </div>
-            <!-- end row -->
-            <div class="row padding-top-50px">
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img1.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Cultural Trecks</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img1.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img2.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Carnival</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img2.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img3.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Murano</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img3.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img4.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Eat + Drink</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img4.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img5.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Gondola Ride</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img5.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img6.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Museum Tickets</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img6.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img7.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Sightseeing</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img7.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-                <div class="col-lg-3 responsive-column">
-                    <div class="flip-box">
-                        <div class="flip-box-front">
-                            <img src="images/img8.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-end justify-content-start"
-                            >
-                                <h3 class="flip-title">Outdoor Activities</h3></a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-front -->
-                        <div class="flip-box-back">
-                            <img src="images/img8.jpg" alt="" class="flip-img"/>
-                            <a
-                                href="#"
-                                class="flip-content d-flex align-items-center justify-content-center"
-                            >
-                                <div>
-                                    <div
-                                        class="icon-element mx-auto mb-3 bg-white text-color-2"
-                                    >
-                                        <i class="la la-arrow-right"></i>
-                                    </div>
-                                    <h3 class="flip-title">Explore Activity</h3>
-                                </div>
-                            </a
-                            ><!-- end flip-content -->
-                        </div>
-                        <!-- end flip-box-back -->
-                    </div>
-                    <!-- end flip-box -->
-                </div>
-                <!-- end col-lg-3 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end top-activity-area -->
 
     <section class="cta-area cta-bg bg-fixed section-padding">
         <div class="container">
@@ -696,17 +389,17 @@
                     <div class="section-heading">
                         <h2 class="sec__title text-white font-size-50 line-height-60">
                             Enjoy Your Holiday <br/>
-                            with 50% Discount
+                            with Your loved ones
                         </h2>
                         <p class="sec__desc text-white pt-3">
-                            Nemo enim ipsam voluptatem quia voluptas sit aspernatur
+                            Enjoy best offers on different tours all over the world
                         </p>
                     </div>
                     <!-- end section-heading -->
                     <div class="btn-box padding-top-35px">
-                        <a href="#" class="theme-btn border-0"
-                        >Explore Now <i class="la la-arrow-right ml-1"></i
-                            ></a>
+                        <a href="{{ route('frontend.contact-us') }}" class="theme-btn border-0">
+                            Reach Out <i class="la la-arrow-right ml-1"></i>
+                        </a>
                     </div>
                 </div>
                 <!-- end col-lg-12 -->
@@ -717,257 +410,67 @@
     </section>
     <!-- end cta-area -->
 
-    <section class="blog-area section--padding">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="section-heading">
-                        <h2
-                            class="sec__title curve-shape padding-bottom-30px"
-                            data-text="curvs"
-                        >
-                            Recent Articles
-                        </h2>
+    @if(count($data['blogs'])>0)
+        <section class="blog-area section--padding">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="section-heading">
+                            <h2 class="sec__title curve-shape padding-bottom-30px" data-text="curvs">
+                                Recent Articles
+                            </h2>
+                        </div>
+                        <!-- end section-heading -->
                     </div>
-                    <!-- end section-heading -->
+                    <!-- end col-lg-12 -->
                 </div>
-                <!-- end col-lg-12 -->
-            </div>
-            <!-- end row -->
-            <div class="row padding-top-50px">
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item blog-card">
-                        <div class="card-img">
-                            <img src="images/img5.jpg" alt="blog-img"/>
-                            <div class="post-format icon-element">
-                                <i class="la la-photo"></i>
-                            </div>
-                            <div class="card-body">
-                                <div class="post-categories">
-                                    <a href="#" class="badge">Travel</a>
-                                    <a href="#" class="badge">lifestyle</a>
+                <!-- end row -->
+                <div class="row padding-top-50px">
+                    @foreach($data['blogs'] as $blog)
+                        <div class="col-lg-4 responsive-column">
+                        <div class="card-item blog-card">
+                            <div class="card-img">
+                                <img class="lazy" data-src="{{ asset(imagePath($blog->image))}}" alt=""/>
+                                <div class="post-format icon-element">
+                                    <i class="la la-photo"></i>
                                 </div>
-                                <h3 class="card-title line-height-26">
-                                    <a href="blog-single.html"
-                                    >Best Scandinavian Accommodation – Treat Yourself</a
-                                    >
-                                </h3>
-                                <p class="card-meta">
-                                    <span class="post__date"> 1 January, 2020</span>
-                                    <span class="post-dot"></span>
-                                    <span class="post__time">5 Mins read</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="card-footer d-flex align-items-center justify-content-between"
-                        >
-                            <div class="author-content d-flex align-items-center">
-                                <div class="author-img">
-                                    <img src="images/small-team1.jpg" alt="testimonial image"/>
-                                </div>
-                                <div class="author-bio">
-                                    <a href="#" class="author__title">Leroy Bell</a>
+                                <div class="card-body">
+                                    <div class="post-categories">
+                                        <a href="#" class="badge">{{ $blog->category->title ?? '' }}</a>
+                                    </div>
+                                    <h3 class="card-title line-height-26">
+                                        <a href="#">{{ $blog->title ?? '' }}</a>
+                                    </h3>
+                                    <p class="card-meta">
+                                        <span class="post__date">{{date('d M Y', strtotime($blog->created_at))}}</span>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="post-share">
-                                <ul>
-                                    <li>
-                                        <i class="la la-share icon-element"></i>
-                                        <ul class="post-share-dropdown d-flex align-items-center">
-                                            <li>
-                                                <a href="#"><i class="lab la-facebook-f"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="lab la-twitter"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="lab la-instagram"></i></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item blog-card">
-                        <div class="card-img">
-                            <img src="images/img6.jpg" alt="blog-img"/>
-                            <div class="post-format icon-element">
-                                <i class="la la-play"></i>
-                            </div>
-                            <div class="card-body">
-                                <div class="post-categories">
-                                    <a href="#" class="badge">Video</a>
-                                </div>
-                                <h3 class="card-title line-height-26">
-                                    <a href="blog-single.html"
-                                    >Amazing Places to Stay in Norway</a
-                                    >
-                                </h3>
-                                <p class="card-meta">
-                                    <span class="post__date"> 1 February, 2020</span>
-                                    <span class="post-dot"></span>
-                                    <span class="post__time">4 Mins read</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="card-footer d-flex align-items-center justify-content-between"
-                        >
-                            <div class="author-content d-flex align-items-center">
-                                <div class="author-img">
-                                    <img src="images/small-team2.jpg" alt="testimonial image"/>
-                                </div>
-                                <div class="author-bio">
-                                    <a href="#" class="author__title">Phillip Hunt</a>
-                                </div>
-                            </div>
-                            <div class="post-share">
-                                <ul>
-                                    <li>
-                                        <i class="la la-share icon-element"></i>
-                                        <ul class="post-share-dropdown d-flex align-items-center">
-                                            <li>
-                                                <a href="#"><i class="lab la-facebook-f"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="lab la-twitter"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="lab la-instagram"></i></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-                <div class="col-lg-4 responsive-column">
-                    <div class="card-item blog-card">
-                        <div class="card-img">
-                            <img src="images/img7.jpg" alt="blog-img"/>
-                            <div class="post-format icon-element">
-                                <i class="la la-music"></i>
-                            </div>
-                            <div class="card-body">
-                                <div class="post-categories">
-                                    <a href="#" class="badge">audio</a>
-                                </div>
-                                <h3 class="card-title line-height-26">
-                                    <a href="blog-single.html"
-                                    >Feel Like Home on Your Business Trip</a
-                                    >
-                                </h3>
-                                <p class="card-meta">
-                                    <span class="post__date"> 1 March, 2020</span>
-                                    <span class="post-dot"></span>
-                                    <span class="post__time">3 Mins read</span>
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="card-footer d-flex align-items-center justify-content-between"
-                        >
-                            <div class="author-content d-flex align-items-center">
-                                <div class="author-img">
-                                    <img src="images/small-team3.jpg" alt="testimonial image"/>
-                                </div>
-                                <div class="author-bio">
-                                    <a href="#" class="author__title">Luke Jacobs</a>
-                                </div>
-                            </div>
-                            <div class="post-share">
-                                <ul>
-                                    <li>
-                                        <i class="la la-share icon-element"></i>
-                                        <ul class="post-share-dropdown d-flex align-items-center">
-                                            <li>
-                                                <a href="#"><i class="lab la-facebook-f"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="lab la-twitter"></i></a>
-                                            </li>
-                                            <li>
-                                                <a href="#"><i class="lab la-instagram"></i></a>
-                                            </li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end card-item -->
-                </div>
-                <!-- end col-lg-4 -->
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end blog-area -->
-
-    <section class="cta-area subscriber-area section-bg-2 padding-top-60px padding-bottom-60px">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7">
-                    <div class="section-heading">
-                        <p class="sec__desc text-white-50 pb-1">Newsletter Sign up</p>
-                        <h2 class="sec__title font-size-30 text-white">
-                            Subscribe to Get Special Offers
-                        </h2>
-                    </div>
-                    <!-- end section-heading -->
-                </div>
-                <!-- end col-lg-7 -->
-                <div class="col-lg-5">
-                    <div class="subscriber-box">
-                        <div class="contact-form-action">
-                            <form action="#">
-                                <div class="input-box">
-                                    <label class="label-text text-white"
-                                    >Enter email address</label
-                                    >
-                                    <div class="form-group mb-0">
-                                        <span class="la la-envelope form-icon"></span>
-                                        <input
-                                            class="form-control"
-                                            type="email"
-                                            name="email"
-                                            placeholder="Email address"
-                                        />
-                                        <button
-                                            class="theme-btn theme-btn-small submit-btn"
-                                            type="submit"
-                                        >
-                                            Subscribe
-                                        </button>
-                                        <span class="font-size-14 pt-1 text-white-50"
-                                        ><i class="la la-lock mr-1"></i>Don't worry your
-                        information is safe with us.</span
-                                        >
+                            <div class="card-footer d-flex align-items-center justify-content-between"
+                            >
+                                <div class="author-content d-flex align-items-center">
+                                    <div class="author-bio">
+                                        <a href="#" class="author__title">Read all</a>
                                     </div>
                                 </div>
-                            </form>
+                                <div class="post-share">
+                                    <ul>
+                                        <li>
+                                            <a href="#"><i class="la la-share icon-element"></i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
+                        <!-- end card-item -->
                     </div>
-                    <!-- end section-heading -->
+                    @endforeach
                 </div>
-                <!-- end col-lg-5 -->
+                <!-- end row -->
             </div>
-            <!-- end row -->
-        </div>
-        <!-- end container -->
-    </section>
-    <!-- end cta-area -->
-
+            <!-- end container -->
+        </section>
+    @endif
 @endsection
 
 @section('js')

@@ -260,12 +260,36 @@ if (!function_exists('imagePath')) {
     }
 }
 
+if (!function_exists('getRibbonClass')) {
+    /**
+     * @param $value
+     * @return string
+     */
+    function getRibbonClass($key): string
+    {
+        if($key == 'popular'){
+            $class = 'ribbon-success';
+        }else if($key =='top-rated'){
+            $class = 'ribbon-info';
+        }else if($key == 'in-demand'){
+            $class = 'ribbon-secondary';
+        }else if($key == 'trending'){
+            $class = 'ribbon-warning';
+        }else{
+            $class = 'ribbon-danger';
+        }
+
+        return $class;
+    }
+}
+
 if (!function_exists('get_page_section_icons')) {
     /**
      * @param $value
      * @return string
      */
-    function get_page_section_icons($value){
+    function get_page_section_icons($value): string
+    {
         $icon   = '';
         if($value == 'basic_section'){
             $icon = ' ri-layout-2-line';
