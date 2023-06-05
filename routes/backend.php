@@ -93,6 +93,10 @@ Route::prefix('activity/')->name('activity.')->middleware(['auth'])->group(funct
     });
 
     //package
+    Route::put('/package-upload-gallery/{id}', [PackageController::class,'uploadGallery'])->name('package.gallery-update');
+    Route::post('/package/image-delete', [PackageController::class,'deleteGallery'])->name('package.gallery-delete');
+    Route::get('/package/get-gallery/{id}', [PackageController::class,'getGallery'])->name('package.gallery-display');
+    Route::get('/package/gallery/{key}', [PackageController::class,'gallery'])->name('package.gallery');
     Route::post('/package/status-update', [PackageController::class,'statusUpdate'])->name('package.status-update');
     Route::post('/package/data', [PackageController::class,'getDataForDataTable'])->name('package.data');
     Route::get('/package/trash', [PackageController::class,'trash'])->name('package.trash');

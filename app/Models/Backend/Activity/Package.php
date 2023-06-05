@@ -29,6 +29,11 @@ class Package extends BackendBaseModel
         return $this->belongsTo(PackageCategory::class);
     }
 
+    public function packageGalleries()
+    {
+        return $this->hasMany(PackageGallery::class);
+    }
+
     public function tourType()
     {
         return $this->country->key == 'nepal' ? 'National':'International';

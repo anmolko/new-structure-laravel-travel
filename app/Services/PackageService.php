@@ -12,6 +12,7 @@ class PackageService {
 
     protected string $module        = 'backend.';
     protected string $base_route    = 'backend.activity.package.';
+    protected string $view_path     = 'backend.activity.package.';
     private DataTables $dataTables;
     private Package $model;
 
@@ -43,9 +44,10 @@ class PackageService {
             ->editColumn('action',function ($item){
                 $params = [
                     'id'            => $item->id,
+                    'key'           => $item->key,
                     'base_route'    => $this->base_route,
                 ];
-                return view($this->module.'.includes.dataTable_action', compact('params'));
+                return view($this->view_path.'.includes.dataTable_action', compact('params'));
 
             })
             ->filterColumn('country', function($query, $keyword) {
