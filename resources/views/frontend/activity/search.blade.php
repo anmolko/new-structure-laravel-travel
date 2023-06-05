@@ -30,17 +30,16 @@
                                         <a href="{{ route('frontend.activity.show',$package->slug) }}" class="d-block">
                                             <img class="lazy" data-src="{{ asset(imagePath($package->image)) }}"  alt=""/>
                                         </a>
+                                        <span class="badge badge-ribbon">
+                                            <a href="{{ route('frontend.activity.category', $package->packageCategory->slug) }}" class="text-white">{{ $package->packageCategory->title ?? '' }}</a>
+                                        </span>
                                         @if($package->package_ribbon_id)
                                             <div class="ribbon {{ getRibbonClass($package->packageRibbon->key) }} ribbon-shape">{{$package->packageRibbon->title ?? ''}}</div>
                                         @endif
                                     </div>
                                     <div class="card-body">
-                                        <h3 class="card-title"><a href="#">{{ $package->title ?? '' }}</a></h3>
                                         <div class="card-price d-flex align-items-center justify-content-between">
-                                            <p>
-                                                <span class="price__from">Category </span>
-                                                <span class="price__num">{{ $package->packageCategory->title ?? '' }}</span>
-                                            </p>
+                                            <h3 class="card-title"><a href="{{ route('frontend.activity.show',$package->slug) }}">{{ $package->title ?? '' }}</a></h3 class="card-title">
                                             <span class="tour-hour"><i class="la la-globe mr-1"></i>{{ $package->country->title }}</span>
                                         </div>
                                     </div>

@@ -83,21 +83,20 @@ class PackageController extends BackendBaseController
         $this->page_method      = 'show';
         $this->page_title       = $this->panel.' Details';
         $data                   = [];
-        $data['all_packages']   = Package::active()->descending()->get();
-        $data['categories']     = PackageCategory::active()->descending()->has('packages')->get();
+        $data['package']        =  $this->model->find($id);
 
         return view($this->loadView($this->view_path.'show'), compact('data'));
     }
 
-    public function category()
+    public function category($slug)
     {
+        $data                   = $this->getCommonData();
+        $data['category']       = PackageCategory::where('slug',$slug)->active()->first();
         $this->page_method      = 'category';
-        $this->page_title       = 'Category '.$this->panel;
-        $data                   = [];
-        $data['all_packages']   = Package::active()->descending()->get();
-        $data['categories']     = PackageCategory::active()->descending()->has('packages')->get();
+        $this->page_title       = $data['category']->title.' '.$this->panel;
+        $data['all_packages']   = $this->model->where('package_category_id', $data['category']->id)->active()->descending()->paginate(6);
 
-        return view($this->loadView($this->view_path.'show'), compact('data'));
+        return view($this->loadView($this->view_path.'category'), compact('data'));
     }
 
 }

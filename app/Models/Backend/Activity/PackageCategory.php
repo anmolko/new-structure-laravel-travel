@@ -17,7 +17,7 @@ class PackageCategory extends BackendBaseModel
 
     public function packages()
     {
-        return $this->hasMany(Package::class);
+        return $this->hasMany(Package::class)->orderBy('created_at','desc');
     }
 
 }
