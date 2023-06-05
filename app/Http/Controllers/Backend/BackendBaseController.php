@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Backend\Activity\Country;
+use App\Models\Backend\Activity\PackageCategory;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Session;
@@ -98,5 +100,13 @@ class BackendBaseController extends Controller
             Session::flash('error',$this->panel.' was not updated. Something went wrong.');
         }
         return response()->json(['id'=>$data['row']->id,'status'=>$data['row']->status]);
+    }
+
+    public function getCountries(){
+        return Country::has('packages')->active()->descending()->pluck('title','id');
+    }
+
+    public function getPackageCategory(){
+        return PackageCategory::has('packages')->active()->descending()->pluck('title','id');
     }
 }

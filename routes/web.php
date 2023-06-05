@@ -31,7 +31,7 @@ Route::get('/contact-us', [HomePageController::class, 'index'])->name('contact-u
 
 Route::get('/activity', [PackageController::class, 'index'])->name('activity.index');
 Route::get('/activity/{slug}', [PackageController::class, 'show'])->name('activity.show');
-Route::get('/activity/search', [PackageController::class, 'search'])->name('activity.search');
+Route::post('/activity/search', [PackageController::class, 'search'])->name('activity.search');
 Route::get('/activity/category/{slug}', [PackageController::class, 'category'])->name('activity.category');
 
 

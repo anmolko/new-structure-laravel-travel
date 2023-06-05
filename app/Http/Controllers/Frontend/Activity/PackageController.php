@@ -12,7 +12,9 @@ use App\Models\Backend\Page\PageSectionGallery;
 use App\Models\Backend\Service;
 use App\Models\Backend\Testimonial;
 use App\Models\Backend\Activity\Package;
+use App\Services\Frontend\PackageSearchService;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Http\Request;
 
 class PackageController extends BackendBaseController
 {
@@ -22,15 +24,18 @@ class PackageController extends BackendBaseController
     protected string $panel         = 'Activity';
     protected string $folder_name   = 'activity';
     protected string $page_title, $page_method;
+    protected object $model;
+    private PackageSearchService $packageSearchService;
 
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(PackageSearchService $packageSearchService)
     {
-
+        $this->model            = new Package();
+        $this->packageSearchService   = $packageSearchService;
     }
 
     /**
@@ -42,23 +47,33 @@ class PackageController extends BackendBaseController
     {
         $this->page_method      = 'index';
         $this->page_title       = 'All '.$this->panel;
-        $data                   = [];
-        $data['all_packages']   = Package::active()->descending()->paginate(1);
+        $data                   = $this->getCommonData();
+        $data['all_packages']   = $this->model->active()->descending()->paginate(6);
+
+        return view($this->loadView($this->view_path.'index'), compact('data'));
+    }
+
+
+    public function getCommonData(): array
+    {
         $data['categories']     = PackageCategory::active()->descending()->has('packages')->withCount('packages')->get();
         $data['ribbons']        = PackageRibbon::active()->descending()->whereHas('packages', function ($package){
             return $package->descending()->take(3);
         })->withCount('packages')->limit(3)->get();
 
-        return view($this->loadView($this->view_path.'index'), compact('data'));
+        $data['search_countries']   = $this->getCountries();
+        $data['search_categories']  = $this->getPackageCategory();
+
+        return $data;
     }
 
-    public function search()
+
+    public function search(Request $request)
     {
         $this->page_method      = 'search';
         $this->page_title       = 'Search '.$this->panel;
-        $data                   = [];
-        $data['all_packages']   = Package::active()->descending()->get();
-        $data['categories']     = PackageCategory::active()->descending()->has('packages')->get();
+        $data                   = $this->getCommonData();
+        $data['all_packages']   = $this->packageSearchService->getSearchedPackages($request);
 
         return view($this->loadView($this->view_path.'search'), compact('data'));
     }

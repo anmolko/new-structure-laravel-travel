@@ -35,13 +35,16 @@ class HomePageController extends BackendBaseController
      */
     public function index()
     {
-        $data                   = [];
-        $data['slider_images']  = Slider::active()->descending()->pluck('image');
-        $data['all_packages']   = Package::with('packageRibbon')->active()->descending()->get();
-        $data['testimonials']   = Testimonial::active()->descending()->get();
-        $data['countries']      = Country::active()->has('packages')->withCount('packages')->descending()->get();
-        $data['services']       = Service::active()->descending()->get();
-        $data['blogs']          = Blog::active()->descending()->latest()->take(3)->get();
+        $data                       = [];
+        $data['slider_images']      = Slider::active()->descending()->pluck('image');
+        $data['all_packages']       = Package::with('packageRibbon')->active()->descending()->get();
+        $data['testimonials']       = Testimonial::active()->descending()->get();
+        $data['countries']          = Country::active()->has('packages')->withCount('packages')->descending()->get();
+        $data['services']           = Service::active()->descending()->get();
+        $data['blogs']              = Blog::active()->descending()->latest()->take(3)->get();
+        $data['search_countries']   = $this->getCountries();
+        $data['search_categories']  =$this->getPackageCategory();
+
 
         return view($this->loadView($this->view_path.'homepage'), compact('data'));
     }

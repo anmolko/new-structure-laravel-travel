@@ -68,7 +68,9 @@
                         <!-- end section-tab -->
                         <div class="tab-content search-fields-container" id="myTabContent">
                         @include($module.'includes.flight_tab')
-                        @include($module.'includes.tour_tab')
+                        <div class="tab-pane fade" id="tour" role="tabpanel" aria-labelledby="tour-tab">
+                            @include($module.'includes.tour_tab')
+                        </div>
                         <!-- end tab-pane -->
                         </div>
                     </div>
