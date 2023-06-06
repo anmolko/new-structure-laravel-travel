@@ -135,7 +135,10 @@ if (!function_exists('get_menu_url')) {
             $url = url('blog').'/'.@$menu->slug;
         }else if($menu_type == 'service'){
             $url = url('service').'/'.@$menu->slug;
-        }else{
+        } else if($menu_type == 'package') {
+            $url = url('activity').'/'.@$menu->slug;
+        }
+        else{
             $url = url('/').'/'.@$menu->slug;
         }
 

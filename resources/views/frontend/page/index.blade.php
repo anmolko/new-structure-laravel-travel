@@ -2,7 +2,6 @@
 @section('title') {{ $page_title }} @endsection
 
 @section('content')
-
     @include($module.'includes.breadcrumb',['breadcrumb_image'=>'team-cta-bg.jpg'])
 
     @if($data['section_elements'])
@@ -25,11 +24,11 @@
             @if($index == 'map_description')
                 @include($base_route.'includes.map_description')
             @endif
+            @if($index == 'gallery')
+                @include($base_route.'includes.gallery')
+            @endif
         @endforeach
     @endif
-
-
-
 @endsection
 @section('js')
     <script src="{{asset('assets/common/lazyload.js')}}"></script>

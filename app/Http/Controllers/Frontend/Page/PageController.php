@@ -47,7 +47,7 @@ class PageController extends BackendBaseController
 
         foreach ($data['row']->pageSections as $section){
             if($section->slug == 'gallery'){
-                $data['section_elements'][$section->slug] = $section->pageSectionGalleries;
+                $data['section_elements'][$section->slug] = $section;
             }else{
                 $data['section_elements'][$section->slug] = $section->pageSectionElements;
             }

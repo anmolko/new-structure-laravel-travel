@@ -768,3 +768,8 @@
     margin: auto;
 }
 
+.custom_gallery_size{
+    height: 270px;
+    object-fit: cover;
+}
+
