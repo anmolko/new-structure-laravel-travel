@@ -13,6 +13,18 @@
             @if($index == 'call_to_action')
                 @include($base_route.'includes.call_to_action')
             @endif
+            @if($index == 'flash_card')
+                @include($base_route.'includes.flash_card')
+            @endif
+            @if($index == 'faq')
+                @include($base_route.'includes.faq')
+            @endif
+            @if($index == 'header_description')
+                @include($base_route.'includes.header_description')
+            @endif
+            @if($index == 'map_description')
+                @include($base_route.'includes.map_description')
+            @endif
         @endforeach
     @endif
 

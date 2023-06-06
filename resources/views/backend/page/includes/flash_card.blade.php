@@ -18,7 +18,7 @@
                     <div class="col-lg-6 mt-3">
                         <div class="mb-1">
                             <label class="form-label required">Title </label>
-                            <input type="text" class="form-control" name="title[]" value="{{ $flash_card[0]->title ?? null}}" maxlength="35" required>
+                            <input type="text" class="form-control" name="title[]" value="{{ $flash_card[0]->title ?? null}}" maxlength="50" required>
                             <input type="hidden" class="form-control" value="{{$key}}" name="page_section_id" required>
                             <input type="hidden" class="form-control" value="{{$value}}" name="section_name" required>
                             <input type="hidden" class="form-control" value="{{ $data['row']->id }}" name="page_id" required>
@@ -30,23 +30,23 @@
                     <div class="col-lg-6 mt-3">
                         <div class="mb-1">
                             <label>Sub Title </label>
-                            <input type="text" class="form-control" maxlength="35" name="subtitle[]" value="{{ $flash_card[0]->subtitle ?? null}}">
+                            <input type="text" class="form-control" maxlength="45" name="subtitle[]" value="{{ $flash_card[0]->subtitle ?? null}}">
                             <div class="invalid-feedback">
                                 Please enter the basic section sub title.
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success mt-3" id="accordionBordered5">
+                <div class="accordion custom-accordionwithicon custom-accordion-border accordion-border-box accordion-success mt-3" id="accordionBorderedFlash">
                     <input type="hidden" class="form-control" value="{{@$flash_card}}" name="flash_card_section">
                     @for ($i = 1; $i <=3; $i++)
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="accordian-heading-{{$i}}">
-                                <button class="accordion-button {{($i==1) ? '':'collapsed'}}" type="button" data-bs-toggle="collapse" data-bs-target="#accor_borderedExamplecollapse_{{$i}}" aria-expanded="{{($i==1) ? 'true':'false'}}" aria-controls="accor_borderedExamplecollapse_{{$i}}">
+                            <h2 class="accordion-header" id="accordian-heading-f-{{$i}}">
+                                <button class="accordion-button {{($i==1) ? '':'collapsed'}}" type="button" data-bs-toggle="collapse" data-bs-target="#flash_borderedExamplecollapse_{{$i}}" aria-expanded="{{($i==1) ? 'true':'false'}}" aria-controls="flash_borderedExamplecollapse_{{$i}}">
                                     Card {{$i}} details
                                 </button>
                             </h2>
-                            <div id="accor_borderedExamplecollapse_{{$i}}" class="accordion-collapse collapse {{($i==1) ? 'show':''}} " aria-labelledby="accordian-heading-{{$i}}" data-bs-parent="#accordionBordered5">
+                            <div id="flash_borderedExamplecollapse_{{$i}}" class="accordion-collapse collapse {{($i==1) ? 'show':''}} " aria-labelledby="accordian-heading-f-{{$i}}" data-bs-parent="#accordionBorderedFlash">
                                 <div class="accordion-body">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -55,7 +55,7 @@
                                                 <input type="hidden" class="form-control" value="{{$key}}"    name="page_section_id" required>
                                                 <input type="hidden" class="form-control" value="{{$value}}"  name="section_name" required>
                                                 <input type="hidden" class="form-control" value="3" name="list_number_1" required>
-                                                <input type="hidden" class="form-control" value="{{$flash_card[$i-1]->id}}" name="id[]">
+                                                <input type="hidden" class="form-control" value="{{$flash_card[$i-1]->id ?? null}}" name="id[]">
                                                 <input type="text" class="form-control" name="list_title[]" value="{{@$flash_card[$i-1]->list_title ?? null}}" required>
                                                 <div class="invalid-feedback">
                                                     Please enter the heading.
@@ -63,7 +63,7 @@
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label>Description </label>
-                                                <textarea class="form-control" rows="6" name="list_description[]" id="accordian_two_editor_{{$i}}">{{$flash_card[$i-1]->list_description ?? null}}</textarea>
+                                                <textarea class="form-control" maxlength="400" rows="6" name="list_description[]" id="accordian_two_editor_{{$i}}">{{$flash_card[$i-1]->list_description ?? null}}</textarea>
                                                 <div class="invalid-feedback">
                                                     Please write the description.
                                                 </div>

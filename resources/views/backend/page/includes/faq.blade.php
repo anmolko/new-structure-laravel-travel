@@ -15,7 +15,7 @@
             <div class="card-body">
                 <div class="row">
                     <img class="img-responsive pb-4 border-bottom lazy" data-src="{{asset('assets/backend/images/pages/sections/'.$value.'.png')}}" width="100%"/>
-                    <div class="col-lg-6 mt-3">
+                    <div class="col-lg-12 mt-3">
                         <div class="mb-1">
                             <label class="form-label required">Title </label>
                             <input type="text" class="form-control" name="title[]" value="{{ $faq[0]->title ?? null}}" maxlength="35" required>
@@ -24,15 +24,6 @@
                             <input type="hidden" class="form-control" value="{{ $data['row']->id }}" name="page_id" required>
                             <div class="invalid-feedback">
                                 Please enter the basic section title.
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mt-3">
-                        <div class="mb-1">
-                            <label>Sub Title </label>
-                            <input type="text" class="form-control" maxlength="35" name="subtitle[]" value="{{ $faq[0]->subtitle ?? null}}">
-                            <div class="invalid-feedback">
-                                Please enter the basic section sub title.
                             </div>
                         </div>
                     </div>
@@ -56,14 +47,14 @@
                                                 <input type="hidden" class="form-control" value="{{$value}}"  name="section_name" required>
                                                 <input type="hidden" class="form-control" value="{{$faq_section->list_number_1}}" name="list_number_1" required>
                                                 <input type="hidden" class="form-control" value="{{@$faq[$i-1]->id}}" name="id[]">
-                                                <input type="text" class="form-control" name="list_title[]" value="{{@$faq[$i-1]->list_title}}" required>
+                                                <input type="text" class="form-control" maxlength="100" name="list_title[]" value="{{@$faq[$i-1]->list_title}}" required>
                                                 <div class="invalid-feedback">
                                                     Please enter the heading.
                                                 </div>
                                             </div>
                                             <div class="form-group mb-3">
                                                 <label>Description </label>
-                                                <textarea class="form-control" rows="6" name="list_description[]" id="accordian_two_editor_{{$i}}">{{@$faq[$i-1]->list_description}}</textarea>
+                                                <textarea class="form-control" maxlength="300" rows="6" name="list_description[]" id="accordian_two_editor_{{$i}}">{{@$faq[$i-1]->list_description}}</textarea>
                                                 <div class="invalid-feedback">
                                                     Please write the description.
                                                 </div>

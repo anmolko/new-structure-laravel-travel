@@ -70,13 +70,12 @@ class PageSectionElementController extends BackendBaseController
             if($section_name == 'faq') {
                 $faq_num   = $request['list_number_1'];
                 for ($i=0;$i<$faq_num;$i++){
-                    $subheading  =  array_key_exists($i, $request->input('subtitle')) ? $request->input('subtitle')[$i] : null;
+//                    $subheading  =  array_key_exists($i, $request->input('subtitle')) ? $request->input('subtitle')[$i] : null;
                     $heading     =  array_key_exists($i, $request->input('title')) ? $request->input('title')[$i] : null;
 
                     $data=[
                         'page_section_id'     => $section_id,
                         'title'               => $heading,
-                        'subtitle'            => $subheading,
                         'list_title'          => $request['list_title'][$i],
                         'list_description'    => $request['list_description'][$i],
                         'status'              => $request['status'],
@@ -170,12 +169,11 @@ class PageSectionElementController extends BackendBaseController
                 $faq_section_elements_id    = $faq_section->pageSectionElements->pluck('id')->toArray();
                 for ($i=0;$i<$faq_num;$i++){
                     $heading     =  array_key_exists($i, $request->input('title')) ? $request->input('title')[$i] : null;
-                    $subheading  =  array_key_exists($i, $request->input('subtitle')) ? $request->input('subtitle')[$i] : null;
+//                    $subheading  =  array_key_exists($i, $request->input('subtitle')) ? $request->input('subtitle')[$i] : null;
 
                     $data=[
                         'page_section_id'     => $section_id,
                         'title'               => $heading,
-                        'subtitle'            => $subheading,
                         'list_title'          => $request['list_title'][$i],
                         'list_description'    => $request['list_description'][$i],
                         'status'              => $request['status'],
