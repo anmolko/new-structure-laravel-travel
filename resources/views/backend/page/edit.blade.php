@@ -15,10 +15,12 @@
                     <div class="flex-shrink-0">
 
                         <div class="d-flex justify-content-sm-end gap-2">
-                            <a class="btn btn-outline-success waves-effect waves-light" href="{{route($base_route.'index')}}">
-                                <i class="ri-menu-2-line align-bottom me-1"></i> {{ $panel . ' List'}} </a>
+                            <a href="{{ route('frontend.page.index', $data['row']->slug) }}" title="View in frontend" target="_blank"
+                               class="btn btn-outline-info waves-effect waves-light"><i class="ri-eye-line"></i></a>
                             <a class="btn btn-outline-primary waves-effect waves-light" href="{{ route('backend.section-element.show',$data['row']->id) }}">
                                 <i class="ri-edit-2-fill align-bottom me-1"></i> {{ $panel . ' sections edit'}} </a>
+                            <a class="btn btn-outline-success waves-effect waves-light" href="{{route($base_route.'index')}}">
+                                <i class="ri-menu-2-line align-bottom me-1"></i> {{ $panel . ' List'}} </a>
                         </div>
 
                     </div>

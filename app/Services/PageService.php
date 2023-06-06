@@ -46,6 +46,7 @@ class PageService {
             ->editColumn('action',function ($item){
                 $params = [
                     'id'            => $item->id,
+                    'slug'          => $item->slug,
                     'base_route'    => $this->base_route,
                 ];
                 return view($this->view_path.'.includes.dataTable_action', compact('params'));

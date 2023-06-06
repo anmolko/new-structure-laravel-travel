@@ -137,7 +137,7 @@ Route::post('/update-menuitem/{id}',[MenuController::class,'updateMenuItem'])->n
 Route::get('/delete-menuitem/{id}/{key}/{in?}/{inside?}',[MenuController::class,'deleteMenuItem'])->name('menu.delete_menu_item');
 Route::post('menu', [MenuController::class,'store'])->name('menu.store');
 Route::get('/menu/{slug?}', [MenuController::class,'index'])->name('menu.index');
-Route::get('/menu/{id}',[MenuController::class,'destroy'])->name('menu.delete');
+Route::get('/menu/{id}/delete',[MenuController::class,'destroy'])->name('menu.delete');
 Route::resource('menu', MenuController::class)->names('menu');
 
 

@@ -14,7 +14,7 @@ class Page extends BackendBaseModel
     use HasFactory, SoftDeletes, Sluggable, Slug;
 
     protected $table    ='pages';
-    protected $fillable =['id','title','slug','status','created_by','updated_by'];
+    protected $fillable =['id','title','slug','image','status','created_by','updated_by'];
 
     public function pageSections()
     {

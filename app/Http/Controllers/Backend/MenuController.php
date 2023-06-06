@@ -70,7 +70,6 @@ class MenuController extends BackendBaseController
             return redirect()->route($this->base_route.'index');
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e);
             Session::flash('error',$this->panel.'  was not created. Something went wrong.');
             return redirect()->back();
         }
@@ -92,18 +91,26 @@ class MenuController extends BackendBaseController
 
     public function destroy(Request $request)
     {
-        $delete    = $this->model->find($request->id);
+        $data['row']   = $this->model->find($request['id']);
+
         DB::beginTransaction();
         try {
-            $delete->forceDelete();
+            if($data['row']->menuItems){
+                foreach ($data['row']->menuItems as $item){
+                    $item->forceDelete();
+                }
+            }
 
+            $data['row']->forceDelete();
+            DB::commit();
             Session::flash('success',$this->panel.' was deleted successfully');
         } catch (\Exception $e) {
             DB::rollback();
+
             Session::flash('error',$this->panel.'  was not deleted. Something went wrong.');
         }
 
-        return redirect()->route('menu.index');
+        return redirect()->route($this->base_route.'index');
     }
 
     public function updateMenu(Request $request){
@@ -116,7 +123,6 @@ class MenuController extends BackendBaseController
             Session::flash('error','Menu could not be updated');
         }
     }
-
 
     public function addPage(Request $request){
         $menuid     = $request->menuid;
