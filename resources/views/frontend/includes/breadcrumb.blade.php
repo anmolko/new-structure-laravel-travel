@@ -1,4 +1,4 @@
-<section class="breadcrumb-area" style="background-image: url( {{ $page_image ? asset(imagePath($page_image)) : asset('assets/frontend/images/'.$breadcrumb_image) }} );">
+<section class="breadcrumb-area" style="background-image: url( {{ isset($page_image) && $page_image  ? asset(imagePath($page_image)) : asset('assets/frontend/images/'.$breadcrumb_image) }} );">
     <div class="breadcrumb-wrap">
         <div class="container">
             <div class="row align-items-center">

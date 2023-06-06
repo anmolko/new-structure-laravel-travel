@@ -26,7 +26,9 @@ Route::any('/register', function() {
 });
 
 
-Route::get('/contact-us', [HomePageController::class, 'index'])->name('contact-us');
+Route::get('/contact-us', [HomePageController::class, 'contact'])->name('contact-us');
+Route::post('/contact/message', [HomePageController::class, 'contactStore'])->name('contact-us.store');
+
 
 Route::get('/activity', [PackageController::class, 'index'])->name('activity.index');
 Route::post('/activity/search', [PackageController::class, 'search'])->name('activity.search');
@@ -39,5 +41,6 @@ Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 
 Route::get('/{slug}', [PageController::class, 'index'])->name('page.index');
+
 
 

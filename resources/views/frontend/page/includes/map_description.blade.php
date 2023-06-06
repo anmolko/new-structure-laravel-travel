@@ -18,13 +18,16 @@
                     @endif
                 </div>
             </div>
+
             <!-- end col-lg-6 -->
             <div class="col-lg-6">
-                <div class="image-box about-img-box" style="height: 600px;">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d266.3349664705987!2d85.33336097730498!3d27.71767486634828!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19f3f402500b%3A0x672cd8537d17f880!2sMD%20Human%20Resource!5e0!3m2!1sen!2snp!4v1682317631311!5m2!1sen!2snp
-                        " style="border:0;width: 100%;height: 100%;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
+                @if($setting_data && $setting_data->google_map)
+                    <div class="image-box about-img-box" style="height: 600px;">
+                        <iframe src="{{ $setting_data->google_map }}" style="border:0;width: 100%;height: 100%;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                @endif
             </div>
+
         </div>
     </div>
 </section>

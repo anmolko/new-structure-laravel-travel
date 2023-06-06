@@ -29,10 +29,13 @@ function loadEditor(){
 }
 
 function reinitializeSelect2(){
-    if(document.getElementById('offcanvasRight')){
-        $('.select2').select2({$dropdownParent:'#offcanvasRight'});
-    }else{
-        $('.select2').select2();
+    let select2 =  $('.select2');
+    if(select2.length > 0){
+        if(document.getElementById('offcanvasRight')){
+            $('.select2').select2({$dropdownParent:'#offcanvasRight'});
+        }else{
+            $('.select2').select2();
+        }
     }
 }
 
