@@ -118,59 +118,58 @@ class MenuController extends BackendBaseController
     }
 
 
-//    public function addPage(Request $request){
-//        $data       = $request->all();
-//        $menuid     = $request->menuid;
-//        $ids        = $request->ids;
-//        $menu       = $this->model->findOrFail($menuid);
-//        if($menu->content == ''){
-//            foreach($ids as $id){
-//                $page = Page::find($id);
-//                $data =[
-//                    'title'          => $page->name,
-//                    'slug'          => $page->slug,
-//                    'page_id'        => $id,
-//                    'type'          => 'page',
-//                    'menu_id'       => $menuid,
-//                    'created_by'    => Auth::user()->id,
-//                ];
-//                $status = \App\Models\MenuItem::create($data);
-//            }
-//
-//        }
-//        else{
-//            $olddata = json_decode($menu->content,true);
-//            foreach($ids as $id){
-//                $page = Page::find($id);
-//                $data =[
-//                    'title'          => $page->name,
-//                    'slug'          => $page->slug,
-//                    'page_id'       => $id,
-//                    'type'          => 'page',
-//                    'menu_id'       => $menuid,
-//                    'created_by'    => Auth::user()->id,
-//                ];
-//                $status = MenuItem::create($data);
-//            }
-//            foreach($ids as $id){
-//                $page = Page::find($id);
-//                $array['title']         = $page->name;
-//                $array['slug']          = $page->slug;
-//                $array['page_id']       = $id;
-//                $array['type']          = 'page';
-//                $array['id']            = MenuItem::where('slug',$array['slug'])->where('type',$array['type'])->value('id');
-//                $array['children']      = [[]];
-//                array_push($olddata[0],$array);
-//                $oldata = json_encode($olddata);
-//                $status = $menu->update(['content'=>$olddata]);
-//            }
-//        }
-//if($status){
-//Session::flash('success','Service added in '.$this->panel);
-//}else{
-//    Session::flash('error','Service could not be added in '.$this->panel);
-//}
-//    }
+    public function addPage(Request $request){
+        $menuid     = $request->menuid;
+        $ids        = $request->ids;
+        $menu       = $this->model->findOrFail($menuid);
+        if($menu->content == ''){
+            foreach($ids as $id){
+                $page = Page::find($id);
+                $data =[
+                    'title'         => $page->title,
+                    'slug'          => $page->slug,
+                    'page_id'       => $id,
+                    'type'          => 'page',
+                    'menu_id'       => $menuid,
+                    'created_by'    => Auth::user()->id,
+                ];
+                $status = MenuItem::create($data);
+            }
+
+        }
+        else{
+            $olddata = json_decode($menu->content,true);
+            foreach($ids as $id){
+                $page = Page::find($id);
+                $data =[
+                    'title'         => $page->title,
+                    'slug'          => $page->slug,
+                    'page_id'       => $id,
+                    'type'          => 'page',
+                    'menu_id'       => $menuid,
+                    'created_by'    => Auth::user()->id,
+                ];
+                $status = MenuItem::create($data);
+            }
+            foreach($ids as $id){
+                $page = Page::find($id);
+                $array['title']         = $page->title;
+                $array['slug']          = $page->slug;
+                $array['page_id']       = $id;
+                $array['type']          = 'page';
+                $array['id']            = MenuItem::where('slug',$array['slug'])->where('type',$array['type'])->value('id');
+                $array['children']      = [[]];
+                array_push($olddata[0],$array);
+                $oldata = json_encode($olddata);
+                $status = $menu->update(['content'=>$olddata]);
+            }
+        }
+            if($status){
+            Session::flash('success','Page added in '.$this->panel);
+            }else{
+                Session::flash('error','Page could not be added in '.$this->panel);
+            }
+    }
 
     public function addService(Request $request){
         $menuid     = $request->menuid;
