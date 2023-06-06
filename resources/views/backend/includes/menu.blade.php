@@ -105,6 +105,12 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{request()->route()->getName() == 'backend.page.index' ? 'active':''}}" href="{{route('backend.page.index')}}">
+                        <i class="ri-pages-line"></i> <span data-key="t-widgets">Page</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link menu-link {{request()->route()->getName() == 'backend.testimonial.index' ? 'active':''}}" href="{{route('backend.testimonial.index')}}">
                         <i class="ri-hand-heart-line"></i> <span data-key="t-widgets">Testimonial</span>
                     </a>

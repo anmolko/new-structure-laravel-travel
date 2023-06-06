@@ -45,7 +45,10 @@
                 </div>
             </div>
         </div>
-    </section>@endsection
+    </section>
+
+@endsection
+
 @section('js')
     <script src="{{asset('assets/common/lazyload.js')}}"></script>
     <script src="{{asset('assets/frontend/js/navbar-sticky.js')}}"></script>

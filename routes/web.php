@@ -31,13 +31,13 @@ Route::any('/register', function() {
 Route::get('/contact-us', [HomePageController::class, 'index'])->name('contact-us');
 
 Route::get('/activity', [PackageController::class, 'index'])->name('activity.index');
-Route::get('/activity/{slug}', [PackageController::class, 'show'])->name('activity.show');
 Route::post('/activity/search', [PackageController::class, 'search'])->name('activity.search');
+Route::get('/activity/{slug}', [PackageController::class, 'show'])->name('activity.show');
 Route::get('/activity/category/{slug}', [PackageController::class, 'category'])->name('activity.category');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/search/', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
-Route::post('/blog/search', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
 
 

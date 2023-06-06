@@ -536,7 +536,7 @@ body {
   display: none !important; }
 
 .section-bg {
-  background-color: #F5F7FC; }
+  background-color: #bad6eb61; }
 
 .section-bg-2 {
   background-color: #0d233e; }
@@ -551,14 +551,14 @@ body {
   background: linear-gradient(70deg, #e8eef9 0, #fff 100%) !important; }
 
 .bg-gray {
-  background-color: #F5F7FC !important; }
+  background-color: #bad6eb61 !important; }
 
 .bg-fixed {
   background-attachment: fixed; }
 
 .section-block {
   height: 1px;
-  background-color: #F5F7FC; }
+  background-color: #bad6eb61; }
 
 /*==== hover-y =====*/
 .hover-y {
@@ -5423,7 +5423,7 @@ body {
     margin-bottom: 30px;
     padding: 30px 0 35px 0;
     position: relative;
-    background-color: #F5F7FC; }
+    background-color: #bad6eb61; }
     .package-card .package-title .package__title {
       font-size: 25px;
       font-weight: 700;
@@ -7268,7 +7268,7 @@ body {
     .xdsoft_autocomplete .xdsoft_autocomplete_dropdown::-webkit-scrollbar {
       width: 8px; }
     .xdsoft_autocomplete .xdsoft_autocomplete_dropdown::-webkit-scrollbar-track {
-      background-color: #F5F7FC; }
+      background-color: #bad6eb61; }
     .xdsoft_autocomplete .xdsoft_autocomplete_dropdown::-webkit-scrollbar-thumb {
       background-color: rgba(128, 137, 150, 0.3);
       -webkit-border-radius: 10px;
@@ -7506,7 +7506,7 @@ body {
   .step-bar-list .step-bar::before, .step-bar-list .step-bar::after {
     display: block;
     position: absolute;
-    background-color: #F5F7FC;
+    background-color: #bad6eb61;
     height: 4px;
     content: '';
     width: 50%;

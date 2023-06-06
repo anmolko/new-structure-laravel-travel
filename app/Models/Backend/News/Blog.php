@@ -15,7 +15,7 @@ class Blog extends BackendBaseModel
     protected $table    ='blogs';
     protected $fillable = ['id','blog_category_id','title','key','slug','description','image','meta_title','meta_tags','meta_description','status','created_by','updated_by'];
 
-    public function category(){
+    public function blogCategory(){
         return $this->belongsTo(BlogCategory::class);
     }
 

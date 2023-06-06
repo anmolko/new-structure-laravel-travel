@@ -90,7 +90,7 @@ class PackageController extends BackendBaseController
         $data                   = $this->getCommonData();
         $data['category']       = PackageCategory::where('slug',$slug)->active()->first();
         $this->page_method      = 'category';
-        $this->page_title       = $data['category']->title.' '.$this->panel;
+        $this->page_title       = $data['category']->title.' | '.$this->panel;
         $data['rows']           = $this->model->where('package_category_id', $data['category']->id)->active()->descending()->paginate(6);
 
         return view($this->loadView($this->view_path.'category'), compact('data'));

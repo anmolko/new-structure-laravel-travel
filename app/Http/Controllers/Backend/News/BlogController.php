@@ -63,7 +63,6 @@ class BlogController extends BackendBaseController
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e);
             Session::flash('error',$this->panel.'  was not created. Something went wrong.');
         }
 
@@ -89,7 +88,6 @@ class BlogController extends BackendBaseController
             DB::commit();
         } catch (\Exception $e) {
             DB::rollback();
-            dd($e);
             Session::flash('error',$this->panel.' was not updated. Something went wrong.');
         }
 

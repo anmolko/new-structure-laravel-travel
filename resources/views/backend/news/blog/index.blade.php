@@ -37,6 +37,7 @@
                                     <tr>
                                         <th>S.N</th>
                                         <th>Title</th>
+                                        <th>Category</th>
                                         <th>Status</th>
                                         <th class="text-right">Action</th>
                                     </tr>
@@ -46,6 +47,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $row->title }}</td>
+                                            <td>{{ $row->blogCategory->title ?? '' }}</td>
                                             <td>
                                                 @include($module.'includes.status_display',['status'=>$row->status])
                                             </td>

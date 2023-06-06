@@ -43,7 +43,12 @@ class AppServiceProvider extends ServiceProvider
     }
 
     public function sensitiveBackendComposer(){
-        view()->composer(['backend.partials.header', 'backend.partials.footer','backend.partials.sidebar','frontend.activity.includes.sidebar','auth.login'], function ($view) {
+        view()->composer(['backend.partials.header',
+            'backend.partials.footer',
+            'backend.partials.sidebar',
+            'frontend.activity.includes.sidebar',
+            'frontend.blog.includes.sidebar',
+            'auth.login'], function ($view) {
             $view->with([
                 'setting_data' => Setting::first(),
             ]);

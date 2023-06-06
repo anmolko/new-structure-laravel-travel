@@ -1,69 +1,55 @@
 <div class="sidebar mb-0">
     <div class="sidebar-widget">
-        <h3 class="title stroke-shape">Search Blog</h3>
+        <h3 class="title stroke-shape">Search Post</h3>
         <div class="contact-form-action">
-            {!! Form::open(['route' => $module.'activity.search', 'method'=>'GET', 'class'=>'row align-items-center search_blog_form']) !!}
-                <div class="input-box">
-                    <div class="form-group mb-0">
-                        <input class="form-control pl-3" type="text" name="title" placeholder="Type your keywords...">
-                        <button class="search-btn" type="submit"><i class="la la-search"></i></button>
-                    </div>
+            {!! Form::open(['route' => $base_route.'search', 'method'=>'GET', 'class'=>'search_blog_form']) !!}
+            <div class="input-box">
+                <div class="form-group mb-0">
+                    <input class="form-control pl-3" type="text" name="for" placeholder="Type your keywords...">
+                    <button class="search-btn" type="submit"><i class="la la-search"></i></button>
                 </div>
+            </div>
             {!! Form::close() !!}
         </div>
     </div><!-- end sidebar-widget -->
     @if(count( $data['categories']) > 0)
         <div class="sidebar-widget">
             <h3 class="title stroke-shape">Categories</h3>
-            <div class="sidebar-category">
-                @foreach($data['categories'] as $category)
-                    <div class="custom-checkbox">
-                        <label for="cat1">All <span class="font-size-13 ml-1">(55)</span></label>
-                    </div>
-                @endforeach
-                </div><!-- end collapse -->
-                <a class="btn-text" data-toggle="collapse" href="#categoryMenu" role="button" aria-expanded="false" aria-controls="categoryMenu">
-                    <span class="show-more">Show More <i class="la la-angle-down"></i></span>
-                    <span class="show-less">Show Less <i class="la la-angle-up"></i></span>
-                </a>
+            <div class="sidebar-list">
+                <ul class="list-items">
+                    @foreach($data['categories'] as $category)
+                        <li><i class="la la-dot-circle mr-2 text-color"></i><a href="{{ route($base_route.'category',$category->slug) }}">{{$category->title}} ({{$category->blogs_count}})</a></li>
+                    @endforeach
+                </ul>
             </div>
         </div><!-- end sidebar-widget -->
     @endif
     @if(count( $data['latest']) > 0)
+
         <div class="sidebar-widget">
-            <div class="section-tab section-tab-2 pb-3">
+            <h3 class="title stroke-shape">Latest Posts</h3>
+            <div class="tab-content" id="myTabContent">
                 @foreach($data['latest'] as $latest)
                     <div class="card-item card-item-list recent-post-card">
-                    <div class="card-img">
-                        <a href="{{ route($module.'blog.show',$package->slug) }}" class="d-block">
-                            <img class="lazy" data-src="{{ asset(imagePath($latest->image)) }}" alt="blog-img">
-                        </a>
-                    </div>
-                    <div class="card-body">
-                        <h3 class="card-title"><a href="{{ route($module.'blog.show',$latest->slug) }}">
-                               {{ $latest->title }}
+                        <div class="card-img">
+                            <a href="{{ route($module.'blog.show',$latest->slug) }}" class="d-block">
+                                <img class="lazy" data-src="{{ asset(imagePath($latest->image)) }}" alt="blog-img">
                             </a>
-                        </h3>
-                        <p class="card-meta">
-                            <span class="post__date">{{date('d M Y', strtotime($blog->created_at))}} </span>
-                        </p>
+                        </div>
+                        <div class="card-body">
+                            <h3 class="card-title"><a href="{{ route($module.'blog.show',$latest->slug) }}">
+                                    {{ $latest->title }}
+                                </a>
+                            </h3>
+                            <p class="card-meta">
+                                <span class="post__date">{{date('d M Y', strtotime($latest->created_at))}} </span>
+                            </p>
+                        </div>
                     </div>
-                </div>
                 @endforeach
             </div>
         </div>
     @endif
-
-    <div class="sidebar-widget">
-        <h3 class="title stroke-shape">About us</h3>
-        <div class="sidebar-about">
-            <div class="sidebar-about-img">
-                <img class="lazy" data-src="{{asset('assets/frontend/images/destination-img3.jpg')}}" alt="">
-                <p class="font-size-28 font-weight-bold text-white">Trizen</p>
-            </div>
-            <p class="pt-3">Sed ut perspiciatis unde omnis iste natus error sit voluptatem eaque ipsa quae ab illo inventore incididunt ut labore et dolore magna</p>
-        </div>
-    </div><!-- end sidebar-widget -->
     <div class="sidebar-widget">
         <h3 class="title stroke-shape">Follow & Connect</h3>
         <ul class="social-profile">
@@ -85,4 +71,4 @@
             @endif
         </ul>
     </div><!-- end sidebar-widget -->
-</div>
+</div><!-- end sidebar -->
