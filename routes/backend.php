@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Backend\CustomerInquiryController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\Homepage\SliderController;
 use App\Http\Controllers\Backend\MenuController;
@@ -188,6 +189,8 @@ Route::resource('section-element', PageSectionElementController::class)->names('
 Route::put('/section-element-upload-gallery/{id}', [PageSectionElementController::class,'uploadGallery'])->name('section-element.gallery-update');
 Route::post('/section-element/image-delete', [PageSectionElementController::class,'deleteGallery'])->name('section-element.gallery-delete');
 Route::get('/section-element/gallery/{id}', [PageSectionElementController::class,'getGallery'])->name('section-element.gallery-display');
+
+Route::resource('customer-inquiry', CustomerInquiryController::class)->names('customer-inquiry');
 
 
 Route::resource('setting', SettingController::class)->names('setting');

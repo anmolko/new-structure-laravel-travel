@@ -117,6 +117,18 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link menu-link {{request()->route()->getName() == 'backend.service.index' ? 'active':''}}" href="{{route('backend.service.index')}}">
+                        <i class="ri-shopping-bag-line"></i> <span data-key="t-widgets">Service</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link menu-link {{request()->route()->getName() == 'backend.customer-inquiry.index' ? 'active':''}}" href="{{route('backend.customer-inquiry.index')}}">
+                        <i class="ri-discuss-line"></i> <span data-key="t-widgets">Customer Inquiry</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link menu-link {{request()->route()->getName() == 'backend.user.user_management.index' ? 'active':''}}" href="{{route('backend.user.user-management.index')}}">
                         <i class="ri-account-circle-line"></i> <span data-key="t-widgets">User Mgmt.</span>
                     </a>

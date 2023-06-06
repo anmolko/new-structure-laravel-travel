@@ -2,6 +2,7 @@
 
 namespace App\Models\Backend;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -66,5 +67,15 @@ class User extends Authenticatable
                 'source' => 'name'
             ]
         ];
+    }
+
+    public function scopeActive(Builder $query): void
+    {
+        $query->where('status', 1);
+    }
+
+    public function scopeDescending(Builder $query): void
+    {
+        $query->orderBy('created_at', 'DESC');
     }
 }
