@@ -759,4 +759,12 @@
     text-align: justify;
 }
 
+.custom_cta_title{
+    width: 60%;
+    margin: auto;
+}
+.custom_cta_subtitle {
+    width: 50%;
+    margin: auto;
+}
 

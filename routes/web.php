@@ -3,6 +3,7 @@
 use App\Http\Controllers\Frontend\Activity\PackageController;
 use App\Http\Controllers\Frontend\HomePageController;
 use App\Http\Controllers\Frontend\News\BlogController;
+use App\Http\Controllers\Frontend\Page\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,5 +37,7 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/search/', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
+
+Route::get('/{slug}', [PageController::class, 'index'])->name('page.index');
 
 

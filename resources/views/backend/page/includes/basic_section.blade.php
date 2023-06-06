@@ -38,8 +38,8 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="mb-1 mt-2">
-                            <label class="form-label required"> Description <span class="text-danger">* write 700 characters only</span></label>
-                            <textarea class="form-control" maxlength="1200" rows="14" name="description" id="basic_editor" required>{!! $basic_element->description ?? null !!}</textarea>
+                            <label class="form-label required"> Description <span class="text-danger">* write 800 characters only</span></label>
+                            <textarea class="form-control" maxlength="800" rows="14" name="description" id="basic_editor" required>{!! $basic_element->description ?? null !!}</textarea>
                             <div class="invalid-feedback">
                                 Please write the small summary for basic section.
                             </div>
@@ -67,7 +67,7 @@
                         <div class="mb-1">
                             {!! Form::label('image_input', 'Images', ['class' => 'form-label required']) !!}
                             {!! Form::file('image_input', ['class'=>'form-control','id'=>'basic_image_input']) !!}
-                            <p class="text-muted mb-2">Recommended size: 400 x 545px</p>
+                            <p class="text-muted mb-2">Recommended size: 600 x 550px</p>
                         </div>
                         @if($basic_element && $basic_element->image)
                             <div class="col-xxl-4 col-xl-4 col-sm-6">

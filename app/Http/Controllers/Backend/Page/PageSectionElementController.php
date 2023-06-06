@@ -104,7 +104,7 @@ class PageSectionElementController extends BackendBaseController
             }
             else{
                 if ($request->hasFile('image_input')) {
-                    $image_name = $this->uploadImage($request->file('image_input'), '400', '545');
+                    $image_name = $this->uploadImage($request->file('image_input'), '600','550');
                     $request->request->add(['image' => $image_name]);
                 }
                 $this->model->create($request->all());
@@ -135,7 +135,7 @@ class PageSectionElementController extends BackendBaseController
         DB::beginTransaction();
         try {
             if($request->hasFile('image_input')){
-                $image_name = $this->updateImage($request->file('image_input'),$data['row']->image,'1920','765');
+                $image_name = $this->updateImage($request->file('image_input'),$data['row']->image,'600','550');
                 $request->request->add(['image'=>$image_name]);
             }
             $request->request->add(['status' => true ]);
