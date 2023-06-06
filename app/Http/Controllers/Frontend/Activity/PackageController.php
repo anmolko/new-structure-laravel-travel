@@ -44,7 +44,9 @@ class PackageController extends BackendBaseController
         $this->page_title       = 'All '.$this->panel;
         $data                   = $this->getCommonData();
         $data['rows']           = $this->model->active()->descending()->paginate(6);
-
+        if(!$data['rows']){
+            abort(404);
+        }
         return view($this->loadView($this->view_path.'index'), compact('data'));
     }
 
@@ -80,19 +82,23 @@ class PackageController extends BackendBaseController
         $data                   = $this->getCommonData();
         $data['row']            = $this->model->where('slug',$slug)->first();
 
-//        dd($data['row']->packageGalleries);
-
+        if(!$data['row']){
+            abort(404);
+        }
         return view($this->loadView($this->view_path.'show'), compact('data'));
     }
 
     public function category($slug)
     {
-        $data                   = $this->getCommonData();
-        $data['category']       = PackageCategory::where('slug',$slug)->active()->first();
-        $this->page_method      = 'category';
-        $this->page_title       = $data['category']->title.' | '.$this->panel;
-        $data['rows']           = $this->model->where('package_category_id', $data['category']->id)->active()->descending()->paginate(6);
-
+        try {
+            $data                   = $this->getCommonData();
+            $data['category']       = PackageCategory::where('slug',$slug)->active()->first();
+            $this->page_method      = 'category';
+            $this->page_title       = $data['category']->title.' | '.$this->panel;
+            $data['rows']           = $this->model->where('package_category_id', $data['category']->id)->active()->descending()->paginate(6);
+        } catch (\Exception $e) {
+            abort(404);
+        }
         return view($this->loadView($this->view_path.'category'), compact('data'));
     }
 

@@ -16,15 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
 
 Route::get('/', [HomePageController::class, 'index'])->name('home');
 
 
 Route::any('/register', function() {
-    return redirect()->route('frontend.404');
+    abort(404);
 });
 
 
@@ -39,6 +36,5 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/search/', [BlogController::class, 'search'])->name('blog.search');
 Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/blog/category/{slug}', [BlogController::class, 'category'])->name('blog.category');
-
 
 
