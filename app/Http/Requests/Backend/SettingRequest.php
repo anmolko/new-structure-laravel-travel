@@ -27,6 +27,7 @@ class SettingRequest extends FormRequest
         return [
             'title'         => 'required|string|max:60',
             'email'         => 'required|email',
+            'whatsapp'      => 'required',
             'logo_input'    => request()->method() == 'POST' ? 'required':'nullable'.'|image|mimes:jpeg,png,jpg',
         ];
     }
@@ -37,6 +38,7 @@ class SettingRequest extends FormRequest
             'title.required'            => 'Please enter a title',
             'email.required'            => 'Please enter email',
             'email.email'               => 'Write email in proper format',
+            'whatsapp.required'         => 'Please enter whatsapp number',
             'title.max'                 => 'Title must be less than 60 characters',
             'logo_input.required'       => 'Please select a logo',
         ];

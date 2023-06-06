@@ -2164,10 +2164,51 @@ body {
   margin-right: 5px; }
 
 /*======== back-to-top =========*/
+#back-whatsapp{
+    position: fixed;
+    right: -150px;
+    bottom: 110px;
+    z-index: 9999;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    background-color: #fff;
+    -webkit-box-shadow: 0 10px 40px rgba(82, 85, 90, 0.2);
+    -moz-box-shadow: 0 10px 40px rgba(82, 85, 90, 0.2);
+    box-shadow: 0 10px 40px rgba(82, 85, 90, 0.2);
+    color: #0d233e;
+    font-size: 18px;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -ms-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#back-whatsapp:hover {
+    background-color: #2273e5;
+    color: #fff;
+    border-color: #2273e5;
+}
+
+#back-whatsapp.active, .icon-float.active {
+    right: 30px;
+    opacity: 1;
+    visibility: visible;
+}
+
+
 #back-to-top {
   position: fixed;
   right: -150px;
-  bottom: 40px;
+  bottom: 110px;
   z-index: 9999;
   width: 40px;
   height: 40px;

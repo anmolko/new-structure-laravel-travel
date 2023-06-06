@@ -147,6 +147,12 @@
     <i class="la la-angle-up" title="Go top"></i>
 </div>
 
+@if($setting_data->whatsapp)
+    <a href="https://wa.me/{{$setting_data->whatsapp}}" class="icon-float" target="_blank">
+        <i class="fa-brands fa-whatsapp my-float"></i>
+    </a>
+@endif
+
 
 <!-- Template JS Files -->
 <script src="{{ asset('assets/frontend/js/jquery-3.4.1.min.js') }}"></script>
@@ -167,5 +173,18 @@
 <script src="{{ asset('assets/frontend/js/main.js') }}"></script>
 @yield('js')
 @stack('scripts')
+<script>
+    $(window).scroll(function() {
+        var scroll = $(window).scrollTop();
+
+        //>=, not <=
+        if (scroll >= 500) {
+            //clearHeader, not clearheader - caps H
+            $(".icon-float").addClass("active");
+        }else if(scroll < 500){
+            $(".icon-float").removeClass("active");
+        }
+    });
+</script>
 </body>
 </html>

@@ -22,7 +22,7 @@
     <!-- end card body -->
     <div class="card-body">
         <div class="mb-3">
-            {!! Form::label('whatsapp', 'Whatsapp', ['class' => 'form-label']) !!}
+            {!! Form::label('whatsapp', 'Whatsapp required', ['class' => 'form-label']) !!}
             {!! Form::text('whatsapp', null,['class'=>'form-control','id'=>'whatsapp','placeholder'=>'Enter whatsapp number']) !!}
         </div>
         <div class="mb-3">
